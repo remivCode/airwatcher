@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "CoordGPS.h"
+#include "User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -37,13 +38,13 @@ public:
 
     string GetSensorID(void) const;
     CoordGPS GetCoord(void) const;
-    bool GetFiability(void) const; 
-    string GetUserID(void) const;
+    bool GetFiability(void) const;
+    User *GetUser(void) const;
 
-    void SetSensorID(string id); 
+    void SetSensorID(string id);
     void SetCoord(CoordGPS coordonnes);
     void SetFiability(bool fiab);
-    void SetUserID(string id); 
+    void SetUser(User *u);
 
     //------------------------------------------------- Surcharge d'opérateurs
     Sensor &operator=(const Sensor &unSensor);
@@ -65,7 +66,7 @@ public:
     // Contrat :
     //
 
-    Sensor(string id, CoordGPS coordonnee, string idUser = NULL);
+    Sensor(string id, CoordGPS coordonnee, User *user);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :
@@ -86,8 +87,7 @@ protected:
     string sensorID;
     CoordGPS coord;
     bool fiability = true;
-    string userID;
-
+    User *user;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Sensor>

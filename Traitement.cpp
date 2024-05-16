@@ -12,16 +12,156 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <algorithm>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Traitement.h"
+#include "util/Provider.h"
+#include "util/PrivateIndividual.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
+void Traitement::chargerDonnees()
+// Algorithme :
+//
+{
+    ////////////////////////////////////////////////// Chargement attribut
+    ifstream attributes("data/attributes.csv");
+    string line;
+    getline(attributes, line);
+    while (getline(attributes, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string unit;
+        getline(lineStream, unit, ';');
+        string desc;
+        getline(lineStream, desc, ';');
+        Attribute *a = new Attribute(id, unit, desc);
+        typeMesures.push_back(*a);
+    }
+
+    ////////////////////////////////////////////////// Chargement cleaners
+    ifstream clean("data/cleaners.csv");
+    string line;
+    getline(clean, line);
+    while (getline(clean, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string la;
+        getline(lineStream, la, ';');
+        float lat = stof(la);
+        string ln;
+        getline(lineStream, ln, ';');
+        float lng = stof(ln);
+        CoordGPS *gps = new CoordGPS(lat, lng);
+
+        string a;
+        getline(lineStream, a, '-');
+        int anneeDebut = stoi(a);
+        string m;
+        getline(lineStream, m, '-');
+        int moisDebut = stoi(a);
+        string j;
+        getline(lineStream, j, ' ');
+        int jourDebut = stoi(j);
+        string h;
+        getline(lineStream, h, ':');
+        int heureDebut = stoi(h);
+        Date *debut = new Date(anneeDebut, moisDebut, jourDebut, heureDebut);
+        string temp;
+        getline(lineStream, temp, ';');
+
+        getline(lineStream, a, '-');
+        int anneeFin = stoi(a);
+        getline(lineStream, m, '-');
+        int moisFin = stoi(a);
+        getline(lineStream, j, ' ');
+        int jourFin = stoi(j);
+        getline(lineStream, h, ':');
+        int heureFin = stoi(h);
+        Date *fin = new Date(anneeFin, moisFin, jourFin, heureFin);
+        Cleaner *c = new Cleaner(id, *gps, *debut, *fin, NULL);
+        cleaners.push_back(*c);
+    }
+
+    ////////////////////////////////////////////////// Chargement providers
+    ifstream provid("data/providers.csv");
+    string line;
+    getline(provid, line);
+    while (getline(provid, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string idCleaner;
+        getline(lineStream, idCleaner, ';');
+        Provider *p = new Provider(id, NULL, NULL);
+        users.push_back(*p);
+
+        Cleaner c;
+        for (int i = 0; i < cleaners.size(); i++)
+        {
+            if (cleaners[i].GetId() == idCleaner)
+            {
+                cleaners[i].SetProvider(id);
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////// Chargement sensors
+    ifstream sens("data/sensors.csv");
+    string line;
+    getline(sens, line);
+    while (getline(sens, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string la;
+        getline(lineStream, la, ';');
+        float lat = stof(la);
+        string ln;
+        getline(lineStream, ln, ';');
+        float lng = stof(ln);
+        CoordGPS *gps = new CoordGPS(lat, lng);
+        Sensor *s = new Sensor(id, *gps, NULL);
+        sensors.push_back(*s);
+    } //----- Fin de Méthode
+
+    ////////////////////////////////////////////////// Chargement users
+    ifstream user("data/users.csv");
+    string line;
+    getline(user, line);
+    while (getline(user, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string sensorId;
+        getline(lineStream, sensorId, ';');
+        PrivateIndividual *p = new PrivateIndividual(id, NULL, NULL);
+        users.push_back(*p);
+        for (int i = 0; i < sensors.size(); i++)
+        {
+            if (sensors[i].GetSensorID() == sensorId)
+            {
+                sensors[i].SetUserID(id);
+            }
+        }
+    } //----- Fin de Méthode
+}
+
 bool Traitement::analyzeFunctionalState(Sensor sensor)
 // Algorithme :
 //
@@ -66,8 +206,3 @@ Traitement::~Traitement()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-void Traitement::chargerDonnees()
-// Algorithme :
-//
-{
-} //----- Fin de Méthode

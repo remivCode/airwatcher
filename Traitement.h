@@ -11,7 +11,7 @@
 #define TRAITEMENT_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <list>
+#include <vector>
 #include "util/Sensor.h"
 #include "util/Attribute.h"
 #include "util/Measurement.h"
@@ -19,6 +19,7 @@
 #include "util/CoordGPS.h"
 #include "util/Date.h"
 #include "util/AirMeasurement.h"
+#include "util/User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -36,25 +37,37 @@ class Traitement
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    AirMeasurement calculateAirQualite(CoordGPS coords, Date date);
+    static void chargerDonnees();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    AirMeasurement calculateMeanAirQualite(CoordGPS coords, Date date);
+    static AirMeasurement calculateAirQualite(CoordGPS coords, Date date);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    AirMeasurement calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin);
+    static User connexion(string login, string password);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    bool analyzeFunctionalState(Sensor sensor);
+    static AirMeasurement calculateMeanAirQualite(CoordGPS coords, Date date);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static AirMeasurement calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static bool analyzeFunctionalState(Sensor sensor);
     // Mode d'emploi :
     //
     // Contrat :
@@ -90,17 +103,13 @@ public:
 
 protected:
     //----------------------------------------------------- Méthodes protégées
-    void chargerDonnees();
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     //----------------------------------------------------- Attributs protégés
-    list<Sensor> sensors;
-    list<Attribute> typeMesures;
-    list<Measurement> measurements;
-    list<Cleaner> cleaners;
+    static vector<Sensor> sensors;
+    static vector<Attribute> typeMesures;
+    static vector<Measurement> measurements;
+    static vector<Cleaner> cleaners;
+    static vector<User> users; // à rajouter dans le diagramme de classes
 };
 
 //-------------------------------- Autres définitions dépendantes de <Traitement>

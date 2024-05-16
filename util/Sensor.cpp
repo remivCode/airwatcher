@@ -38,15 +38,14 @@ CoordGPS Sensor::GetCoord(void) const
     return this->coord;
 }
 
-
 bool Sensor::GetFiability(void) const
 {
     return this->fiability;
 }
 
-string Sensor::GetUserID(void) const
+User *Sensor::GetUser(void) const
 {
-    return this->userID;
+    return this->user;
 }
 
 void Sensor::SetSensorID(string id)
@@ -64,11 +63,10 @@ void Sensor::SetFiability(bool fiab)
     this->fiability = fiab;
 }
 
-void Sensor::SetUserID(string id)
+void Sensor::SetUser(User *u)
 {
-    this->userID = id;
+    this->user = u;
 }
-
 
 //------------------------------------------------- Surcharge d'opérateurs
 Sensor &Sensor::operator=(const Sensor &unSensor)
@@ -96,7 +94,7 @@ Sensor::Sensor()
 #endif
 } //----- Fin de Sensor
 
-Sensor::Sensor(string id, CoordGPS coordonnee, string userID)
+Sensor::Sensor(string id, CoordGPS coordonnee, User *u)
 // Algorithme :
 //
 {
@@ -105,7 +103,7 @@ Sensor::Sensor(string id, CoordGPS coordonnee, string userID)
 #endif
     sensorID = id;
     coord = coordonnee;
-    userID = userID;
+    user = u;
 } //----- Fin de Sensor
 
 Sensor::~Sensor()
