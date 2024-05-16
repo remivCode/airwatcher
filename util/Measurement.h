@@ -11,6 +11,7 @@
 #define MEASUREMENT_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "Date.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -54,6 +55,12 @@ public:
     // Contrat :
     //
 
+    Measurement(Date date, float val);
+    // Mode d'emploi (constructeur avec paramètres):
+    //
+    // Contrat :
+    //
+
     virtual ~Measurement();
     // Mode d'emploi :
     //
@@ -66,6 +73,8 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    Date timestamp;
+    float value;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Measurement>

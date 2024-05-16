@@ -16,7 +16,6 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Sensor.h"
-#include "CoordGPS.h"
 
 //------------------------------------------------------------- Constantes
 

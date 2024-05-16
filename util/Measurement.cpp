@@ -54,6 +54,17 @@ Measurement::Measurement()
 #endif
 } //----- Fin de Measurement
 
+Measurement::Measurement(Date date, float val)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Measurement>" << endl;
+#endif
+    timestamp = date;
+    value = val;
+} //----- Fin de Measurement
+
 Measurement::~Measurement()
 // Algorithme :
 //
