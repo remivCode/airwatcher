@@ -42,8 +42,15 @@ public:
     //
 
     //-------------------------------------------- Constructeurs - destructeur
+
     Date(const Date &unDate);
     // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+
+    Date(int annee, int mois, int jour, int heure);
+    // Mode d'emploi (constructeur avec paramètres) :
     //
     // Contrat :
     //
@@ -66,6 +73,10 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    int annee;
+    int mois;
+    int jour;
+    int heure;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Date>
