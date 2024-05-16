@@ -15,6 +15,7 @@
 #include "CoordGPS.h"
 #include "Sensor.h"
 #include "Controller.h"
+#include "Date.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -81,7 +82,7 @@ public:
     //
     // Contrat :
     //
-    static string entrerDate(const string& prompt);
+    static Date entrerDate(const string& prompt);
     // Mode d'emploi :
     //
     // Contrat :

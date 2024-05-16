@@ -92,12 +92,20 @@ void afficherTpsExec(const string &temps)
     cout << "Execution time: " << temps << endl;
 }
 
-string entrerDate(const string &prompt)
+Date entrerDate(const string& prompt)
 {
-    string date;
-    cout << prompt;
-    cin >> date;
-    return date;
+    int annee, mois, jour, heure;
+    cout << prompt << endl;
+    cout << "Enter year: ";
+    cin >> annee;
+    cout << "Enter month: ";
+    cin >> mois;
+    cout << "Enter day: ";
+    cin >> jour;
+    cout << "Enter hour: ";
+    cin >> heure;
+
+    return Date(annee, mois, jour, heure);
 }
 
 int entrerNombre(const string &prompt)
