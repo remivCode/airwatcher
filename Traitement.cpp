@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           Traitement  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <Traitement> (fichier Traitement.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "Traitement.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type Traitement::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble &Ensemble::operator=(const Ensemble &unEnsemble)
+Traitement &Traitement::operator=(const Traitement &unTraitement)
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble(const Ensemble &unEnsemble)
+Traitement::Traitement(const Traitement &unTraitement)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <Traitement>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de Traitement (constructeur de copie)
 
-Ensemble::Ensemble()
+Traitement::Traitement()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <Traitement>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de Traitement
 
-Ensemble::~Ensemble()
+Traitement::~Traitement()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <Traitement>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~Traitement
 
 //------------------------------------------------------------------ PRIVE
 

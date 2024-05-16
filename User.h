@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           User  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Ensemble> (fichier Ensemble.h) ----------------
-#if !defined(ENSEMBLE_H)
-#define ENSEMBLE_H
+//---------- Interface de la classe <User> (fichier User.h) ----------------
+#if !defined(USER_H)
+#define USER_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Ensemble>
+// Rôle de la classe <User>
 //
 //
 //------------------------------------------------------------------------
 
-class Ensemble
+class User
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,26 +35,26 @@ public:
     //
 
     //------------------------------------------------- Surcharge d'opérateurs
-    Ensemble &operator=(const Ensemble &unEnsemble);
+    User &operator=(const User &unUser);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Ensemble(const Ensemble &unEnsemble);
+    User(const User &unUser);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Ensemble();
+    User();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Ensemble();
+    virtual ~User();
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +68,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
 };
 
-//-------------------------------- Autres définitions dépendantes de <Ensemble>
+//-------------------------------- Autres définitions dépendantes de <User>
 
-#endif // ENSEMBLE_H
+#endif // USER_H

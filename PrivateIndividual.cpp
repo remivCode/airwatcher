@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           PrivateIndividual  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <PrivateIndividual> (fichier PrivateIndividual.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "PrivateIndividual.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type PrivateIndividual::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble &Ensemble::operator=(const Ensemble &unEnsemble)
+PrivateIndividual &PrivateIndividual::operator=(const PrivateIndividual &unPrivateIndividual)
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble(const Ensemble &unEnsemble)
+PrivateIndividual::PrivateIndividual(const PrivateIndividual &unPrivateIndividual)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <PrivateIndividual>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de PrivateIndividual (constructeur de copie)
 
-Ensemble::Ensemble()
+PrivateIndividual::PrivateIndividual()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <PrivateIndividual>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de PrivateIndividual
 
-Ensemble::~Ensemble()
+PrivateIndividual::~PrivateIndividual()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <PrivateIndividual>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~PrivateIndividual
 
 //------------------------------------------------------------------ PRIVE
 

@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           Sensor  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <Sensor> (fichier Sensor.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "Sensor.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type Sensor::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble &Ensemble::operator=(const Ensemble &unEnsemble)
+Sensor &Sensor::operator=(const Sensor &unSensor)
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble(const Ensemble &unEnsemble)
+Sensor::Sensor(const Sensor &unSensor)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <Sensor>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de Sensor (constructeur de copie)
 
-Ensemble::Ensemble()
+Sensor::Sensor()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <Sensor>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de Sensor
 
-Ensemble::~Ensemble()
+Sensor::~Sensor()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <Sensor>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~Sensor
 
 //------------------------------------------------------------------ PRIVE
 

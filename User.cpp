@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           User  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <User> (fichier User.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "User.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type User::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble &Ensemble::operator=(const Ensemble &unEnsemble)
+User &User::operator=(const User &unUser)
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble(const Ensemble &unEnsemble)
+User::User(const User &unUser)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <User>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de User (constructeur de copie)
 
-Ensemble::Ensemble()
+User::User()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <User>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de User
 
-Ensemble::~Ensemble()
+User::~User()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <User>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~User
 
 //------------------------------------------------------------------ PRIVE
 

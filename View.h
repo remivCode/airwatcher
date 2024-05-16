@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           View  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
@@ -7,8 +7,8 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Ensemble> (fichier Ensemble.h) ----------------
-#if !defined(ENSEMBLE_H)
-#define ENSEMBLE_H
+#if !defined(VIEW_H)
+#define VIEW_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Ensemble>
+// Rôle de la classe <vVew>
 //
 //
 //------------------------------------------------------------------------
 
-class Ensemble
+class View
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,26 +35,26 @@ public:
     //
 
     //------------------------------------------------- Surcharge d'opérateurs
-    Ensemble &operator=(const Ensemble &unEnsemble);
+    View &operator=(const View &unView);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Ensemble(const Ensemble &unEnsemble);
+    View(const View &unView);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Ensemble();
+    View();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Ensemble();
+    virtual ~View();
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +68,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
 };
 
-//-------------------------------- Autres définitions dépendantes de <Ensemble>
+//-------------------------------- Autres définitions dépendantes de <View>
 
-#endif // ENSEMBLE_H
+#endif // VIEW_H

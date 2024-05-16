@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           Traitement  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Ensemble> (fichier Ensemble.h) ----------------
-#if !defined(ENSEMBLE_H)
-#define ENSEMBLE_H
+//---------- Interface de la classe <Traitement> (fichier Traitement.h) ----------------
+#if !defined(TRAITEMENT_H)
+#define TRAITEMENT_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Ensemble>
+// Rôle de la classe <Traitement>
 //
 //
 //------------------------------------------------------------------------
 
-class Ensemble
+class Traitement
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,26 +35,26 @@ public:
     //
 
     //------------------------------------------------- Surcharge d'opérateurs
-    Ensemble &operator=(const Ensemble &unEnsemble);
+    Traitement &operator=(const Traitement &unTraitement);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Ensemble(const Ensemble &unEnsemble);
+    Traitement(const Traitement &unTraitement);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Ensemble();
+    Traitement();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Ensemble();
+    virtual ~Traitement();
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +68,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
 };
 
-//-------------------------------- Autres définitions dépendantes de <Ensemble>
+//-------------------------------- Autres définitions dépendantes de <Traitement>
 
-#endif // ENSEMBLE_H
+#endif // TRAITEMENT_H

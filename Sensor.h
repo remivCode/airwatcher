@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           Sensor  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Ensemble> (fichier Ensemble.h) ----------------
-#if !defined(ENSEMBLE_H)
-#define ENSEMBLE_H
+//---------- Interface de la classe <Sensor> (fichier Sensor.h) ----------------
+#if !defined(SENSOR_H)
+#define SENSOR_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Ensemble>
+// Rôle de la classe <Sensor>
 //
 //
 //------------------------------------------------------------------------
 
-class Ensemble
+class Sensor
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,26 +35,26 @@ public:
     //
 
     //------------------------------------------------- Surcharge d'opérateurs
-    Ensemble &operator=(const Ensemble &unEnsemble);
+    Sensor &operator=(const Sensor &unSensor);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Ensemble(const Ensemble &unEnsemble);
+    Sensor(const Sensor &unSensor);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Ensemble();
+    Sensor();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Ensemble();
+    virtual ~Sensor();
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +68,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
 };
 
-//-------------------------------- Autres définitions dépendantes de <Ensemble>
+//-------------------------------- Autres définitions dépendantes de <Sensor>
 
-#endif // ENSEMBLE_H
+#endif // SENSOR_H

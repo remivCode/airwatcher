@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           PrivateIndividual  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Ensemble> (fichier Ensemble.h) ----------------
-#if !defined(ENSEMBLE_H)
-#define ENSEMBLE_H
+//---------- Interface de la classe <PrivateIndividual> (fichier PrivateIndividual.h) ----------------
+#if !defined(PRIVATEINDIVIDUAL_H)
+#define PRIVATEINDIVIDUAL_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Ensemble>
+// Rôle de la classe <PrivateIndividual>
 //
 //
 //------------------------------------------------------------------------
 
-class Ensemble
+class PrivateIndividual
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,26 +35,26 @@ public:
     //
 
     //------------------------------------------------- Surcharge d'opérateurs
-    Ensemble &operator=(const Ensemble &unEnsemble);
+    PrivateIndividual &operator=(const PrivateIndividual &unPrivateIndividual);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Ensemble(const Ensemble &unEnsemble);
+    PrivateIndividual(const PrivateIndividual &unPrivateIndividual);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Ensemble();
+    PrivateIndividual();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Ensemble();
+    virtual ~PrivateIndividual();
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +68,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
 };
 
-//-------------------------------- Autres définitions dépendantes de <Ensemble>
+//-------------------------------- Autres définitions dépendantes de <PrivateIndividual>
 
-#endif // ENSEMBLE_H
+#endif // PRIVATEINDIVIDUAL_H
