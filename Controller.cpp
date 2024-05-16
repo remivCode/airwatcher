@@ -52,16 +52,16 @@ bool Controller::recupererSaisieMenu(int saisie)
 
         case caseMesureAirQuality :
             CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates : \r\n") ;
-            if ((abs(coordGPS.getLatitude() > 90.0)) or (abs(coordGPS.getLongitude() > 180))){
+            if ((abs(coordGPS.GetLatitude() > 90.0)) or (abs(coordGPS.GetLongitude() > 180))){
                 View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n") ;
                 break ;
             }
 
             Date date = View::entrerDate("Enter the date : \r\n") ;
-            int an = date.getAnnee() ;
-            int mois = date.getMois() ;
-            int jour = date.getJour() ; 
-            int heure = date.getHeure() ;
+            int an = date.GetAnnee() ;
+            int mois = date.GetMois() ;
+            int jour = date.GetJour() ; 
+            int heure = date.GetHeure() ;
 
             if ((mois<0) or (mois>12)){
                 View::afficherErreur("Months must be between 1 and 12 included\r\n") ;
@@ -106,7 +106,7 @@ bool Controller::recupererSaisieMenu(int saisie)
 
         case caseMesureMeanAirQuality :
             CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates of the center of the area : \r\n") ;
-            if ((abs(coordGPS.getLatitude() > 90.0)) or (abs(coordGPS.getLongitude() > 180))){
+            if ((abs(coordGPS.GetLatitude() > 90.0)) or (abs(coordGPS.GetLongitude() > 180))){
                 View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n") ;
                 break ;
             }
@@ -118,15 +118,15 @@ bool Controller::recupererSaisieMenu(int saisie)
             }
 
             Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n") ;
-            int an1 = dateBeginning.getAnnee() ;
-            int mois1 = dateBeginning.getMois() ;
-            int jour1 = dateBeginning.getJour() ; 
-            int heure1 = dateBeginning.getHeure() ;
+            int an1 = dateBeginning.GetAnnee() ;
+            int mois1 = dateBeginning.GetMois() ;
+            int jour1 = dateBeginning.GetJour() ; 
+            int heure1 = dateBeginning.GetHeure() ;
             Date dateEnd = View::enterDate("Enter the date 2 (end) : \r\n") ;
-            int an2 = dateEnd.getAnnee() ;
-            int mois2 = dateEnd.getMois() ;
-            int jour2 = dateEnd.getJour() ; 
-            int heure2 = dateEnd.getHeure() ;
+            int an2 = dateEnd.GetAnnee() ;
+            int mois2 = dateEnd.GetMois() ;
+            int jour2 = dateEnd.GetJour() ; 
+            int heure2 = dateEnd.GetHeure() ;
 
             if ((mois1<0) or (mois1>12) or (mois2<0) or (mois2>12)){
                 View::afficherErreur("Months must be between 1 and 12 included\r\n") ;
