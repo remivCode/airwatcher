@@ -28,6 +28,40 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+ // Getters
+    int Date::GetAnnee() const {
+        return annee;
+    }
+
+    int Date::GetMois() const {
+        return mois;
+    }
+
+    int Date::GetJour() const {
+        return jour;
+    }
+
+    int Date::GetHeure() const {
+        return heure;
+    }
+
+    // Setters
+    void Date::SetAnnee(int a) {
+        annee = a;
+    }
+
+    void Date::SetMois(int m) {
+        mois = m;
+    }
+
+    void Date::SetJour(int j) {
+        jour = j;
+    }
+
+    void Date::SetHeure(int h) {
+        heure = h;
+    }
+
 //------------------------------------------------- Surcharge d'opérateurs
 Date &Date::operator=(const Date &unDate)
 // Algorithme :

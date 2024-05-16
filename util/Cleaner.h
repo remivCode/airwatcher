@@ -37,6 +37,20 @@ public:
     // Contrat :
     //
 
+    // Getters
+    std::string getCleanerID() const;
+    CoordGPS getCoord() const;
+    Date getTimestampStart() const;
+    Date getTimestampStop() const;
+    Provider* getProvider() const;
+
+    // Setters
+    void setCleanerID(const std::string& id);
+    void setCoord(const CoordGPS& gps);
+    void setTimestampStart(const Date& start);
+    void setTimestampStop(const Date& stop);
+    void setProvider(Provider* prov);
+
     //------------------------------------------------- Surcharge d'opérateurs
     Cleaner &operator=(const Cleaner &unCleaner);
     // Mode d'emploi :
@@ -57,7 +71,7 @@ public:
     // Contrat :
     //
 
-    Cleaner(string id, CoordGPS coordonnee, Date debut, Date fin, Provider provid);
+    Cleaner(string id, CoordGPS coordonnee, Date debut, Date fin, Provider* provid);
     // Mode d'emploi :
     //
     // Contrat :
@@ -79,7 +93,7 @@ protected:
     CoordGPS coord;
     Date timestamp_start;
     Date timestamp_stop;
-    Provider provider;
+    Provider* provider;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Cleaner>
