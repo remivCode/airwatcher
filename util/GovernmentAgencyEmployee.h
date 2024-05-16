@@ -11,6 +11,7 @@
 #define GOVERNMENTAGENCYEMPLOYEE_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -22,7 +23,7 @@
 //
 //------------------------------------------------------------------------
 
-class GovernmentAgencyEmployee
+class GovernmentAgencyEmployee : public User
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -50,6 +51,12 @@ public:
 
     GovernmentAgencyEmployee();
     // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    GovernmentAgencyEmployee(int id, string login, string password);
+    // Mode d'emploi (constructeur avec paramètres) :
     //
     // Contrat :
     //

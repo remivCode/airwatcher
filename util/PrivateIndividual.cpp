@@ -28,6 +28,32 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+
+int PrivateIndividual::GetPoints(void) const
+{
+    return this->numberOfPoints;
+}
+
+bool PrivateIndividual::GetFiability(void) const
+{
+    return this->fiability;
+}
+
+void PrivateIndividual::SetPoints(int points)
+{
+    this->numberOfPoints = points;
+}
+
+void PrivateIndividual::SetFiability(bool fiab)
+{
+    this->fiability = fiab;
+}
+
+void PrivateIndividual::IncrementerNbPoints()
+{
+    this->numberOfPoints++;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 PrivateIndividual &PrivateIndividual::operator=(const PrivateIndividual &unPrivateIndividual)
 // Algorithme :
@@ -46,6 +72,16 @@ PrivateIndividual::PrivateIndividual(const PrivateIndividual &unPrivateIndividua
 } //----- Fin de PrivateIndividual (constructeur de copie)
 
 PrivateIndividual::PrivateIndividual()
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <PrivateIndividual>" << endl;
+#endif
+} //----- Fin de PrivateIndividual
+
+
+PrivateIndividual::PrivateIndividual(int id, string login, string password) : User(id, login, password)
 // Algorithme :
 //
 {

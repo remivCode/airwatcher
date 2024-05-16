@@ -11,6 +11,8 @@
 #define PRIVATEINDIVIDUAL_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "User.h"
+
 
 //------------------------------------------------------------- Constantes
 
@@ -22,7 +24,7 @@
 //
 //------------------------------------------------------------------------
 
-class PrivateIndividual
+class PrivateIndividual : public User
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -33,6 +35,15 @@ public:
     //
     // Contrat :
     //
+
+    void IncrementerNbPoints();
+    //Incrementer le nb de points
+
+    int GetPoints(void) const;
+    bool GetFiability(void) const;
+
+    void SetPoints(int points);
+    void SetFiability(bool fiab);
 
     //------------------------------------------------- Surcharge d'opérateurs
     PrivateIndividual &operator=(const PrivateIndividual &unPrivateIndividual);
@@ -54,6 +65,12 @@ public:
     // Contrat :
     //
 
+    PrivateIndividual(int id, string login, string password);
+    // Mode d'emploi (constructeur avec paramètres):
+    //
+    // Contrat :
+    //
+
     virtual ~PrivateIndividual();
     // Mode d'emploi :
     //
@@ -66,6 +83,9 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    int numberOfPoints = 0;
+    bool fiability = true;
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <PrivateIndividual>
