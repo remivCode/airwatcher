@@ -61,7 +61,7 @@ Sensor::Sensor(int id, CoordGPS coordonnee, bool fiab)
 #ifdef MAP
     cout << "Appel au constructeur de <Sensor>" << endl;
 #endif
-    sensorId = id;
+    sensorID = id;
     coord = coordonnee;
     fiability = fiab;
 } //----- Fin de Sensor

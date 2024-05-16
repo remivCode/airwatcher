@@ -73,7 +73,7 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
-    int sensorId;
+    int sensorID;
     CoordGPS coord;
     bool fiability;
 };

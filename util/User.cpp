@@ -54,6 +54,18 @@ User::User()
 #endif
 } //----- Fin de User
 
+User::User(int id, string login, string password)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <User>" << endl;
+#endif
+    this->userID = id;
+    this->login = login;
+    this->password = password;
+} //----- Fin de User
+
 User::~User()
 // Algorithme :
 //

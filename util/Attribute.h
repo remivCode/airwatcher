@@ -55,7 +55,7 @@ public:
     // Contrat :
     //
 
-    Attribute(int id, string unit, string description);
+    Attribute(string id, string unit, string description);
     // Mode d'emploi :
     //
     // Contrat :
@@ -73,7 +73,7 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
-    int attributeId;
+    string attributeID;
     string unit;
     string description;
 };

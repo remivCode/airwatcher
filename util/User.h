@@ -11,6 +11,7 @@
 #define USER_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <string>
 
 //------------------------------------------------------------- Constantes
 
@@ -54,6 +55,12 @@ public:
     // Contrat :
     //
 
+    User(int id, string login, string password);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     virtual ~User();
     // Mode d'emploi :
     //
@@ -66,6 +73,10 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    int userID;
+    string login;
+    string password;
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <User>
