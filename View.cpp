@@ -65,10 +65,16 @@ void afficherMesureAirQuality(const AirMeasurement &mesure)
     cout << mesure.getNo2() << endl;
     cout << mesure.getPm10() << endl;
 }
-void afficherListe(const vector<Sensor> &liste)
-{
+void afficherListe(const std::vector<Sensor>& liste) {
     // Algorithme :
-
+    cout << "List of Sensors:" << endl;
+    for (const Sensor& sensor : liste) {
+        cout << "Sensor ID: " << sensor.GetSensorID() 
+                  << ", Coordinates: (" << sensor.GetCoord().GetLatitude() 
+                  << ", " << sensor.GetCoord().GetLongitude() 
+                  << "), Fiability: " << (sensor.GetFiability() ? "True" : "False") 
+                  << endl;
+    }
 }
 
 void afficherErreur(const string &message)
@@ -86,12 +92,20 @@ void afficherTpsExec(const string &temps)
     cout << "Execution time: " << temps << endl;
 }
 
-string entrerDate(const string &prompt)
+Date entrerDate(const string& prompt)
 {
-    string date;
-    cout << prompt;
-    cin >> date;
-    return date;
+    int annee, mois, jour, heure;
+    cout << prompt << endl;
+    cout << "Enter year: ";
+    cin >> annee;
+    cout << "Enter month: ";
+    cin >> mois;
+    cout << "Enter day: ";
+    cin >> jour;
+    cout << "Enter hour: ";
+    cin >> heure;
+
+    return Date(annee, mois, jour, heure);
 }
 
 int entrerNombre(const string &prompt)
@@ -160,7 +174,7 @@ void MenuPrincipalProvider()
               << "0: End\n";
     int choice;
     cin >> choice;
-    recupererSaisieMenu(choice);
+    Controller::recupererSaisieMenu(choice);
 }
 
 View::~View()
