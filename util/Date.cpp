@@ -45,7 +45,6 @@ Date::Date(const Date &unDate)
 #endif
 } //----- Fin de Date (constructeur de copie)
 
-
 Date::Date(int annee, int mois, int jour, int heure)
 // Algorithme :
 //
@@ -59,7 +58,6 @@ Date::Date(int annee, int mois, int jour, int heure)
     this->jour = jour;
     this->heure = heure;
 } //----- Fin de Date
-
 
 Date::Date()
 // Algorithme :

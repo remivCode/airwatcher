@@ -22,11 +22,11 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Traitement::Méthode ( liste des paramètres )
+bool Traitement::analyzeFunctionalState(Sensor sensor)
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
+{
+} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 Traitement &Traitement::operator=(const Traitement &unTraitement)
@@ -66,3 +66,8 @@ Traitement::~Traitement()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+void Traitement::chargerDonnees()
+// Algorithme :
+//
+{
+} //----- Fin de Méthode
