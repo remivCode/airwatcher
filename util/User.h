@@ -35,11 +35,11 @@ public:
     // Contrat :
     //
 
-    int GetID(void) const;
+    string GetID(void) const;
     string GetLogin(void) const;
     string GetPassword(void) const;
 
-    void SetID(int id);
+    void SetID(string id);
     void SetLogin(string login);
     void SetPassword(string password);
 
@@ -63,7 +63,7 @@ public:
     // Contrat :
     //
 
-    User(int id, string login, string password);
+    User(string id, string login, string password);
     // Mode d'emploi :
     //
     // Contrat :
@@ -81,7 +81,7 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
-    int userID;
+    string userID;
     string login;
     string password;
 

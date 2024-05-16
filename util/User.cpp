@@ -28,7 +28,7 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-int User::GetID(void) const
+string User::GetID(void) const
 {
     return this->userID;
 }
@@ -43,7 +43,7 @@ string User::GetPassword(void) const
     return this->password;
 }
 
-void User::SetID(int id)
+void User::SetID(string id)
 {
     this->userID = id;
 }
@@ -84,7 +84,7 @@ User::User()
 #endif
 } //----- Fin de User
 
-User::User(int id, string login, string password)
+User::User(string id, string login, string password)
 // Algorithme :
 //
 {

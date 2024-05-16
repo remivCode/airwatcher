@@ -11,6 +11,7 @@
 #define PROVIDER_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -22,7 +23,7 @@
 //
 //------------------------------------------------------------------------
 
-class Provider
+class Provider : public User
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -49,6 +50,12 @@ public:
     //
 
     Provider();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    Provider(string id, string login, string password);
     // Mode d'emploi :
     //
     // Contrat :
