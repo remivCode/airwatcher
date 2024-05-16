@@ -54,9 +54,15 @@ Date::Date(int annee, int mois, int jour, int heure)
 #endif
 
     this->annee = annee;
+<<<<<<< HEAD
     this.mois = mois;
     this.jour = jour;
     this.heure = heure;
+=======
+    this->mois = mois;
+    this->jour = jour;
+    this->heure = heure;
+>>>>>>> 85c5563e77f46fefb79eacad4e8b54c777c329c3
 } //----- Fin de Date
 
 Date::Date()

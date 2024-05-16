@@ -48,6 +48,12 @@ public:
     // Contrat :
     //
 
+    AirMeasurement(int index, float o3, float so2, float no2, float pm10)
+    // Mode d'emploi (constructeur avec paramètres) :
+    //
+    // Contrat :
+    //
+
     AirMeasurement();
     // Mode d'emploi :
     //
@@ -66,6 +72,11 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    int atmoIndex;
+    float o3;
+    float so2;
+    float no2;
+    float pm10;
 };
 
 //-------------------------------- Autres définitions dépendantes de <AirMeasurement>
