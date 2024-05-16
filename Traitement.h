@@ -11,6 +11,14 @@
 #define TRAITEMENT_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <list>
+#include "util/Sensor.h"
+#include "util/Attribute.h"
+#include "util/Measurement.h"
+#include "util/Cleaner.h"
+#include "util/CoordGPS.h"
+#include "util/Date.h"
+#include "util/AirMeasurement.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -28,7 +36,25 @@ class Traitement
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+    AirMeasurement calculateAirQualite(CoordGPS coords, Date date);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    AirMeasurement calculateMeanAirQualite(CoordGPS coords, Date date);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    AirMeasurement calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    bool analyzeFunctionalState(Sensor sensor);
     // Mode d'emploi :
     //
     // Contrat :
@@ -64,8 +90,17 @@ public:
 
 protected:
     //----------------------------------------------------- Méthodes protégées
+    void chargerDonnees();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     //----------------------------------------------------- Attributs protégés
+    list<Sensor> sensors;
+    list<Attribute> typeMesures;
+    list<Measurement> measurements;
+    list<Cleaner> cleaners;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Traitement>
