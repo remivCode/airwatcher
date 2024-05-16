@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           GovernmentAgencyEmployee  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Ensemble> (fichier Ensemble.h) ----------------
-#if !defined(ENSEMBLE_H)
-#define ENSEMBLE_H
+//---------- Interface de la classe <GovernmentAgencyEmployee> (fichier GovernmentAgencyEmployee.h) ----------------
+#if !defined(GOVERNMENTAGENCYEMPLOYEE_H)
+#define GOVERNMENTAGENCYEMPLOYEE_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Ensemble>
+// Rôle de la classe <GovernmentAgencyEmployee>
 //
 //
 //------------------------------------------------------------------------
 
-class Ensemble
+class GovernmentAgencyEmployee
 {
     //----------------------------------------------------------------- PUBLIC
 
@@ -35,26 +35,26 @@ public:
     //
 
     //------------------------------------------------- Surcharge d'opérateurs
-    Ensemble &operator=(const Ensemble &unEnsemble);
+    GovernmentAgencyEmployee &operator=(const GovernmentAgencyEmployee &unGovernmentAgencyEmployee);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     //-------------------------------------------- Constructeurs - destructeur
-    Ensemble(const Ensemble &unEnsemble);
+    GovernmentAgencyEmployee(const GovernmentAgencyEmployee &unGovernmentAgencyEmployee);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Ensemble();
+    GovernmentAgencyEmployee();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Ensemble();
+    virtual ~GovernmentAgencyEmployee();
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +68,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
 };
 
-//-------------------------------- Autres définitions dépendantes de <Ensemble>
+//-------------------------------- Autres définitions dépendantes de <GovernmentAgencyEmployee>
 
-#endif // ENSEMBLE_H
+#endif // GOVERNMENTAGENCYEMPLOYEE_H

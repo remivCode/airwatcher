@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           AirMeasurement  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <AirMeasurement> (fichier AirMeasurement.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "AirMeasurement.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type AirMeasurement::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble &Ensemble::operator=(const Ensemble &unEnsemble)
+AirMeasurement &AirMeasurement::operator=(const AirMeasurement &unAirMeasurement)
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble(const Ensemble &unEnsemble)
+AirMeasurement::AirMeasurement(const AirMeasurement &unAirMeasurement)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <AirMeasurement>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de AirMeasurement (constructeur de copie)
 
-Ensemble::Ensemble()
+AirMeasurement::AirMeasurement()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <AirMeasurement>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de AirMeasurement
 
-Ensemble::~Ensemble()
+AirMeasurement::~AirMeasurement()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <AirMeasurement>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~AirMeasurement
 
 //------------------------------------------------------------------ PRIVE
 
