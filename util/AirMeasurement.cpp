@@ -45,6 +45,21 @@ AirMeasurement::AirMeasurement(const AirMeasurement &unAirMeasurement)
 #endif
 } //----- Fin de AirMeasurement (constructeur de copie)
 
+AirMeasurement::AirMeasurement(int index, float o3, float so2, float no2, float pm10)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <AirMeasurement>" << endl;
+#endif
+    this->atmoIndex = index;
+    this->o3 = o3;
+    this->so2 = so2;
+    this->no2 = no2;
+    this->pm10 = pm10;
+} //----- Fin de AirMeasurement
+
+
 AirMeasurement::AirMeasurement()
 // Algorithme :
 //
