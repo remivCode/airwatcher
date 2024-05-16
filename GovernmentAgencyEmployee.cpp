@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           GovernmentAgencyEmployee  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <GovernmentAgencyEmployee> (fichier GovernmentAgencyEmployee.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "GovernmentAgencyEmployee.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type GovernmentAgencyEmployee::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble &Ensemble::operator=(const Ensemble &unEnsemble)
+GovernmentAgencyEmployee &GovernmentAgencyEmployee::operator=(const GovernmentAgencyEmployee &unGovernmentAgencyEmployee)
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble(const Ensemble &unEnsemble)
+GovernmentAgencyEmployee::GovernmentAgencyEmployee(const GovernmentAgencyEmployee &unGovernmentAgencyEmployee)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <GovernmentAgencyEmployee>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de GovernmentAgencyEmployee (constructeur de copie)
 
-Ensemble::Ensemble()
+GovernmentAgencyEmployee::GovernmentAgencyEmployee()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <GovernmentAgencyEmployee>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de GovernmentAgencyEmployee
 
-Ensemble::~Ensemble()
+GovernmentAgencyEmployee::~GovernmentAgencyEmployee()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <GovernmentAgencyEmployee>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~GovernmentAgencyEmployee
 
 //------------------------------------------------------------------ PRIVE
 

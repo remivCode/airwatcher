@@ -1,12 +1,12 @@
 /*************************************************************************
-                           Ensemble  -  description
+                           CoordGPS  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Réalisation de la classe <Ensemble> (fichier Ensemble.cpp) ------------
+//---------- Réalisation de la classe <CoordGPS> (fichier CoordGPS.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
 
@@ -15,53 +15,53 @@
 using namespace std;
 
 //------------------------------------------------------ Include personnel
-#include "Ensemble.h"
+#include "CoordGPS.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Ensemble::Méthode ( liste des paramètres )
+// type CoordGPS::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
-Ensemble &Ensemble::operator=(const Ensemble &unEnsemble)
+CoordGPS &CoordGPS::operator=(const CoordGPS &unCoordGPS)
 // Algorithme :
 //
 {
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
-Ensemble::Ensemble(const Ensemble &unEnsemble)
+CoordGPS::CoordGPS(const CoordGPS &unCoordGPS)
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de copie de <Ensemble>" << endl;
+    cout << "Appel au constructeur de copie de <CoordGPS>" << endl;
 #endif
-} //----- Fin de Ensemble (constructeur de copie)
+} //----- Fin de CoordGPS (constructeur de copie)
 
-Ensemble::Ensemble()
+CoordGPS::CoordGPS()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au constructeur de <Ensemble>" << endl;
+    cout << "Appel au constructeur de <CoordGPS>" << endl;
 #endif
-} //----- Fin de Ensemble
+} //----- Fin de CoordGPS
 
-Ensemble::~Ensemble()
+CoordGPS::~CoordGPS()
 // Algorithme :
 //
 {
 #ifdef MAP
-    cout << "Appel au destructeur de <Ensemble>" << endl;
+    cout << "Appel au destructeur de <CoordGPS>" << endl;
 #endif
-} //----- Fin de ~Ensemble
+} //----- Fin de ~CoordGPS
 
 //------------------------------------------------------------------ PRIVE
 
