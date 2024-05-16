@@ -28,6 +28,26 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+float CoordGPS::GetLat(void) const
+{
+    return this->latitude;
+}
+
+float CoordGPS::GetLng(void) const
+{
+    return this->longitude;
+}
+
+void CoordGPS::SetLat(float lat)
+{
+    this->latitude=lat;
+}
+
+void CoordGPS::SetLng(float lng)
+{
+    this->latitude=lng;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 CoordGPS &CoordGPS::operator=(const CoordGPS &unCoordGPS)
 // Algorithme :

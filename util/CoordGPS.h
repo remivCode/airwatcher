@@ -34,6 +34,11 @@ public:
     // Contrat :
     //
 
+    float GetLat(void) const;
+    float GetLng(void) const;
+    void SetLat(float lat);
+    void SetLng(float lng);
+
     //------------------------------------------------- Surcharge d'opérateurs
     CoordGPS &operator=(const CoordGPS &unCoordGPS);
     // Mode d'emploi :
