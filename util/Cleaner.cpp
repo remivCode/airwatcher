@@ -28,6 +28,58 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+// Getters
+string Cleaner::getCleanerID() const
+{
+    return cleanerID;
+}
+
+CoordGPS Cleaner::getCoord() const
+{
+    return coord;
+}
+
+Date Cleaner::getTimestampStart() const
+{
+    return timestamp_start;
+}
+
+Date Cleaner::getTimestampStop() const
+{
+    return timestamp_stop;
+}
+
+Provider *Cleaner::getProvider() const
+{
+    return provider;
+}
+
+// Setters
+void Cleaner::setCleanerID(const std::string &id)
+{
+    cleanerID = id;
+}
+
+void Cleaner::setCoord(const CoordGPS &gps)
+{
+    coord = gps;
+}
+
+void Cleaner::setTimestampStart(const Date &start)
+{
+    timestamp_start = start;
+}
+
+void Cleaner::setTimestampStop(const Date &stop)
+{
+    timestamp_stop = stop;
+}
+
+void Cleaner::setProvider(Provider *prov)
+{
+    provider = prov;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 Cleaner &Cleaner::operator=(const Cleaner &unCleaner)
 // Algorithme :
@@ -54,7 +106,7 @@ Cleaner::Cleaner()
 #endif
 } //----- Fin de Cleaner
 
-Cleaner::Cleaner(string id, CoordGPS coordonnee, Date debut, Date fin, Provider provid)
+Cleaner::Cleaner(string id, CoordGPS coordonnee, Date debut, Date fin, Provider *provid)
 // Algorithme :
 //
 {

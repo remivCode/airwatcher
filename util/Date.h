@@ -34,6 +34,15 @@ public:
     // Contrat :
     //
 
+    int GetAnnee(void) const;
+    int GetMois(void) const;
+    int GetJour(void) const;
+    int GetHeure(void) const;
+    void SetAnnee(int a);
+    void SetMois(int m);
+    void SetJour(int j);
+    void SetHeure(int h);
+
     //------------------------------------------------- Surcharge d'opérateurs
     Date &operator=(const Date &unDate);
     // Mode d'emploi :
