@@ -54,6 +54,15 @@ GovernmentAgencyEmployee::GovernmentAgencyEmployee()
 #endif
 } //----- Fin de GovernmentAgencyEmployee
 
+GovernmentAgencyEmployee::GovernmentAgencyEmployee(int id, string login, string password) : User(id, login, password)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <GovernmentAgencyEmployee>" << endl;
+#endif
+} //----- Fin de GovernmentAgencyEmployee
+
 GovernmentAgencyEmployee::~GovernmentAgencyEmployee()
 // Algorithme :
 //

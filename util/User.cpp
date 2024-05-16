@@ -28,6 +28,36 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+int User::GetID(void) const
+{
+    return this->userID;
+}
+
+string User::GetLogin(void) const
+{
+    return this->login;
+}
+
+string User::GetPassword(void) const
+{
+    return this->password;
+}
+
+void User::SetID(int id)
+{
+    this->userID = id;
+}
+
+void User::SetLogin(string login)
+{
+    this->login = login;
+}
+
+void User::SetPassword(string password)
+{
+    this->password = password;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 User &User::operator=(const User &unUser)
 // Algorithme :

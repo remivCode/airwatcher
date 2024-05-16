@@ -35,6 +35,14 @@ public:
     // Contrat :
     //
 
+    int GetID(void) const;
+    string GetLogin(void) const;
+    string GetPassword(void) const;
+
+    void SetID(int id);
+    void SetLogin(string login);
+    void SetPassword(string password);
+
     //------------------------------------------------- Surcharge d'opérateurs
     User &operator=(const User &unUser);
     // Mode d'emploi :

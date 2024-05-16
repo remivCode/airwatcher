@@ -54,7 +54,7 @@ Sensor::Sensor()
 #endif
 } //----- Fin de Sensor
 
-Sensor::Sensor(int id, CoordGPS coordonnee, bool fiab)
+Sensor::Sensor(int id, CoordGPS coordonnee)
 // Algorithme :
 //
 {
@@ -63,7 +63,6 @@ Sensor::Sensor(int id, CoordGPS coordonnee, bool fiab)
 #endif
     sensorID = id;
     coord = coordonnee;
-    fiability = fiab;
 } //----- Fin de Sensor
 
 Sensor::~Sensor()

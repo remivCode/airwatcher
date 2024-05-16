@@ -55,7 +55,7 @@ public:
     // Contrat :
     //
 
-    Sensor(int id, CoordGPS coordonnee, bool fiab);
+    Sensor(int id, CoordGPS coordonnee);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :
@@ -75,7 +75,7 @@ protected:
     //----------------------------------------------------- Attributs protégés
     int sensorID;
     CoordGPS coord;
-    bool fiability;
+    bool fiability = true;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Sensor>
