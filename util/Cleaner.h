@@ -57,6 +57,12 @@ public:
     // Contrat :
     //
 
+    Cleaner(string id, CoordGPS coordonnee, Date debut, Date fin, Provider provid);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     virtual ~Cleaner();
     // Mode d'emploi :
     //

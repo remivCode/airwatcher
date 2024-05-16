@@ -65,7 +65,7 @@ public:
     // Contrat :
     //
 
-    PrivateIndividual(int id, string login, string password);
+    PrivateIndividual(string id, string login, string password);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :
