@@ -65,10 +65,16 @@ void afficherMesureAirQuality(const AirMeasurement &mesure)
     cout << mesure.getNo2() << endl;
     cout << mesure.getPm10() << endl;
 }
-void afficherListe(const vector<Sensor> &liste)
-{
+void afficherListe(const std::vector<Sensor>& liste) {
     // Algorithme :
-
+    cout << "List of Sensors:" << endl;
+    for (const Sensor& sensor : liste) {
+        cout << "Sensor ID: " << sensor.GetSensorID() 
+                  << ", Coordinates: (" << sensor.GetCoord().GetLatitude() 
+                  << ", " << sensor.GetCoord().GetLongitude() 
+                  << "), Fiability: " << (sensor.GetFiability() ? "True" : "False") 
+                  << endl;
+    }
 }
 
 void afficherErreur(const string &message)
@@ -160,7 +166,7 @@ void MenuPrincipalProvider()
               << "0: End\n";
     int choice;
     cin >> choice;
-    recupererSaisieMenu(choice);
+    Controller::recupererSaisieMenu(choice);
 }
 
 View::~View()

@@ -81,7 +81,7 @@ public:
     //
     // Contrat :
     //
-    static std::string entrerDate(const string& prompt);
+    static string entrerDate(const string& prompt);
     // Mode d'emploi :
     //
     // Contrat :
@@ -91,7 +91,7 @@ public:
     //
     // Contrat :
     //
-    CoordGPS entrerCoord(const string& prompt);
+    static CoordGPS entrerCoord(const string& prompt);
     // Mode d'emploi :
     //
     // Contrat :
