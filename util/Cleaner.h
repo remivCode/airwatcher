@@ -11,6 +11,9 @@
 #define CLEANER_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "Provider.h"
+#include "Date.h"
+#include "CoordGPS.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -66,6 +69,11 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    string cleanerID;
+    CoordGPS coord;
+    Date timestamp_start;
+    Date timestamp_stop;
+    Provider provider;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Cleaner>

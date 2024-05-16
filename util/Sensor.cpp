@@ -28,6 +28,48 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+string Sensor::GetSensorID(void) const
+{
+    return this->sensorID;
+}
+
+CoordGPS Sensor::GetCoord(void) const
+{
+    return this->coord;
+}
+
+
+bool Sensor::GetFiability(void) const
+{
+    return this->fiability;
+}
+
+string Sensor::GetUserID(void) const
+{
+    return this->userID;
+}
+
+void Sensor::SetSensorID(string id)
+{
+    this->sensorID = id;
+}
+
+void Sensor::SetCoord(CoordGPS coord)
+{
+    this->coord = coord;
+}
+
+void Sensor::SetFiability(bool fiab)
+{
+    this->fiability = fiab;
+}
+
+void Sensor::SetUserID(string id)
+{
+    this->userID = id;
+}
+
+
 //------------------------------------------------- Surcharge d'opérateurs
 Sensor &Sensor::operator=(const Sensor &unSensor)
 // Algorithme :
@@ -54,7 +96,7 @@ Sensor::Sensor()
 #endif
 } //----- Fin de Sensor
 
-Sensor::Sensor(int id, CoordGPS coordonnee)
+Sensor::Sensor(string id, CoordGPS coordonnee, string userID)
 // Algorithme :
 //
 {
@@ -63,6 +105,7 @@ Sensor::Sensor(int id, CoordGPS coordonnee)
 #endif
     sensorID = id;
     coord = coordonnee;
+    userID = userID;
 } //----- Fin de Sensor
 
 Sensor::~Sensor()

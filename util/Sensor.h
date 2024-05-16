@@ -35,6 +35,16 @@ public:
     // Contrat :
     //
 
+    string GetSensorID(void) const;
+    CoordGPS GetCoord(void) const;
+    bool GetFiability(void) const; 
+    string GetUserID(void) const;
+
+    void SetSensorID(string id); 
+    void SetCoord(CoordGPS coordonnes);
+    void SetFiability(bool fiab);
+    void SetUserID(string id); 
+
     //------------------------------------------------- Surcharge d'opérateurs
     Sensor &operator=(const Sensor &unSensor);
     // Mode d'emploi :
@@ -55,7 +65,7 @@ public:
     // Contrat :
     //
 
-    Sensor(int id, CoordGPS coordonnee);
+    Sensor(string id, CoordGPS coordonnee, string idUser = NULL);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :
@@ -73,9 +83,11 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
-    int sensorID;
+    string sensorID;
     CoordGPS coord;
     bool fiability = true;
+    string userID;
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Sensor>
