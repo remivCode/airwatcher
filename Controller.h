@@ -34,6 +34,24 @@ public:
     // Contrat :
     //
 
+    static bool recupererSaisieMenu(int saisie) ;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static bool connexion(string login, string password) ;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void chargerMenu() const ;
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     //------------------------------------------------- Surcharge d'opérateurs
     Controller &operator=(const Controller &unController);
     // Mode d'emploi :
@@ -66,6 +84,7 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    User user ;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Controller>

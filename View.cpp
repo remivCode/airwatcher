@@ -68,6 +68,7 @@ void afficherMesureAirQuality(const AirMeasurement &mesure)
 void afficherListe(const vector<Sensor> &liste)
 {
     // Algorithme :
+
 }
 
 void afficherErreur(const string &message)
@@ -101,12 +102,14 @@ int entrerNombre(const string &prompt)
     return nombre;
 }
 
-CoordGPS entrerCoord(const string &prompt)
-{
-    CoordGPS coord;
-    //j'ai tjr pas fini
+CoordGPS entrerCoord(const string& prompt) {
+    float lat, lng;
     cout << prompt << endl;
-    return coord;
+    cout << "Enter latitude: ";
+    cin >> lat;
+    cout << "Enter longitude: ";
+    cin >> lng;
+    return CoordGPS(lat, lng);
 }
 void MenuConnexion()
 {
@@ -122,7 +125,7 @@ void MenuConnexion()
               << "(NB: for a first connexion as a member of the gov agency, please contact the HR to have your connexion's informations)\n"
               << "/*an imaginary button*/\n"
               << "New member\n";
-    connexion(username,password);
+    Controller::connexion(username,password);
 }
 void MenuPrincipalGovernmentAgency()
 {
@@ -136,7 +139,7 @@ void MenuPrincipalGovernmentAgency()
               << "0: End\n";
     int choice;
     cin >> choice;
-    recupererSaisieMenu(choice);
+    Controller::recupererSaisieMenu(choice);
 }
 void MenuPrincipalPrive()
 {
@@ -148,7 +151,7 @@ void MenuPrincipalPrive()
               << "0: End\n";
     int choice;
     cin >> choice;
-    recupererSaisieMenu(choice);
+    Controller::recupererSaisieMenu(choice);
 }
 void MenuPrincipalProvider()
 {
