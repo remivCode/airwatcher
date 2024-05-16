@@ -112,9 +112,9 @@ void Traitement::chargerDonnees()
         Cleaner c;
         for (int i = 0; i < cleaners.size(); i++)
         {
-            if (cleaners[i].GetId() == idCleaner)
+            if (cleaners[i].getCleanerID() == idCleaner)
             {
-                cleaners[i].SetProvider(id);
+                cleaners[i].setProvider(p);
             }
         }
     }
@@ -156,7 +156,7 @@ void Traitement::chargerDonnees()
         {
             if (sensors[i].GetSensorID() == sensorId)
             {
-                sensors[i].SetUserID(id);
+                sensors[i].SetUser(p);
             }
         }
     } //----- Fin de Méthode
