@@ -48,6 +48,12 @@ public:
     // Contrat :
     //
 
+    CoordGPS(float lat, float long);
+    // Mode d'emploi (constructeur avec paramètres):
+    //
+    // Contrat :
+    //
+
     CoordGPS();
     // Mode d'emploi :
     //
@@ -66,6 +72,8 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    float latitude;
+    float longitude;
 };
 
 //-------------------------------- Autres définitions dépendantes de <CoordGPS>
