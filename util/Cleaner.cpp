@@ -54,6 +54,20 @@ Cleaner::Cleaner()
 #endif
 } //----- Fin de Cleaner
 
+Cleaner::Cleaner(string id, CoordGPS coordonnee, Date debut, Date fin, Provider provid)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Cleaner>" << endl;
+#endif
+    this->cleanerID = id;
+    this->coord = coordonnee;
+    this->timestamp_start = debut;
+    this->timestamp_stop = fin;
+    this->provider = provid;
+} //----- Fin de Cleaner
+
 Cleaner::~Cleaner()
 // Algorithme :
 //
