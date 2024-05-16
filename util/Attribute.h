@@ -11,6 +11,7 @@
 #define ATTRIBUTE_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <string>
 
 //------------------------------------------------------------- Constantes
 
@@ -54,6 +55,12 @@ public:
     // Contrat :
     //
 
+    Attribute(int id, string unit, string description);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     virtual ~Attribute();
     // Mode d'emploi :
     //
@@ -66,6 +73,9 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    int attributeId;
+    string unit;
+    string description;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Attribute>
