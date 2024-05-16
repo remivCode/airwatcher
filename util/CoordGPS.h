@@ -48,7 +48,7 @@ public:
     // Contrat :
     //
 
-    CoordGPS(float lat, float long);
+    CoordGPS(float lat, float lng);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :

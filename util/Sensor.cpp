@@ -16,6 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Sensor.h"
+#include "CoordGPS.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -52,6 +53,18 @@ Sensor::Sensor()
 #ifdef MAP
     cout << "Appel au constructeur de <Sensor>" << endl;
 #endif
+} //----- Fin de Sensor
+
+Sensor::Sensor(int id, CoordGPS coordonnee, bool fiab)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Sensor>" << endl;
+#endif
+    sensorId = id;
+    coord = coordonnee;
+    fiability = fiab;
 } //----- Fin de Sensor
 
 Sensor::~Sensor()

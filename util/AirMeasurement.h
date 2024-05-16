@@ -48,7 +48,7 @@ public:
     // Contrat :
     //
 
-    AirMeasurement(int index, float o3, float so2, float no2, float pm10)
+    AirMeasurement(int index, float o3, float so2, float no2, float pm10);
     // Mode d'emploi (constructeur avec paramètres) :
     //
     // Contrat :

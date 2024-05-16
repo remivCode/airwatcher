@@ -11,6 +11,7 @@
 #define SENSOR_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include "CoordGPS.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -54,6 +55,12 @@ public:
     // Contrat :
     //
 
+    Sensor(int id, CoordGPS coordonnee, bool fiab);
+    // Mode d'emploi (constructeur avec paramètres):
+    //
+    // Contrat :
+    //
+
     virtual ~Sensor();
     // Mode d'emploi :
     //
@@ -66,6 +73,9 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    int sensorId;
+    CoordGPS coord;
+    bool fiability;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Sensor>
