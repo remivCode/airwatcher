@@ -27,6 +27,30 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+int AirMeasurement::GetAtmoIndex() const
+{
+    return atmoIndex;
+}
+
+float AirMeasurement::GetO3() const
+{
+    return o3;
+}
+
+float AirMeasurement::GetSO2() const
+{
+    return so2;
+}
+
+float AirMeasurement::GetNO2() const
+{
+    return no2;
+}
+
+float AirMeasurement::GetPM10() const
+{
+    return pm10;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 AirMeasurement &AirMeasurement::operator=(const AirMeasurement &unAirMeasurement)
@@ -58,7 +82,6 @@ AirMeasurement::AirMeasurement(int index, float o3, float so2, float no2, float 
     this->no2 = no2;
     this->pm10 = pm10;
 } //----- Fin de AirMeasurement
-
 
 AirMeasurement::AirMeasurement()
 // Algorithme :

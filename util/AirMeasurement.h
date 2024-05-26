@@ -34,6 +34,12 @@ public:
     // Contrat :
     //
 
+    int GetAtmoIndex(void) const;
+    float GetO3(void) const;
+    float GetSO2(void) const;
+    float GetNO2(void) const;
+    float GetPM10(void) const;
+
     //------------------------------------------------- Surcharge d'opérateurs
     AirMeasurement &operator=(const AirMeasurement &unAirMeasurement);
     // Mode d'emploi :

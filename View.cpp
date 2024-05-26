@@ -59,11 +59,11 @@ View::View()
 void afficherMesureAirQuality(const AirMeasurement &mesure)
 {
     // Algorithme :
-    cout << mesure.getAtmoIndex() << endl;
-    cout << mesure.getO3() << endl;
-    cout << mesure.getSo2() << endl;
-    cout << mesure.getNo2() << endl;
-    cout << mesure.getPm10() << endl;
+    cout << mesure.GetAtmoIndex() << endl;
+    cout << mesure.GetO3() << endl;
+    cout << mesure.GetSO2() << endl;
+    cout << mesure.GetNO2() << endl;
+    cout << mesure.GetPM10() << endl;
 }
 void afficherListe(const std::vector<Sensor> &liste)
 {

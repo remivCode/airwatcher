@@ -39,7 +39,7 @@ public:
     string GetLogin(void) const;
     string GetPassword(void) const;
 
-    void SetID(string id);
+    void SetID(int id);
     void SetLogin(string login);
     void SetPassword(string password);
 
@@ -84,7 +84,6 @@ protected:
     string userID;
     string login;
     string password;
-
 };
 
 //-------------------------------- Autres définitions dépendantes de <User>

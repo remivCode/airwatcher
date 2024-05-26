@@ -43,7 +43,7 @@ string User::GetPassword(void) const
     return this->password;
 }
 
-void User::SetID(string id)
+void User::SetID(int id)
 {
     this->userID = id;
 }

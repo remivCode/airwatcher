@@ -55,7 +55,7 @@ public:
     // Contrat :
     //
 
-    GovernmentAgencyEmployee(int id, string login, string password);
+    GovernmentAgencyEmployee(string id, string login, string password);
     // Mode d'emploi (constructeur avec paramètres) :
     //
     // Contrat :

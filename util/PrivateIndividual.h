@@ -13,7 +13,6 @@
 //--------------------------------------------------- Interfaces utilisées
 #include "User.h"
 
-
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -37,7 +36,7 @@ public:
     //
 
     void IncrementerNbPoints();
-    //Incrementer le nb de points
+    // Incrementer le nb de points
 
     int GetPoints(void) const;
     bool GetFiability(void) const;
@@ -85,7 +84,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
     int numberOfPoints = 0;
     bool fiability = true;
-
 };
 
 //-------------------------------- Autres définitions dépendantes de <PrivateIndividual>

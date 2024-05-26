@@ -54,7 +54,7 @@ GovernmentAgencyEmployee::GovernmentAgencyEmployee()
 #endif
 } //----- Fin de GovernmentAgencyEmployee
 
-GovernmentAgencyEmployee::GovernmentAgencyEmployee(int id, string login, string password) : User(id, login, password)
+GovernmentAgencyEmployee::GovernmentAgencyEmployee(string id, string login, string password) : User(id, login, password)
 // Algorithme :
 //
 {

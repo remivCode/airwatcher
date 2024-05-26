@@ -28,7 +28,6 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-
 int PrivateIndividual::GetPoints(void) const
 {
     return this->numberOfPoints;
@@ -79,7 +78,6 @@ PrivateIndividual::PrivateIndividual()
     cout << "Appel au constructeur de <PrivateIndividual>" << endl;
 #endif
 } //----- Fin de PrivateIndividual
-
 
 PrivateIndividual::PrivateIndividual(string id, string login, string password) : User(id, login, password)
 // Algorithme :
