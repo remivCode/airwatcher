@@ -18,18 +18,20 @@ using namespace std;
 #include "Controller.h"
 #include "Traitement.h"
 #include "View.h"
-#include "util/User.h"
-#include "util/CoordGPS.h"
-#include "util/Date.h"
-#include "util/AirMeasurement.h"
-#include "util/Sensor.h"
-#include "util/GovernmentAgencyEmployee.h"
-#include "util/PrivateIndividual.h"
-#include "util/Provider.h"
+#include "User.h"
+#include "CoordGPS.h"
+#include "Date.h"
+#include "AirMeasurement.h"
+#include "Sensor.h"
+#include "GovernmentAgencyEmployee.h"
+#include "PrivateIndividual.h"
+#include "Provider.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
+
+User *Controller::user;
 
 //----------------------------------------------------- Méthodes publiques
 // type Controller::Méthode ( liste des paramètres )
@@ -181,17 +183,21 @@ bool Controller::connexion(string login, string password)
 
     case caseGovernment:
         *user = GovernmentAgencyEmployee();
+        Controller::chargerMenu();
         break;
 
     case casePrivate:
         *user = PrivateIndividual();
+        Controller::chargerMenu();
         break;
 
     case caseProvider:
         *user = Provider();
+        Controller::chargerMenu();
         break;
 
     default:
+        View::afficherErreur("Veuillez entrer un nombre valide.");
         View::MenuConnexion();
     }
 
@@ -273,7 +279,7 @@ Controller::~Controller()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-void MesureAirQuality()
+void Controller::MesureAirQuality()
 // Algorithme :
 //
 {
@@ -338,7 +344,7 @@ void MesureAirQuality()
     View::afficherMesureAirQuality(airMeasurement);
 }
 
-void MesureMeanAirQuality()
+void Controller::MesureMeanAirQuality()
 // Algorithme :
 //
 {
@@ -427,7 +433,7 @@ void MesureMeanAirQuality()
     View::afficherMesureAirQuality(airMeasurement);
 }
 
-void CheckSensorFunctional()
+void Controller::CheckSensorFunctional()
 // Algorithme :
 //
 {
@@ -438,7 +444,7 @@ void CheckSensorFunctional()
     View::afficherBool(functional);
 }
 
-void RankBySimilarity()
+void Controller::RankBySimilarity()
 // Algorithme :
 //
 {
@@ -454,21 +460,21 @@ void RankBySimilarity()
         */
 }
 
-void ConsultPoints()
+void Controller::ConsultPoints()
 // Algorithme :
 //
 {
     cout << "consult points" << endl; // temporaire
 }
 
-void ImpactAirCleaners()
+void Controller::ImpactAirCleaners()
 // Algorithme :
 //
 {
     cout << "impact cleaners" << endl; // temporaire
 }
 
-void CheckPrivateIndividual()
+void Controller::CheckPrivateIndividual()
 // Algorithme :
 //
 {

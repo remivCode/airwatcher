@@ -20,12 +20,18 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Traitement.h"
-#include "util/Provider.h"
-#include "util/PrivateIndividual.h"
+#include "Provider.h"
+#include "PrivateIndividual.h"
 
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
+
+vector<Sensor> Traitement::sensors;
+vector<Attribute> Traitement::typeMesures;
+vector<Measurement> Traitement::measurements;
+vector<Cleaner> Traitement::cleaners;
+vector<User> Traitement::users;
 
 //----------------------------------------------------- Méthodes publiques
 void Traitement::chargerDonnees()
@@ -51,7 +57,6 @@ void Traitement::chargerDonnees()
 
     ////////////////////////////////////////////////// Chargement cleaners
     ifstream clean("data/cleaners.csv");
-    string line;
     getline(clean, line);
     while (getline(clean, line))
     {
@@ -97,7 +102,6 @@ void Traitement::chargerDonnees()
 
     ////////////////////////////////////////////////// Chargement providers
     ifstream provid("data/providers.csv");
-    string line;
     getline(provid, line);
     while (getline(provid, line))
     {
@@ -121,7 +125,6 @@ void Traitement::chargerDonnees()
 
     ////////////////////////////////////////////////// Chargement sensors
     ifstream sens("data/sensors.csv");
-    string line;
     getline(sens, line);
     while (getline(sens, line))
     {
@@ -141,7 +144,6 @@ void Traitement::chargerDonnees()
 
     ////////////////////////////////////////////////// Chargement users
     ifstream user("data/users.csv");
-    string line;
     getline(user, line);
     while (getline(user, line))
     {
@@ -181,6 +183,18 @@ Sensor *Traitement::findSensorById(string id)
     }
 
     return NULL;
+} //----- Fin de Méthode
+
+AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
+// Algorithme :
+//
+{
+} //----- Fin de Méthode
+
+AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin)
+// Algorithme :
+//
+{
 } //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs

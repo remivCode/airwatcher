@@ -13,7 +13,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <iostream>
 using namespace std;
-#include "util/User.h"
+#include "User.h"
 
 //------------------------------------------------------------- Constantes
 

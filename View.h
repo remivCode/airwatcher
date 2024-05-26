@@ -16,6 +16,7 @@
 #include "Sensor.h"
 #include "Controller.h"
 #include "Date.h"
+#include <vector>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types

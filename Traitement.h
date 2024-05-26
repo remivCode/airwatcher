@@ -12,14 +12,14 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <vector>
-#include "util/Sensor.h"
-#include "util/Attribute.h"
-#include "util/Measurement.h"
-#include "util/Cleaner.h"
-#include "util/CoordGPS.h"
-#include "util/Date.h"
-#include "util/AirMeasurement.h"
-#include "util/User.h"
+#include "Sensor.h"
+#include "Attribute.h"
+#include "Measurement.h"
+#include "Cleaner.h"
+#include "CoordGPS.h"
+#include "Date.h"
+#include "AirMeasurement.h"
+#include "User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -50,12 +50,6 @@ public:
     //
 
     static User connexion(string login, string password);
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
-    static AirMeasurement calculateMeanAirQualite(CoordGPS coords, Date date);
     // Mode d'emploi :
     //
     // Contrat :

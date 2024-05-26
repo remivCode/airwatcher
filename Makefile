@@ -1,32 +1,25 @@
 ECHO = @echo
-EDL = g++
-COMP = g++
-CCFLAGS = -ansi -pedantic -Wall -std=c++11
-MAP_OPTION =
-EXE=analog
-BIN = ./bin
+GCC = g++
+RM = @rm -f
+CCFLAGS = -c -g -O1 -ansi -pedantic -Wall -std=c++11 
+MAP = #-DMAP #Commenter cette ligne si on veut compiler sans le mode Mise Au Point
+BIN = bin
+EXE = analog
+OBJETS = $(SRC:.cpp=.o)
+SRC = $(wildcard *.cpp) #Récupère tous les fichiers .cpp du répertoire courant
+OBJETS_DIR = $(OBJETS:%=$(BIN)/%)
 EXE_DIR = $(EXE:%=$(BIN)/%)
+LIBRAIRIES = 
 
-INT = AirMeasurement.h Attribute.h Cleaner.h CoordGPS.h Date.h GovernmentAgencyEmployee.h Measurement.h PrivateIndividual.h Provider.h Sensor.h User.h Controller.h
-SRC = $(INT:.h=.cpp) main.cpp
-OBJ = $(INT:.h=.o) main.o
+$(EXE_DIR) : $(OBJETS_DIR)
+	$(ECHO) "-Edition des liens de $(EXE)-"
+	$(GCC) -o $@ $^ $(LIBRAIRIES)
+	
+$(BIN)/%.o:%.cpp
+	$(ECHO) "-Compilation de $<- "
+	$(GCC) $(CCFLAGS) $(MAP) -lstdc++ -o $@ $<
 
-
-ifdef MAP
-	MAP_OPTION = -DMAP
-endif
-
-all: $(EXE_DIR)
-
-$(EXE_DIR):$(OBJ)
-	$(ECHO) "Edl de $@"
-	$(EDL) -o $@ $(OBJ)
-
-
-$(BIN)/%.o:%.cpp %.h
-	$(ECHO) "Compilation de $<"
-	$(COMP) -c $< $(CCFLAGS) $(MAP_OPTION)
-
+.PHONY: clean #Pour que make clean fonctionne même si un fichier s'appelant clean existe
 clean:
-	$(ECHO) "Nettoyage des fichiers objets et de l'executable"
-	rm -f $(OBJ) $(EXE_DIR)
+	$(ECHO) "-Nettoyage-"
+	$(RM) $(OBJETS_DIR) $(EXE_DIR)
