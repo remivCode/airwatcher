@@ -168,6 +168,21 @@ bool Traitement::analyzeFunctionalState(Sensor sensor)
 {
 } //----- Fin de Méthode
 
+Sensor *Traitement::findSensorById(string id)
+// Algorithme :
+//
+{
+    for (int i = 0; i < sensors.size(); i++)
+    {
+        if (sensors[i].GetSensorID() == id)
+        {
+            return &sensors[i];
+        }
+    }
+
+    return NULL;
+} //----- Fin de Méthode
+
 //------------------------------------------------- Surcharge d'opérateurs
 Traitement &Traitement::operator=(const Traitement &unTraitement)
 // Algorithme :

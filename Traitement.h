@@ -67,6 +67,12 @@ public:
     // Contrat :
     //
 
+    static Sensor *findSensorById(string id);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     static bool analyzeFunctionalState(Sensor sensor);
     // Mode d'emploi :
     //

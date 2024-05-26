@@ -97,6 +97,11 @@ public:
     //
     // Contrat :
     //
+    static string entrerString(const string &prompt);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
     static void MenuConnexion();
     // Mode d'emploi :
     //

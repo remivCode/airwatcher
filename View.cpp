@@ -56,7 +56,7 @@ View::View()
 #endif
 } //----- Fin de View
 
-void afficherMesureAirQuality(const AirMeasurement &mesure)
+void View::afficherMesureAirQuality(const AirMeasurement &mesure)
 {
     // Algorithme :
     cout << mesure.GetAtmoIndex() << endl;
@@ -65,7 +65,7 @@ void afficherMesureAirQuality(const AirMeasurement &mesure)
     cout << mesure.GetNO2() << endl;
     cout << mesure.GetPM10() << endl;
 }
-void afficherListe(const std::vector<Sensor> &liste)
+void View::afficherListe(const std::vector<Sensor> &liste)
 {
     // Algorithme :
     cout << "List of Sensors:" << endl;
@@ -79,12 +79,12 @@ void afficherListe(const std::vector<Sensor> &liste)
     }
 }
 
-void afficherErreur(const string &message)
+void View::afficherErreur(const string &message)
 {
     cerr << "Error: " << message << endl;
 }
 
-void afficherBool(const bool &state)
+void View::afficherBool(const bool &state)
 {
     if (state)
     {
@@ -96,12 +96,12 @@ void afficherBool(const bool &state)
     }
 }
 
-void afficherTpsExec(const string &temps)
+void View::afficherTpsExec(const string &temps)
 {
     cout << "Execution time: " << temps << endl;
 }
 
-Date entrerDate(const string &prompt)
+Date View::entrerDate(const string &prompt)
 {
     int annee, mois, jour, heure;
     cout << prompt << endl;
@@ -117,7 +117,7 @@ Date entrerDate(const string &prompt)
     return Date(annee, mois, jour, heure);
 }
 
-int entrerNombre(const string &prompt)
+int View::entrerNombre(const string &prompt)
 {
     int nombre;
     cout << prompt;
@@ -125,7 +125,7 @@ int entrerNombre(const string &prompt)
     return nombre;
 }
 
-CoordGPS entrerCoord(const string &prompt)
+CoordGPS View::entrerCoord(const string &prompt)
 {
     float lat, lng;
     cout << prompt << endl;
@@ -135,7 +135,17 @@ CoordGPS entrerCoord(const string &prompt)
     cin >> lng;
     return CoordGPS(lat, lng);
 }
-void MenuConnexion()
+
+string View::entrerString(const string &prompt)
+{
+    string str;
+    cout << prompt << endl;
+    cout << "Enter une chaine de caractère: ";
+    cin >> str;
+    return str;
+}
+
+void View::MenuConnexion()
 {
     string username, password;
     cout << "AUTHENTIFICATION PHASE:\n\n"
@@ -151,7 +161,7 @@ void MenuConnexion()
          << "New member\n";
     Controller::connexion(username, password);
 }
-void MenuPrincipalGovernmentAgency()
+void View::MenuPrincipalGovernmentAgency()
 {
     cout << "Government Agency Menu:\n"
          << "1: Analyze Sensors data\n"
@@ -165,7 +175,7 @@ void MenuPrincipalGovernmentAgency()
     cin >> choice;
     Controller::recupererSaisieMenu(choice);
 }
-void MenuPrincipalPrive()
+void View::MenuPrincipalPrive()
 {
     cout << "private Individual Menu:\n"
          << "1: Mean of air quality in an area\n"
@@ -177,7 +187,7 @@ void MenuPrincipalPrive()
     cin >> choice;
     Controller::recupererSaisieMenu(choice);
 }
-void MenuPrincipalProvider()
+void View::MenuPrincipalProvider()
 {
     cout << "Provider Menu:\n"
          << "1: Air Cleaners impact\n"

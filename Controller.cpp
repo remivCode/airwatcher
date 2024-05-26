@@ -431,10 +431,10 @@ void CheckSensorFunctional()
 // Algorithme :
 //
 {
-    int sensorID = View::entrerNombre("Enter the sensor ID : \r\n");
+    string sensorID = View::entrerString("Enter the sensor ID : \r\n");
 
-    Sensor sensor = Traitement::findSensorById(sensorID);
-    bool functional = Traitement::analyzeFunctionalState(sensor);
+    Sensor *sensor = Traitement::findSensorById(sensorID);
+    bool functional = Traitement::analyzeFunctionalState(*sensor);
     View::afficherBool(functional);
 }
 
@@ -458,16 +458,19 @@ void ConsultPoints()
 // Algorithme :
 //
 {
+    cout << "consult points" << endl; // temporaire
 }
 
 void ImpactAirCleaners()
 // Algorithme :
 //
 {
+    cout << "impact cleaners" << endl; // temporaire
 }
 
 void CheckPrivateIndividual()
 // Algorithme :
 //
 {
+    cout << "private individual fiability" << endl; // temporaire
 }
