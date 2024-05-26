@@ -57,42 +57,42 @@ public:
     //
     // Contrat :
     //
-    static void afficherMesureAirQuality(const AirMeasurement& mesure);
+    static void afficherMesureAirQuality(const AirMeasurement &mesure);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    static void afficherListe(const vector<Sensor>& liste);
+    static void afficherListe(const vector<Sensor> &liste);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    static void afficherErreur(const string& message);
+    static void afficherErreur(const string &message);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    static void afficherBool(const string& message);
+    static void afficherBool(const bool &state);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    static void afficherTpsExec(const string& temps);
+    static void afficherTpsExec(const string &temps);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    static Date entrerDate(const string& prompt);
+    static Date entrerDate(const string &prompt);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    static int entrerNombre(const string& prompt);
+    static int entrerNombre(const string &prompt);
     // Mode d'emploi :
     //
     // Contrat :
     //
-    static CoordGPS entrerCoord(const string& prompt);
+    static CoordGPS entrerCoord(const string &prompt);
     // Mode d'emploi :
     //
     // Contrat :

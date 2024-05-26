@@ -19,13 +19,13 @@ using namespace std;
 #include "Traitement.h"
 #include "View.h"
 #include "util/User.h"
-#include "util/CoordGPS"
-#include "util/Date"
-#include "util/AirMeasurement"
-#include "util/Sensor"
-#include "util/GovernmentAgencyEmployee"
-#include "util/PrivateIndividual"
-#include "util/Provider"
+#include "util/CoordGPS.h"
+#include "util/Date.h"
+#include "util/AirMeasurement.h"
+#include "util/Sensor.h"
+#include "util/GovernmentAgencyEmployee.h"
+#include "util/PrivateIndividual.h"
+#include "util/Provider.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -42,174 +42,125 @@ bool Controller::recupererSaisieMenu(int saisie)
 // Algorithme :
 //
 {
-    int caseMesureAirQuality = 1;
-    int caseMesureMeanAirQuality = 2;
-    int caseCheckSensorFunctional = 3 ;
-    int caseRankSensorSimilarity = 4 ;
-    int caseDeconnexion = 5 ;
+    if (GovernmentAgencyEmployee *u = dynamic_cast<GovernmentAgencyEmployee *>(user))
+    {
+        switch (saisie)
+        {
+        case 1:
+        {
+            CheckSensorFunctional();
+            break;
+        }
 
-    switch (saisie){
+        case 2:
+        {
+            CheckPrivateIndividual();
+            break;
+        }
 
-        case caseMesureAirQuality :
-            CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates : \r\n") ;
-            if ((abs(coordGPS.GetLatitude() > 90.0)) or (abs(coordGPS.GetLongitude() > 180))){
-                View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n") ;
-                break ;
-            }
+        case 3:
+        {
+            RankBySimilarity();
+            break;
+        }
 
-            Date date = View::entrerDate("Enter the date : \r\n") ;
-            int an = date.GetAnnee() ;
-            int mois = date.GetMois() ;
-            int jour = date.GetJour() ; 
-            int heure = date.GetHeure() ;
+        case 4:
+        {
+            MesureMeanAirQuality();
+            break;
+        }
 
-            if ((mois<0) or (mois>12)){
-                View::afficherErreur("Months must be between 1 and 12 included\r\n") ;
-                break ;
-            }
+        case 5:
+        {
+            MesureAirQuality();
+            break;
+        }
 
-            if(jour<0){
-                View::afficherErreur("Days must be positive\r\n") ;
-                break ;
-            }
+        case 6:
+        {
+            ImpactAirCleaners();
+            break;
+        }
 
-            if ((heure<0) or (heure>23)){
-                View::afficherErreur("Hours must be between 0 and 23 included\r\n") ;
-                break ;
-            }
+        case 0:
+        {
+            user = NULL;
+            break;
+        }
 
-            if (mois==2){
-                if (((an%4)==0) and (jour>29)){
-                    View::afficherErreur("February has only 29 days on bissextile years\r\n") ;
-                    break ;
-                }
-                if (((an%4)!=0) and (jour>28)){
-                    View::afficherErreur("February has only 28 days on not bissextile years\r\n") ;
-                    break ;
-                }
-            }
-
-            if ((mois%2==1) and (jour>31))){
-                View::afficherErreur("Days must not exceed 31\r\n") ;
-                break ;
-            }
-            if ((mois%2==0) and (mois!=2) and (jour>30)){
-                View::afficherErreur("Days of some months must not exceed 30\r\n") ;
-                break ;
-            }
-
-            AirMeasurement airMeasurement = Traitement::calculateAirQuality(coordGPS, date) ;
-
-            View::afficherMesureAirQuality(airMeasurement) ;
-
-            break ;
-
-        case caseMesureMeanAirQuality :
-            CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates of the center of the area : \r\n") ;
-            if ((abs(coordGPS.GetLatitude() > 90.0)) or (abs(coordGPS.GetLongitude() > 180))){
-                View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n") ;
-                break ;
-            }
-
-            int radius = View::entrerNombre("Enter the radius (in km) : \r\n") ;
-            if ((radius <= 0) or (radius > 200)){
-                View::afficherErreur("The radius must be strictly positive and must not exceed 200\r\n") ;
-                break ;
-            }
-
-            Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n") ;
-            int an1 = dateBeginning.GetAnnee() ;
-            int mois1 = dateBeginning.GetMois() ;
-            int jour1 = dateBeginning.GetJour() ; 
-            int heure1 = dateBeginning.GetHeure() ;
-            Date dateEnd = View::enterDate("Enter the date 2 (end) : \r\n") ;
-            int an2 = dateEnd.GetAnnee() ;
-            int mois2 = dateEnd.GetMois() ;
-            int jour2 = dateEnd.GetJour() ; 
-            int heure2 = dateEnd.GetHeure() ;
-
-            if ((mois1<0) or (mois1>12) or (mois2<0) or (mois2>12)){
-                View::afficherErreur("Months must be between 1 and 12 included\r\n") ;
-                break ;
-            }
-
-            if((jour1<0) or (jour2<0)){
-                View::afficherErreur("Days must be positive\r\n") ;
-                break ;
-            }
-
-            if ((heure1<0) or (heure1>23) or (heure2<0) or (heure2>23)){
-                View::afficherErreur("Hours must be between 0 and 23 included\r\n") ;
-                break ;
-            }
-
-            if (mois1==2){
-                if (((an1%4)==0) and (jour1>29)){
-                    View::afficherErreur("February has only 29 days on bissextile years\r\n") ;
-                    break ;
-                }
-                if (((an1%4)!=0) and (jour1>28)){
-                    View::afficherErreur("February has only 28 days on not bissextile years\r\n") ;
-                    break ;
-                }
-            }
-            if (mois2==2){
-                if (((an2%4)==0) and (jour2>29)){
-                    View::afficherErreur("February has only 29 days on bissextile years\r\n") ;
-                }
-                if (((an2%4)!=0) and (jour2>28)){
-                    View::afficherErreur("February has only 28 days on not bissextile years\r\n") ;
-                    break ;
-                }
-            }
-
-            if (((mois1%2==1) and (jour1>31)) or ((mois2%2==1) and (jour2>31))){
-                View::afficherErreur("Days must not exceed 31\r\n") ;
-                break ;
-            }
-            if (((mois1%2==0) and (mois1!=2) and (jour1>30)) or ((mois2%2==0) and (mois2!=2)and (jour2>30))){
-                View::afficherErreur("Days of some months must not exceed 30\r\n") ;
-                break ;
-            }
-
-            AirMeasurement airMeasurement = Traitement::calculateMeanAirQuality(coordGPS, radius, dateBeginning, dateEnd) ;
-
-            View::afficherMesureAirQuality(airMeasurement) ;
-
-            break ;
-        
-        case caseCheckSensorFunctional :
-            string sensorID = View::entrerNombre("Enter the sensor ID : \r\n") ;
-
-            Sensor sensor = Traitement::findSensorById(sensorID) ;
-            bool functional = Traitement::analyzeFunctionalState(sensor) ;
-            View::afficherBool(functional) ;
-
-            break ;
-
-        case caseRankSensorSimilarity :
-            /*
-            string sensorID = View::entrerNombre("Enter the sensor ID : \r\n") ;
-            Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n") ;
-            Date dateEnd = View::entrerDate("Enter the date 2 (end) : \r\n") ;
-
-            Sensor sensor = Traitement::findSensorById(sensorID) ;
-            vector<Sensor> vectSensor = Traitement::rankingBySimilarity(sensor, dateBeginning, dateEnd) ;
-
-            View::afficherListe(vectSensor) ;
-            */
-            
-            break ;
-
-        case caseDeconnexion :
-            this.user = NULL ;
-
-            break ;
-        
-        default :
-
+        default:
+        {
+            View::afficherErreur("Veuillez entrer un nombre valide.");
+            break;
+        }
+        }
     }
-    
+
+    else if (PrivateIndividual *u = dynamic_cast<PrivateIndividual *>(user))
+    {
+        switch (saisie)
+        {
+        case 1:
+        {
+            MesureMeanAirQuality();
+            break;
+        }
+
+        case 2:
+        {
+            RankBySimilarity();
+            break;
+        }
+
+        case 3:
+        {
+            MesureAirQuality();
+            break;
+        }
+
+        case 4:
+        {
+            ConsultPoints();
+            break;
+        }
+
+        case 0:
+        {
+            user = NULL;
+            break;
+        }
+
+        default:
+        {
+            View::afficherErreur("Veuillez entrer un nombre valide.");
+            break;
+        }
+        }
+    }
+
+    else if (Provider *u = dynamic_cast<Provider *>(user))
+    {
+        switch (saisie)
+        {
+        case 1:
+        {
+            ImpactAirCleaners();
+            break;
+        }
+
+        case 0:
+        {
+            user = NULL;
+            break;
+        }
+
+        default:
+        {
+            View::afficherErreur("Veuillez entrer un nombre valide.");
+            break;
+        }
+        }
+    }
     chargerMenu();
 
 } //----- Fin de Méthode
@@ -218,31 +169,31 @@ bool Controller::connexion(string login, string password)
 // Algorithme :
 //
 {
-    //The user chooses which type of user he is
-    int caseGovernment = 1 ;
-    int casePrivate = 2 ;
-    int caseProvider = 3 ;
+    // The user chooses which type of user he is
+    const int caseGovernment = 1;
+    const int casePrivate = 2;
+    const int caseProvider = 3;
 
-    int userType = View::entrerNombre("Enter the user : \r\n") ;
+    int userType = View::entrerNombre("Enter the user : \r\n");
 
-    switch (userType){
-        
-        case caseGovernment :
-            this.user = GovernmentAgencyEmployee() ;
-            break;
+    switch (userType)
+    {
 
-        case casePrivate:
-            this.user = PrivateIndividual() ;
-            break;
+    case caseGovernment:
+        *user = GovernmentAgencyEmployee();
+        break;
 
-        case caseProvider:
-            this.user = Provider() ;
-            break;
+    case casePrivate:
+        *user = PrivateIndividual();
+        break;
 
-        default:
-            View::MenuConnexion();
+    case caseProvider:
+        *user = Provider();
+        break;
+
+    default:
+        View::MenuConnexion();
     }
-    
 
     // If there are logins and passwords
     /*
@@ -256,26 +207,28 @@ bool Controller::connexion(string login, string password)
     */
 } //----- Fin de Méthode
 
-void Controller::chargerMenu() const
+void Controller::chargerMenu()
 // Algorithme :
 //
 {
-    if (!this.user){
-        View::MenuConnexion() ;
+    if (!user)
+    {
+        View::MenuConnexion();
     }
 
-    else {
-        // créer méthode getUserType pour récupérer le type du User dans chaque classe (sinon jsp comment faire)
-        
-        string userType = this.user.getUserType() ;
-        if (strcmp(userType, "Government")){
-            View::MenuPrincipalGovernmentAgency() ;
+    else
+    {
+        if (GovernmentAgencyEmployee *u = dynamic_cast<GovernmentAgencyEmployee *>(user))
+        {
+            View::MenuPrincipalGovernmentAgency();
         }
-        else if (strcmp(userType, "Private")){
-            View::MenuPrincipalPrive() ;
+        else if (PrivateIndividual *u = dynamic_cast<PrivateIndividual *>(user))
+        {
+            View::MenuPrincipalPrive();
         }
-        else if (strcmp(userType, "Provider")){
-            View::MenuPrincipalProvider() ;
+        else if (Provider *u = dynamic_cast<Provider *>(user))
+        {
+            View::MenuPrincipalProvider();
         }
     }
 
@@ -293,19 +246,19 @@ Controller::Controller(const Controller &unController)
 // Algorithme :
 //
 {
-    #ifdef MAP
-        cout << "Appel au constructeur de copie de <Controller>" << endl;
-    #endif
+#ifdef MAP
+    cout << "Appel au constructeur de copie de <Controller>" << endl;
+#endif
 } //----- Fin de Controller (constructeur de copie)
 
 Controller::Controller()
 // Algorithme :
 //
 {
-    #ifdef MAP
-        cout << "Appel au constructeur de <Controller>" << endl;
-    #endif
-    this.user = NULL ;
+#ifdef MAP
+    cout << "Appel au constructeur de <Controller>" << endl;
+#endif
+    user = NULL;
 } //----- Fin de Controller
 
 Controller::~Controller()
@@ -320,3 +273,201 @@ Controller::~Controller()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+void MesureAirQuality()
+// Algorithme :
+//
+{
+    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates : \r\n");
+    if ((abs(coordGPS.GetLat() > 90.0)) or (abs(coordGPS.GetLng() > 180)))
+    {
+        View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n");
+        return;
+    }
+
+    Date date = View::entrerDate("Enter the date : \r\n");
+    int an = date.GetAnnee();
+    int mois = date.GetMois();
+    int jour = date.GetJour();
+    int heure = date.GetHeure();
+
+    if ((mois < 0) or (mois > 12))
+    {
+        View::afficherErreur("Months must be between 1 and 12 included\r\n");
+        return;
+    }
+
+    if (jour < 0)
+    {
+        View::afficherErreur("Days must be positive\r\n");
+        return;
+    }
+
+    if ((heure < 0) or (heure > 23))
+    {
+        View::afficherErreur("Hours must be between 0 and 23 included\r\n");
+        return;
+    }
+
+    if (mois == 2)
+    {
+        if (((an % 4) == 0) and (jour > 29))
+        {
+            View::afficherErreur("February has only 29 days on bissextile years\r\n");
+            return;
+        }
+        if (((an % 4) != 0) and (jour > 28))
+        {
+            View::afficherErreur("February has only 28 days on not bissextile years\r\n");
+            return;
+        }
+    }
+
+    if ((mois % 2 == 1) and (jour > 31))
+    {
+        View::afficherErreur("Days must not exceed 31\r\n");
+        return;
+    }
+    if ((mois % 2 == 0) and (mois != 2) and (jour > 30))
+    {
+        View::afficherErreur("Days of some months must not exceed 30\r\n");
+        return;
+    }
+
+    AirMeasurement airMeasurement = Traitement::calculateAirQualite(coordGPS, date);
+
+    View::afficherMesureAirQuality(airMeasurement);
+}
+
+void MesureMeanAirQuality()
+// Algorithme :
+//
+{
+    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates of the center of the area : \r\n");
+    if ((abs(coordGPS.GetLat() > 90.0)) or (abs(coordGPS.GetLng() > 180)))
+    {
+        View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n");
+        return;
+    }
+
+    int radius = View::entrerNombre("Enter the radius (in km) : \r\n");
+    if ((radius <= 0) or (radius > 200))
+    {
+        View::afficherErreur("The radius must be strictly positive and must not exceed 200\r\n");
+        return;
+    }
+
+    Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n");
+    int an1 = dateBeginning.GetAnnee();
+    int mois1 = dateBeginning.GetMois();
+    int jour1 = dateBeginning.GetJour();
+    int heure1 = dateBeginning.GetHeure();
+    Date dateEnd = View::entrerDate("Enter the date 2 (end) : \r\n");
+    int an2 = dateEnd.GetAnnee();
+    int mois2 = dateEnd.GetMois();
+    int jour2 = dateEnd.GetJour();
+    int heure2 = dateEnd.GetHeure();
+
+    if ((mois1 < 0) or (mois1 > 12) or (mois2 < 0) or (mois2 > 12))
+    {
+        View::afficherErreur("Months must be between 1 and 12 included\r\n");
+        return;
+    }
+
+    if ((jour1 < 0) or (jour2 < 0))
+    {
+        View::afficherErreur("Days must be positive\r\n");
+        return;
+    }
+
+    if ((heure1 < 0) or (heure1 > 23) or (heure2 < 0) or (heure2 > 23))
+    {
+        View::afficherErreur("Hours must be between 0 and 23 included\r\n");
+        return;
+    }
+
+    if (mois1 == 2)
+    {
+        if (((an1 % 4) == 0) and (jour1 > 29))
+        {
+            View::afficherErreur("February has only 29 days on bissextile years\r\n");
+            return;
+        }
+        if (((an1 % 4) != 0) and (jour1 > 28))
+        {
+            View::afficherErreur("February has only 28 days on not bissextile years\r\n");
+            return;
+        }
+    }
+    if (mois2 == 2)
+    {
+        if (((an2 % 4) == 0) and (jour2 > 29))
+        {
+            View::afficherErreur("February has only 29 days on bissextile years\r\n");
+        }
+        if (((an2 % 4) != 0) and (jour2 > 28))
+        {
+            View::afficherErreur("February has only 28 days on not bissextile years\r\n");
+            return;
+        }
+    }
+
+    if (((mois1 % 2 == 1) and (jour1 > 31)) or ((mois2 % 2 == 1) and (jour2 > 31)))
+    {
+        View::afficherErreur("Days must not exceed 31\r\n");
+        return;
+    }
+    if (((mois1 % 2 == 0) and (mois1 != 2) and (jour1 > 30)) or ((mois2 % 2 == 0) and (mois2 != 2) and (jour2 > 30)))
+    {
+        View::afficherErreur("Days of some months must not exceed 30\r\n");
+        return;
+    }
+
+    AirMeasurement airMeasurement = Traitement::calculateMeanAirQualite(coordGPS, radius, dateBeginning, dateEnd);
+
+    View::afficherMesureAirQuality(airMeasurement);
+}
+
+void CheckSensorFunctional()
+// Algorithme :
+//
+{
+    int sensorID = View::entrerNombre("Enter the sensor ID : \r\n");
+
+    Sensor sensor = Traitement::findSensorById(sensorID);
+    bool functional = Traitement::analyzeFunctionalState(sensor);
+    View::afficherBool(functional);
+}
+
+void RankBySimilarity()
+// Algorithme :
+//
+{
+    /*
+        string sensorID = View::entrerNombre("Enter the sensor ID : \r\n") ;
+        Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n") ;
+        Date dateEnd = View::entrerDate("Enter the date 2 (end) : \r\n") ;
+
+        Sensor sensor = Traitement::findSensorById(sensorID) ;
+        vector<Sensor> vectSensor = Traitement::rankingBySimilarity(sensor, dateBeginning, dateEnd) ;
+
+        View::afficherListe(vectSensor) ;
+        */
+}
+
+void ConsultPoints()
+// Algorithme :
+//
+{
+}
+
+void ImpactAirCleaners()
+// Algorithme :
+//
+{
+}
+
+void CheckPrivateIndividual()
+// Algorithme :
+//
+{
+}

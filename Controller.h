@@ -11,6 +11,9 @@
 #define CONTROLLER_H
 
 //--------------------------------------------------- Interfaces utilisées
+#include <iostream>
+using namespace std;
+#include "util/User.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -34,19 +37,19 @@ public:
     // Contrat :
     //
 
-    static bool recupererSaisieMenu(int saisie) ;
+    static bool recupererSaisieMenu(int saisie);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    static bool connexion(string login, string password) ;
+    static bool connexion(string login, string password);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    static void chargerMenu() const ;
+    static void chargerMenu();
     // Mode d'emploi :
     //
     // Contrat :
@@ -82,9 +85,50 @@ public:
 
 protected:
     //----------------------------------------------------- Méthodes protégées
+    static void MesureAirQuality();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void MesureMeanAirQuality();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void CheckSensorFunctional();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void RankBySimilarity();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void ConsultPoints();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void ImpactAirCleaners();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void CheckPrivateIndividual();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     //----------------------------------------------------- Attributs protégés
-    User user ;
+    static User *user;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Controller>
