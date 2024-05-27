@@ -155,10 +155,7 @@ void View::MenuConnexion()
     cout << "Password: ";
     cin >> password;
 
-    cout << "if you don't have an account yet, create one:\n"
-         << "(NB: for a first connexion as a member of the gov agency, please contact the HR to have your connexion's informations)\n"
-         << "/*an imaginary button*/\n"
-         << "New member\n";
+    cout << "Fake auth" << endl;
     Controller::connexion(username, password);
 }
 void View::MenuPrincipalGovernmentAgency()

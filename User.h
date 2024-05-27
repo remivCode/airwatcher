@@ -38,7 +38,7 @@ public:
     string GetLogin(void) const;
     string GetPassword(void) const;
 
-    void SetID(int id);
+    void SetID(string id);
     void SetLogin(string login);
     void SetPassword(string password);
 

@@ -43,7 +43,7 @@ string User::GetPassword(void) const
     return this->password;
 }
 
-void User::SetID(int id)
+void User::SetID(string id)
 {
     this->userID = id;
 }
@@ -63,6 +63,10 @@ User &User::operator=(const User &unUser)
 // Algorithme :
 //
 {
+    userID = unUser.userID;
+    login = unUser.login;
+    password = unUser.password;
+    return *this;
 } //----- Fin de operator =
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -73,6 +77,9 @@ User::User(const User &unUser)
 #ifdef MAP
     cout << "Appel au constructeur de copie de <User>" << endl;
 #endif
+    userID = unUser.userID;
+    login = unUser.login;
+    password = unUser.password;
 } //----- Fin de User (constructeur de copie)
 
 User::User()

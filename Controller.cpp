@@ -171,6 +171,8 @@ bool Controller::connexion(string login, string password)
 // Algorithme :
 //
 {
+    string id = "A1"; // Fake id, same for everyone
+
     // The user chooses which type of user he is
     const int caseGovernment = 1;
     const int casePrivate = 2;
@@ -182,17 +184,17 @@ bool Controller::connexion(string login, string password)
     {
 
     case caseGovernment:
-        *user = GovernmentAgencyEmployee();
+        user = new GovernmentAgencyEmployee(id, login, password);
         Controller::chargerMenu();
         break;
 
     case casePrivate:
-        *user = PrivateIndividual();
+        user = new PrivateIndividual(id, login, password);
         Controller::chargerMenu();
         break;
 
     case caseProvider:
-        *user = Provider();
+        user = new Provider(id, login, password);
         Controller::chargerMenu();
         break;
 
