@@ -17,6 +17,7 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Measurement.h"
 
+
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -27,6 +28,14 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+
+Sensor Measurement::getSensor(void) const {
+    return sensor;
+}
+
+Attribute Measurement::getAttribute(void) const {
+    return attribut;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 Measurement &Measurement::operator=(const Measurement &unMeasurement)
