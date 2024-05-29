@@ -182,9 +182,17 @@ bool Traitement::analyzeFunctionalState(Sensor sensor)
         if (i < 3)
         {
             AirMeasurement am = Traitement::calculateAirQualite(el.second.GetCoord(), measurements.back().getTimestamp());
+            ozone += am.GetO3();
+            sulfur += am.GetSO2();
+            nitrogen += am.GetNO2();
+            particules += am.GetPM10();
         }
         i++;
     }
+    float ozoneMean = ozone / 3;
+    float sulfurMean = sulfur / 3;
+    float nitrogenMean = nitrogen / 3;
+    float particulesMean = particules / 3;
 } //----- Fin de Méthode
 
 Sensor *Traitement::findSensorById(string id)
