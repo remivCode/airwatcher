@@ -170,18 +170,18 @@ bool Traitement::analyzeFunctionalState(Sensor sensor)
 // Algorithme :
 //
 {
-    map<int, Sensor> *nearest = Traitement::findSensorByCoord(sensor.GetCoord());
+    map<int, Sensor> nearest = Traitement::findSensorByCoord(sensor.GetCoord());
     float ozone = 0;
     float sulfur = 0;
     float nitrogen = 0;
     float particules = 0;
 
     int i = 0;
-    for (const pair<int, Sensor> el : *nearest)
+    for (const pair<int, Sensor> el : nearest)
     {
         if (i < 3)
         {
-            AirMeasurement am = Traitement::calculateAirQualite(el.second.GetCoord(), measurements.end().getDate())
+            AirMeasurement am = Traitement::calculateAirQualite(el.second.GetCoord(), measurements.back().getTimestamp());
         }
         i++;
     }
@@ -202,7 +202,7 @@ Sensor *Traitement::findSensorById(string id)
     return NULL;
 } //----- Fin de Méthode
 
-map<int, Sensor> *Traitement::findSensorByCoord(CoordGPS coordonnees)
+map<int, Sensor> Traitement::findSensorByCoord(CoordGPS coordonnees)
 {
     map<int, Sensor> *sensorDistMap = new map<int, Sensor>;
     int i;
@@ -216,32 +216,38 @@ map<int, Sensor> *Traitement::findSensorByCoord(CoordGPS coordonnees)
         d = (int)sqrt(pow(lat - coordonnees.GetLat(), 2) + pow(lng - coordonnees.GetLng(), 2));
         sensorDistMap->insert(make_pair(d, sensors[i]));
     }
-    return sensorDistMap;
+    return *sensorDistMap;
 }
 
 AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 // Algorithme :
 //
 {
-    Sensor sensor = findSensorByCoord(coords).begin()->second; //récupérer le sensor le plus proche
+    Sensor sensor = findSensorByCoord(coords).begin()->second; // récupérer le sensor le plus proche
 
     int i;
     float measureO3 = -1;
     float measureNO2 = -1;
     float measureSO2 = -1;
     float measurePM = -1;
-    for (i=measurements.size()-1 ; (i>=0) && (measureO3*measureNO2*measureSO2*measurePM<0) ; i--){
-        if (measurements[i].getSensor().GetSensorID() == sensor.GetSensorID()) {
-            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0)) {
+    for (i = measurements.size() - 1; (i >= 0) && (measureO3 * measureNO2 * measureSO2 * measurePM < 0); i--)
+    {
+        if (measurements[i].getSensor().GetSensorID() == sensor.GetSensorID())
+        {
+            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0))
+            {
                 measureO3 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0)) {
+            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0))
+            {
                 measureSO2 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0)) {
+            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0))
+            {
                 measureNO2 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0)) {
+            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0))
+            {
                 measurePM = measurements[i].getValue();
             }
         }
