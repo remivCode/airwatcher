@@ -33,6 +33,11 @@ Sensor Measurement::getSensor(void) const
     return sensor;
 }
 
+Date Measurement::getTimestamp(void) const
+{
+    return timestamp;
+}
+
 Attribute Measurement::getAttribute(void) const
 {
     return attribut;

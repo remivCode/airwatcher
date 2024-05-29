@@ -167,10 +167,25 @@ void Traitement::chargerDonnees()
 }
 
 bool Traitement::analyzeFunctionalState(Sensor sensor)
-    // Algorithme :
-    //
+// Algorithme :
+//
+{
+    map<int, Sensor> *nearest = Traitement::findSensorByCoord(sensor.GetCoord());
+    float ozone = 0;
+    float sulfur = 0;
+    float nitrogen = 0;
+    float particules = 0;
+
+    int i = 0;
+    for (const pair<int, Sensor> el : *nearest)
     {
-        map<int, Sensor> nearest} //----- Fin de Méthode
+        if (i < 3)
+        {
+            AirMeasurement am = Traitement::calculateAirQualite(el.second.GetCoord(), measurements.end().getDate())
+        }
+        i++;
+    }
+} //----- Fin de Méthode
 
 Sensor *Traitement::findSensorById(string id)
 // Algorithme :
