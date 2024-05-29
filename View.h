@@ -130,6 +130,16 @@ public:
     //
 
     //------------------------------------------------------------------ PRIVE
+    private:
+    //----------------------------------------------------- Méthodes privées
+    static void setColor(int color);
+    // Mode d'emploi :
+    // Change the text color in the terminal
+    // color - The color code to be set
+    //
+    // Contrat :
+    // Uses ANSI escape codes for Unix-like systems and Windows API for Windows
+
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
