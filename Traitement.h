@@ -43,7 +43,7 @@ public:
     // Contrat :
     //
 
-    static map<int,Sensor> findSensorByCoord(CoordGPS coordonnees);
+    static map<int, Sensor> *findSensorByCoord(CoordGPS coordonnees);
     // Mode d'emploi :
     //
     // Contrat :

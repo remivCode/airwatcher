@@ -167,10 +167,10 @@ void Traitement::chargerDonnees()
 }
 
 bool Traitement::analyzeFunctionalState(Sensor sensor)
-// Algorithme :
-//
-{
-} //----- Fin de Méthode
+    // Algorithme :
+    //
+    {
+        map<int, Sensor> nearest} //----- Fin de Méthode
 
 Sensor *Traitement::findSensorById(string id)
 // Algorithme :
@@ -187,20 +187,21 @@ Sensor *Traitement::findSensorById(string id)
     return NULL;
 } //----- Fin de Méthode
 
-map<int,Sensor> Traitement::findSensorByCoord(CoordGPS coordonnees)
+map<int, Sensor> *Traitement::findSensorByCoord(CoordGPS coordonnees)
 {
-    map<int,Sensor> sensorDistMap;
+    map<int, Sensor> *sensorDistMap = new map<int, Sensor>;
     int i;
     float lat;
     float lng;
     int d;
-    for (i=0; i<sensors.size(); i++)
+    for (i = 0; i < sensors.size(); i++)
     {
         lat = sensors[i].GetCoord().GetLat();
         lng = sensors[i].GetCoord().GetLng();
-        d = (int) sqrt(pow(lat-coordonnees.GetLat(),2)+pow(lng-coordonnees.GetLng(),2));
-        sensorDistMap.insert(make_pair(d,sensors[i]));
+        d = (int)sqrt(pow(lat - coordonnees.GetLat(), 2) + pow(lng - coordonnees.GetLng(), 2));
+        sensorDistMap->insert(make_pair(d, sensors[i]));
     }
+    return sensorDistMap;
 }
 
 AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
@@ -240,7 +241,7 @@ AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, 
 // Algorithme :
 //
 {
-    
+
 } //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
