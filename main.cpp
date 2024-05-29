@@ -4,6 +4,7 @@
 
 int main()
 {
+    Traitement::chargerDonnees();
     View::MenuConnexion();
     return 0;
 }
