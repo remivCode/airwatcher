@@ -43,6 +43,12 @@ public:
     // Contrat :
     //
 
+    static map<int,Sensor> findSensorByCoord(CoordGPS coordonnees);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     static AirMeasurement calculateAirQualite(CoordGPS coords, Date date);
     // Mode d'emploi :
     //

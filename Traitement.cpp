@@ -187,20 +187,20 @@ Sensor *Traitement::findSensorById(string id)
     return NULL;
 } //----- Fin de Méthode
 
-Sensor* Traitement::findSensorByCoord(CoordGPS coordonnees)
+map<int,Sensor> Traitement::findSensorByCoord(CoordGPS coordonnees)
 {
-    map<Sensor,int> sensorDistMap;
+    map<int,Sensor> sensorDistMap;
     int i;
     float lat;
     float lng;
     int d;
     for (i=0; i<sensors.size(); i++)
     {
-        lat = sensors[i].coord.latitude;
-        lng = sensors[i].coord.longitude;
-        d = sqrt(pow(lat-coordonnees.GetLat(),2)+pow(lng-coordonnees.GetLng(),2));
+        lat = sensors[i].GetCoord().GetLat();
+        lng = sensors[i].GetCoord().GetLng();
+        d = (int) sqrt(pow(lat-coordonnees.GetLat(),2)+pow(lng-coordonnees.GetLng(),2));
+        sensorDistMap.insert(make_pair(d,sensors[i]));
     }
-
 }
 
 AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
