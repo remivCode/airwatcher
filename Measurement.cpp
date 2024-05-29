@@ -28,6 +28,31 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+Sensor Measurement::getSensor(void) const
+{
+    return sensor;
+}
+
+Date Measurement::getTimestamp(void) const
+{
+    return timestamp;
+}
+
+Attribute Measurement::getAttribute(void) const
+{
+    return attribut;
+}
+
+float Measurement::getValue(void) const
+{
+    return value;
+}
+
+Attribute Measurement::getAttribute(void) const
+{
+    return attribut;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 Measurement &Measurement::operator=(const Measurement &unMeasurement)
 // Algorithme :
@@ -54,7 +79,7 @@ Measurement::Measurement()
 #endif
 } //----- Fin de Measurement
 
-Measurement::Measurement(Date date, float val)
+Measurement::Measurement(Date date, float val, Attribute attribute, Sensor sensor)
 // Algorithme :
 //
 {
@@ -63,6 +88,8 @@ Measurement::Measurement(Date date, float val)
 #endif
     timestamp = date;
     value = val;
+    this->attribut = attribute;
+    this->sensor = sensor;
 } //----- Fin de Measurement
 
 Measurement::~Measurement()

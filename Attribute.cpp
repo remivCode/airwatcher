@@ -28,6 +28,10 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+string Attribute::getAttributeID(void) const {
+    return attributeID;
+}
+
 //------------------------------------------------- Surcharge d'opérateurs
 Attribute &Attribute::operator=(const Attribute &unAttribute)
 // Algorithme :

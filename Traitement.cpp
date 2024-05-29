@@ -12,6 +12,8 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <map>
+#include <cmath>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -165,9 +167,32 @@ void Traitement::chargerDonnees()
 }
 
 bool Traitement::analyzeFunctionalState(Sensor sensor)
-// Algorithme :
-//
-{
+    // Algorithme :
+    //
+    {
+    map<int, Sensor> nearest = Traitement::findSensorByCoord(sensor.GetCoord());
+    float ozone = 0;
+    float sulfur = 0;
+    float nitrogen = 0;
+    float particules = 0;
+
+    int i = 0;
+    for (const pair<int, Sensor> el : nearest)
+    {
+        if (i < 3)
+        {
+            AirMeasurement am = Traitement::calculateAirQualite(el.second.GetCoord(), measurements.back().getTimestamp());
+            ozone += am.GetO3();
+            sulfur += am.GetSO2();
+            nitrogen += am.GetNO2();
+            particules += am.GetPM10();
+        }
+        i++;
+    }
+    float ozoneMean = ozone / 3;
+    float sulfurMean = sulfur / 3;
+    float nitrogenMean = nitrogen / 3;
+    float particulesMean = particules / 3;
 } //----- Fin de Méthode
 
 Sensor *Traitement::findSensorById(string id)
@@ -185,16 +210,90 @@ Sensor *Traitement::findSensorById(string id)
     return NULL;
 } //----- Fin de Méthode
 
+map<int, Sensor> Traitement::findSensorByCoord(CoordGPS coordonnees)
+{
+    map<int, Sensor> *sensorDistMap = new map<int, Sensor>;
+    int i;
+    float lat;
+    float lng;
+    int d;
+    for (i = 0; i < sensors.size(); i++)
+    {
+        lat = sensors[i].GetCoord().GetLat();
+        lng = sensors[i].GetCoord().GetLng();
+        d = (int)sqrt(pow(lat - coordonnees.GetLat(), 2) + pow(lng - coordonnees.GetLng(), 2));
+        sensorDistMap->insert(make_pair(d, sensors[i]));
+    }
+    return *sensorDistMap;
+}
+
 AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 // Algorithme :
 //
 {
+    Sensor sensor = findSensorByCoord(coords).begin()->second; //récupérer le sensor le plus proche
+
+    int i;
+    float measureO3 = -1;
+    float measureNO2 = -1;
+    float measureSO2 = -1;
+    float measurePM = -1;
+    for (i=measurements.size()-1 ; (i>=0) && (measureO3*measureNO2*measureSO2*measurePM<0) ; i--){
+        if ((measurements[i].getSensor().GetSensorID() == sensor.GetSensorID()) && (measurements[i].getTimestamp() == date)) {
+            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0)) {
+                measureO3 = measurements[i].getValue();
+            }
+            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0)) {
+                measureSO2 = measurements[i].getValue();
+            }
+            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0)) {
+                measureNO2 = measurements[i].getValue();
+            }
+            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0)) {
+                measurePM = measurements[i].getValue();
+            }
+        }
+    }
+
+    AirMeasurement mesurement = AirMeasurement(measureO3, measureSO2, measureNO2, measurePM);
+
+    return mesurement;
 } //----- Fin de Méthode
 
 AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin)
 // Algorithme :
 //
 {
+    int i;
+    int day;
+    int month;
+    int year;
+    Date date = dateDebut;
+    int counter = 0;
+    AirMeasurement mean = *(new AirMeasurement());
+    AirMeasurement sum;
+
+    map<int, Sensor> DistSensor = findSensorByCoord(coords);
+
+    for (auto it = DistSensor.begin(); it != DistSensor.end(); it++) {
+        if (it->first < radius) {
+            for (year = dateDebut.GetAnnee(); year<=dateFin.GetAnnee() ; year++) {
+                date.SetAnnee(year);
+                for (month = dateDebut.GetMois(); month<=dateFin.GetMois(); month++) {
+                    date.SetMois(month);
+                    for (day=dateDebut.GetJour(); day<=dateFin.GetJour(); day++) {
+                        date.SetJour(day);
+                        sum = sum + calculateAirQualite(it->second.GetCoord(),date);
+                        ++counter;
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    mean = sum/counter;
+    return mean;
 } //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
