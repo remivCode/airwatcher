@@ -47,6 +47,10 @@ public:
     // Contrat :
     //
 
+    AirMeasurement operator+(const AirMeasurement &unAirMeasurement) const;
+
+    AirMeasurement operator/(int diviseur) const;
+
     //-------------------------------------------- Constructeurs - destructeur
     AirMeasurement(const AirMeasurement &unAirMeasurement);
     // Mode d'emploi (constructeur de copie) :

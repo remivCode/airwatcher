@@ -60,6 +60,56 @@ AirMeasurement &AirMeasurement::operator=(const AirMeasurement &unAirMeasurement
 {
 } //----- Fin de operator =
 
+AirMeasurement AirMeasurement::operator+(const AirMeasurement &unAirMeasurement) const {
+    float sumO3 = this->o3 + unAirMeasurement.o3;
+    float sumSO2 = this->so2 + unAirMeasurement.so2;
+    float sumNO2 = this->no2 + unAirMeasurement.no2;
+    float sumPM10 = this->pm10 + unAirMeasurement.pm10;
+
+    return AirMeasurement(sumO3, sumSO2, sumNO2, sumPM10);
+}
+
+AirMeasurement AirMeasurement::operator/(int diviseur) const {
+    // Vérification pour éviter une division par zéro
+
+    float divO3;
+    float divSO2;
+    float divNO2;
+    float divPM10;
+
+    if (this->o3 != 0) {
+        divO3 = this->o3 / diviseur;
+    }
+    else {
+        divO3 = 0;
+    }
+    
+    if (this->so2 != 0) {
+        divSO2 = this->so2 / diviseur;
+    }
+    else {
+        divSO2 = 0;
+    }
+
+    if (this->no2 != 0) {
+        divNO2 = this->no2 / diviseur;
+    }
+    else {
+        divNO2 = 0;
+    }
+
+    if (this->pm10 != 0) {
+        divPM10 = this->pm10 / diviseur;
+    }
+    else {
+        divPM10 = 0;
+    }
+
+
+    // Créer et retourner un nouvel objet AirMeasurement avec les valeurs divisées
+    return AirMeasurement(divO3, divSO2, divNO2, divPM10);
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 AirMeasurement::AirMeasurement(const AirMeasurement &unAirMeasurement)
 // Algorithme :
