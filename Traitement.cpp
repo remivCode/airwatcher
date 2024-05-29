@@ -207,11 +207,8 @@ AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 // Algorithme :
 //
 {
-    int atmoO3;
-    int atmoSO2;
-    int atmoNO2;
-    int atmoPM;
-
+    Sensor sensor = findSensorByCoord(coords).begin()->second; //récupérer le sensor le plus proche
+    AirMeasurement mesurement = getMeasurementBySensor(sensor).end().getValue();
 } //----- Fin de Méthode
 
 AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin)
