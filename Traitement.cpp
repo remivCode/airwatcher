@@ -12,6 +12,8 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+#include <map>
+#include <cmath>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -185,10 +187,31 @@ Sensor *Traitement::findSensorById(string id)
     return NULL;
 } //----- Fin de Méthode
 
+Sensor* Traitement::findSensorByCoord(CoordGPS coordonnees)
+{
+    map<Sensor,int> sensorDistMap;
+    int i;
+    float lat;
+    float lng;
+    int d;
+    for (i=0; i<sensors.size(); i++)
+    {
+        lat = sensors[i].coord.latitude;
+        lng = sensors[i].coord.longitude;
+        d = sqrt(pow(lat-coordonnees.GetLat(),2)+pow(lng-coordonnees.GetLng(),2));
+    }
+
+}
+
 AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 // Algorithme :
 //
 {
+    int atmoO3;
+    int atmoSO2;
+    int atmoNO2;
+    int atmoPM;
+
 } //----- Fin de Méthode
 
 AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin)

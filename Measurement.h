@@ -61,7 +61,7 @@ public:
     // Contrat :
     //
 
-    Measurement(Date date, float val);
+    Measurement(Date date, float val, Attribute attribut, Sensor sensor);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :

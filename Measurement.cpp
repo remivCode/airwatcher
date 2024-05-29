@@ -63,7 +63,7 @@ Measurement::Measurement()
 #endif
 } //----- Fin de Measurement
 
-Measurement::Measurement(Date date, float val)
+Measurement::Measurement(Date date, float val, Attribute attribute, Sensor sensor)
 // Algorithme :
 //
 {
@@ -72,6 +72,8 @@ Measurement::Measurement(Date date, float val)
 #endif
     timestamp = date;
     value = val;
+    this->attribut = attribute;
+    this->sensor = sensor;
 } //----- Fin de Measurement
 
 Measurement::~Measurement()
