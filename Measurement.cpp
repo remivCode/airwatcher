@@ -17,7 +17,6 @@ using namespace std;
 //------------------------------------------------------ Include personnel
 #include "Measurement.h"
 
-
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -29,11 +28,23 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-Sensor Measurement::getSensor(void) const {
+Sensor Measurement::getSensor(void) const
+{
     return sensor;
 }
 
-Attribute Measurement::getAttribute(void) const {
+Attribute Measurement::getAttribute(void) const
+{
+    return attribut;
+}
+
+float Measurement::getValue(void) const
+{
+    return value;
+}
+
+Attribute Measurement::getAttribute(void) const
+{
     return attribut;
 }
 

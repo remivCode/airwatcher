@@ -37,9 +37,9 @@ public:
     // Contrat :
     //
 
-
     Sensor getSensor(void) const;
     Attribute getAttribute(void) const;
+    float getValue(void) const;
 
     //------------------------------------------------- Surcharge d'opérateurs
     Measurement &operator=(const Measurement &unMeasurement);
