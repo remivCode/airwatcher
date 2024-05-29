@@ -48,11 +48,6 @@ float Measurement::getValue(void) const
     return value;
 }
 
-Attribute Measurement::getAttribute(void) const
-{
-    return attribut;
-}
-
 //------------------------------------------------- Surcharge d'opérateurs
 Measurement &Measurement::operator=(const Measurement &unMeasurement)
 // Algorithme :

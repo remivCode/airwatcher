@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <vector>
+#include <map>
 #include "Sensor.h"
 #include "Attribute.h"
 #include "Measurement.h"

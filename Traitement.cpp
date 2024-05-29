@@ -167,9 +167,9 @@ void Traitement::chargerDonnees()
 }
 
 bool Traitement::analyzeFunctionalState(Sensor sensor)
-    // Algorithme :
-    //
-    {
+// Algorithme :
+//
+{
     map<int, Sensor> nearest = Traitement::findSensorByCoord(sensor.GetCoord());
     float ozone = 0;
     float sulfur = 0;
@@ -231,25 +231,31 @@ AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 // Algorithme :
 //
 {
-    Sensor sensor = findSensorByCoord(coords).begin()->second; //récupérer le sensor le plus proche
+    Sensor sensor = findSensorByCoord(coords).begin()->second; // récupérer le sensor le plus proche
 
     int i;
     float measureO3 = -1;
     float measureNO2 = -1;
     float measureSO2 = -1;
     float measurePM = -1;
-    for (i=measurements.size()-1 ; (i>=0) && (measureO3*measureNO2*measureSO2*measurePM<0) ; i--){
-        if ((measurements[i].getSensor().GetSensorID() == sensor.GetSensorID()) && (measurements[i].getTimestamp() == date)) {
-            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0)) {
+    for (i = measurements.size() - 1; (i >= 0) && (measureO3 * measureNO2 * measureSO2 * measurePM < 0); i--)
+    {
+        if ((measurements[i].getSensor().GetSensorID() == sensor.GetSensorID()) && (measurements[i].getTimestamp() == date))
+        {
+            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0))
+            {
                 measureO3 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0)) {
+            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0))
+            {
                 measureSO2 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0)) {
+            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0))
+            {
                 measureNO2 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0)) {
+            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0))
+            {
                 measurePM = measurements[i].getValue();
             }
         }
@@ -275,24 +281,28 @@ AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, 
 
     map<int, Sensor> DistSensor = findSensorByCoord(coords);
 
-    for (auto it = DistSensor.begin(); it != DistSensor.end(); it++) {
-        if (it->first < radius) {
-            for (year = dateDebut.GetAnnee(); year<=dateFin.GetAnnee() ; year++) {
+    for (auto it = DistSensor.begin(); it != DistSensor.end(); it++)
+    {
+        if (it->first < radius)
+        {
+            for (year = dateDebut.GetAnnee(); year <= dateFin.GetAnnee(); year++)
+            {
                 date.SetAnnee(year);
-                for (month = dateDebut.GetMois(); month<=dateFin.GetMois(); month++) {
+                for (month = dateDebut.GetMois(); month <= dateFin.GetMois(); month++)
+                {
                     date.SetMois(month);
-                    for (day=dateDebut.GetJour(); day<=dateFin.GetJour(); day++) {
+                    for (day = dateDebut.GetJour(); day <= dateFin.GetJour(); day++)
+                    {
                         date.SetJour(day);
-                        sum = sum + calculateAirQualite(it->second.GetCoord(),date);
+                        sum = sum + calculateAirQualite(it->second.GetCoord(), date);
                         ++counter;
                     }
                 }
             }
-            
         }
     }
-    
-    mean = sum/counter;
+
+    mean = sum / counter;
     return mean;
 } //----- Fin de Méthode
 
