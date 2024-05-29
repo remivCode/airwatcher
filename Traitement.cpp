@@ -16,6 +16,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <map>
 using namespace std;
 
 //------------------------------------------------------ Include personnel
@@ -161,13 +162,75 @@ void Traitement::chargerDonnees()
                 sensors[i].SetUser(p);
             }
         }
-    } //----- Fin de Méthode
-}
+    }
+
+    ////////////////////////////////////////////////// Chargement measurement
+    ifstream meas("data/measurements.csv");
+    getline(meas, line);
+    while (getline(meas, line))
+    {
+        stringstream lineStream(line);
+
+        string a;
+        getline(lineStream, a, '-');
+        int anneeDebut = stoi(a);
+        string m;
+        getline(lineStream, m, '-');
+        int moisDebut = stoi(a);
+        string j;
+        getline(lineStream, j, ' ');
+        int jourDebut = stoi(j);
+        string h;
+        getline(lineStream, h, ':');
+        int heureDebut = stoi(h);
+        Date *date = new Date(anneeDebut, moisDebut, jourDebut, heureDebut);
+        string temp;
+        getline(lineStream, temp, ';');
+
+        string sensorId;
+        getline(lineStream, sensorId, ';');
+        Sensor *sensor = Traitement::findSensorById(sensorId);
+
+        string attribute;
+        getline(lineStream, attribute, ';');
+
+        string v;
+        getline(lineStream, v, ';');
+        float value = stof(v);
+
+        Measurement *me = new Measurement(date, value, attribute, sensor);
+        measurements.push_back(*me);
+    }
+} //----- Fin de Méthode
+
+vector<Measurement> Traitement::getMeasurementsBySensor(Sensor s)
+// Algorithme :
+//
+{
+    for (const auto &el : measurements)
+    {
+    }
+} //----- Fin de Méthode
 
 bool Traitement::analyzeFunctionalState(Sensor sensor)
 // Algorithme :
 //
 {
+    map<Sensor, int> nearest = Traitement::findSensorByCoord(sensor.GetCoord());
+    int ozone = 0;
+    int sulfur = 0;
+    int nitrogen = 0;
+    int particules = 0;
+    int i = 0;
+    for (const auto &el : nearest)
+    {
+        if (i < 3)
+        {
+            vector<Measurement> m = Traitement::getMeasurementsBySensor(el.first);
+        }
+        i++;
+    }
+
 } //----- Fin de Méthode
 
 Sensor *Traitement::findSensorById(string id)

@@ -73,6 +73,12 @@ public:
     // Contrat :
     //
 
+    static vector<Measurement> getMeasurementsBySensor(Sensor sensor);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     //------------------------------------------------- Surcharge d'opérateurs
     Traitement &operator=(const Traitement &unTraitement);
     // Mode d'emploi :
