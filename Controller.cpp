@@ -178,7 +178,7 @@ bool Controller::connexion(string login, string password)
     const int casePrivate = 2;
     const int caseProvider = 3;
 
-    int userType = View::entrerNombre("Enter the user : \r\n");
+    int userType = View::entrerNombre("Enter the user :");
 
     switch (userType)
     {
@@ -285,14 +285,14 @@ void Controller::MesureAirQuality()
 // Algorithme :
 //
 {
-    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates : \r\n");
+    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates :");
     if ((abs(coordGPS.GetLat() > 90.0)) or (abs(coordGPS.GetLng() > 180)))
     {
-        View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n");
+        View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180");
         return;
     }
 
-    Date date = View::entrerDate("Enter the date : \r\n");
+    Date date = View::entrerDate("Enter the date :");
     int an = date.GetAnnee();
     int mois = date.GetMois();
     int jour = date.GetJour();
@@ -300,19 +300,19 @@ void Controller::MesureAirQuality()
 
     if ((mois < 0) or (mois > 12))
     {
-        View::afficherErreur("Months must be between 1 and 12 included\r\n");
+        View::afficherErreur("Months must be between 1 and 12 included");
         return;
     }
 
     if (jour < 0)
     {
-        View::afficherErreur("Days must be positive\r\n");
+        View::afficherErreur("Days must be positives");
         return;
     }
 
     if ((heure < 0) or (heure > 23))
     {
-        View::afficherErreur("Hours must be between 0 and 23 included\r\n");
+        View::afficherErreur("Hours must be between 0 and 23 included");
         return;
     }
 
@@ -320,24 +320,24 @@ void Controller::MesureAirQuality()
     {
         if (((an % 4) == 0) and (jour > 29))
         {
-            View::afficherErreur("February has only 29 days on bissextile years\r\n");
+            View::afficherErreur("February has only 29 days on bissextile years");
             return;
         }
         if (((an % 4) != 0) and (jour > 28))
         {
-            View::afficherErreur("February has only 28 days on not bissextile years\r\n");
+            View::afficherErreur("February has only 28 days on not bissextile years");
             return;
         }
     }
 
     if ((mois % 2 == 1) and (jour > 31))
     {
-        View::afficherErreur("Days must not exceed 31\r\n");
+        View::afficherErreur("Days must not exceed 31");
         return;
     }
     if ((mois % 2 == 0) and (mois != 2) and (jour > 30))
     {
-        View::afficherErreur("Days of some months must not exceed 30\r\n");
+        View::afficherErreur("Days of some months must not exceed 30");
         return;
     }
 
@@ -350,26 +350,26 @@ void Controller::MesureMeanAirQuality()
 // Algorithme :
 //
 {
-    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates of the center of the area : \r\n");
+    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates of the center of the area :");
     if ((abs(coordGPS.GetLat() > 90.0)) or (abs(coordGPS.GetLng() > 180)))
     {
-        View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180\r\n");
+        View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180");
         return;
     }
 
-    int radius = View::entrerNombre("Enter the radius (in km) : \r\n");
+    int radius = View::entrerNombre("Enter the radius (in km) :");
     if ((radius <= 0) or (radius > 200))
     {
-        View::afficherErreur("The radius must be strictly positive and must not exceed 200\r\n");
+        View::afficherErreur("The radius must be strictly positive and must not exceed 200");
         return;
     }
 
-    Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n");
+    Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) :");
     int an1 = dateBeginning.GetAnnee();
     int mois1 = dateBeginning.GetMois();
     int jour1 = dateBeginning.GetJour();
     int heure1 = dateBeginning.GetHeure();
-    Date dateEnd = View::entrerDate("Enter the date 2 (end) : \r\n");
+    Date dateEnd = View::entrerDate("Enter the date 2 (end) :");
     int an2 = dateEnd.GetAnnee();
     int mois2 = dateEnd.GetMois();
     int jour2 = dateEnd.GetJour();
@@ -377,19 +377,19 @@ void Controller::MesureMeanAirQuality()
 
     if ((mois1 < 0) or (mois1 > 12) or (mois2 < 0) or (mois2 > 12))
     {
-        View::afficherErreur("Months must be between 1 and 12 included\r\n");
+        View::afficherErreur("Months must be between 1 and 12 included");
         return;
     }
 
     if ((jour1 < 0) or (jour2 < 0))
     {
-        View::afficherErreur("Days must be positive\r\n");
+        View::afficherErreur("Days must be positive");
         return;
     }
 
     if ((heure1 < 0) or (heure1 > 23) or (heure2 < 0) or (heure2 > 23))
     {
-        View::afficherErreur("Hours must be between 0 and 23 included\r\n");
+        View::afficherErreur("Hours must be between 0 and 23 included");
         return;
     }
 
@@ -397,12 +397,12 @@ void Controller::MesureMeanAirQuality()
     {
         if (((an1 % 4) == 0) and (jour1 > 29))
         {
-            View::afficherErreur("February has only 29 days on bissextile years\r\n");
+            View::afficherErreur("February has only 29 days on bissextile years");
             return;
         }
         if (((an1 % 4) != 0) and (jour1 > 28))
         {
-            View::afficherErreur("February has only 28 days on not bissextile years\r\n");
+            View::afficherErreur("February has only 28 days on not bissextile years");
             return;
         }
     }
@@ -410,11 +410,11 @@ void Controller::MesureMeanAirQuality()
     {
         if (((an2 % 4) == 0) and (jour2 > 29))
         {
-            View::afficherErreur("February has only 29 days on bissextile years\r\n");
+            View::afficherErreur("February has only 29 days on bissextile years");
         }
         if (((an2 % 4) != 0) and (jour2 > 28))
         {
-            View::afficherErreur("February has only 28 days on not bissextile years\r\n");
+            View::afficherErreur("February has only 28 days on not bissextile years");
             return;
         }
     }
