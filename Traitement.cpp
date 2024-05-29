@@ -167,15 +167,9 @@ void Traitement::chargerDonnees()
 }
 
 bool Traitement::analyzeFunctionalState(Sensor sensor)
-<<<<<<< HEAD
     // Algorithme :
     //
     {
-=======
-// Algorithme :
-//
-{
->>>>>>> e216e21232c039aa49cf32826dc8f501d7615e1b
     map<int, Sensor> nearest = Traitement::findSensorByCoord(sensor.GetCoord());
     float ozone = 0;
     float sulfur = 0;
@@ -229,37 +223,25 @@ AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 // Algorithme :
 //
 {
-    Sensor sensor = findSensorByCoord(coords).begin()->second; // récupérer le sensor le plus proche
+    Sensor sensor = findSensorByCoord(coords).begin()->second; //récupérer le sensor le plus proche
 
     int i;
     float measureO3 = -1;
     float measureNO2 = -1;
     float measureSO2 = -1;
     float measurePM = -1;
-<<<<<<< HEAD
     for (i=measurements.size()-1 ; (i>=0) && (measureO3*measureNO2*measureSO2*measurePM<0) ; i--){
         if ((measurements[i].getSensor().GetSensorID() == sensor.GetSensorID()) && (measurements[i].getTimestamp() == date)) {
             if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0)) {
-=======
-    for (i = measurements.size() - 1; (i >= 0) && (measureO3 * measureNO2 * measureSO2 * measurePM < 0); i--)
-    {
-        if (measurements[i].getSensor().GetSensorID() == sensor.GetSensorID())
-        {
-            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0))
-            {
->>>>>>> e216e21232c039aa49cf32826dc8f501d7615e1b
                 measureO3 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0))
-            {
+            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0)) {
                 measureSO2 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0))
-            {
+            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0)) {
                 measureNO2 = measurements[i].getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0))
-            {
+            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0)) {
                 measurePM = measurements[i].getValue();
             }
         }
