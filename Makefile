@@ -9,7 +9,7 @@ OBJETS = $(SRC:.cpp=.o)
 SRC = $(wildcard *.cpp) #Récupère tous les fichiers .cpp du répertoire courant
 OBJETS_DIR = $(OBJETS:%=$(BIN)/%)
 EXE_DIR = $(EXE:%=$(BIN)/%)
-LIBRAIRIES = 
+LIBRAIRIES = -lm
 
 $(EXE_DIR) : $(OBJETS_DIR)
 	$(ECHO) "-Edition des liens de $(EXE)-"
