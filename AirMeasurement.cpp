@@ -11,6 +11,7 @@
 //---------------------------------------------------------------- INCLUDE
 
 //-------------------------------------------------------- Include système
+#include <algorithm>
 #include <iostream>
 using namespace std;
 
@@ -169,8 +170,7 @@ AirMeasurement::AirMeasurement(float o3, float so2, float no2, float pm10)
     if(pm10 >= 80){
         indexpm = 10;}
 
-
-
+    this->atmoIndex = max({indexpm,indexo3,indexno2,indexso2});
 } //----- Fin de AirMeasurement
 
 AirMeasurement::AirMeasurement()
