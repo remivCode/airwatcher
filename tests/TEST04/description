@@ -1,0 +1,5 @@
+UNIT TESTS FOR THE FUNCTION calculateAirQuality
+
+test 4.1 : sensor data available
+test 4.2 : sensor data unavailable, nearest sensor data used
+test 4.3 : sensor data unavailable, nearest sensor data used (earlier specified date)

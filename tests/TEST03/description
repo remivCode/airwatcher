@@ -1,0 +1,5 @@
+UNIT TESTS FOR THE FUNCTION analyzeFunctionalState
+
+test 3.1 : sensor 1 (functional)
+test 3.2 : sensor 2 (non functional)
+test 3.3 : sensor 3 (functional sensor but a borderline case)

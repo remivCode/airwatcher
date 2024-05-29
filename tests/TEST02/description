@@ -1,0 +1,5 @@
+UNIT TESTS FOR THE FUNCTION rankingBySimilarity
+
+test 2.1 : ranking by similarity with sensor 1
+test 2.2 : ranking by similarity with sensor 2
+test 2.3 : ranking by similarity with sensor 3
