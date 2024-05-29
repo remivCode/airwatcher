@@ -35,6 +35,8 @@ public:
     // Contrat :
     //
 
+    string getAttributeID(void) const;
+
     //------------------------------------------------- Surcharge d'opérateurs
     Attribute &operator=(const Attribute &unAttribute);
     // Mode d'emploi :

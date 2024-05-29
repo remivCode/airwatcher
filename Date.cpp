@@ -69,6 +69,12 @@ Date &Date::operator=(const Date &unDate)
 {
 } //----- Fin de operator =
 
+bool Date::operator==(const Date &unDate) const {
+    return (this->annee == unDate.annee) &&
+           (this->mois == unDate.mois) &&
+           (this->jour == unDate.jour);
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 Date::Date(const Date &unDate)
 // Algorithme :

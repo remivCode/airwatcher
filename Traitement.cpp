@@ -208,13 +208,39 @@ AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 //
 {
     Sensor sensor = findSensorByCoord(coords).begin()->second; //récupérer le sensor le plus proche
-    AirMeasurement mesurement = getMeasurementBySensor(sensor).end().getValue();
+
+    int i;
+    float measureO3 = -1;
+    float measureNO2 = -1;
+    float measureSO2 = -1;
+    float measurePM = -1;
+    for (i=measurements.size()-1 ; (i>=0) && (measureO3*measureNO2*measureSO2*measurePM<0) ; i--){
+        if (measurements[i].getSensor().GetSensorID() == sensor.GetSensorID()) {
+            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0)) {
+                measureO3 = measurements[i].getValue();
+            }
+            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0)) {
+                measureSO2 = measurements[i].getValue();
+            }
+            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0)) {
+                measureNO2 = measurements[i].getValue();
+            }
+            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0)) {
+                measurePM = measurements[i].getValue();
+            }
+        }
+    }
+
+    AirMeasurement mesurement = AirMeasurement(measureO3, measureSO2, measureNO2, measurePM);
+
+    return mesurement;
 } //----- Fin de Méthode
 
 AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin)
 // Algorithme :
 //
 {
+    
 } //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
