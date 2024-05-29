@@ -187,27 +187,28 @@ Sensor *Traitement::findSensorById(string id)
     return NULL;
 } //----- Fin de Méthode
 
-map<int,Sensor> Traitement::findSensorByCoord(CoordGPS coordonnees)
+map<int, Sensor> Traitement::findSensorByCoord(CoordGPS coordonnees)
 {
-    map<int,Sensor> sensorDistMap;
+    map<int, Sensor> sensorDistMap;
     int i;
     float lat;
     float lng;
     int d;
-    for (i=0; i<sensors.size(); i++)
+    for (i = 0; i < sensors.size(); i++)
     {
         lat = sensors[i].GetCoord().GetLat();
         lng = sensors[i].GetCoord().GetLng();
-        d = (int) sqrt(pow(lat-coordonnees.GetLat(),2)+pow(lng-coordonnees.GetLng(),2));
-        sensorDistMap.insert(make_pair(d,sensors[i]));
+        d = (int)sqrt(pow(lat - coordonnees.GetLat(), 2) + pow(lng - coordonnees.GetLng(), 2));
+        sensorDistMap.insert(make_pair(d, sensors[i]));
     }
+    return sensorDistMap;
 }
 
 AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
 // Algorithme :
 //
 {
-    Sensor sensor = findSensorByCoord(coords).begin()->second; //récupérer le sensor le plus proche
+    Sensor sensor = findSensorByCoord(coords).begin()->second; // récupérer le sensor le plus proche
     AirMeasurement mesurement = getMeasurementBySensor(sensor).end().getValue();
 } //----- Fin de Méthode
 
