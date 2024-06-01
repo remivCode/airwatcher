@@ -41,7 +41,12 @@ void Traitement::chargerDonnees()
 //
 {
     ////////////////////////////////////////////////// Chargement attribut
-    ifstream attributes("data/attributes.csv");
+    ifstream attributes("../data/attributes.csv");
+    if (!attributes.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de attributes.csv" << endl;
+        return;
+    }
     string line;
     getline(attributes, line);
     while (getline(attributes, line))
@@ -49,16 +54,23 @@ void Traitement::chargerDonnees()
         stringstream lineStream(line);
         string id;
         getline(lineStream, id, ';');
+        cout << "Chargement, id des éléments de typeMesures : " << id << endl;
         string unit;
         getline(lineStream, unit, ';');
         string desc;
         getline(lineStream, desc, ';');
-        Attribute *a = new Attribute(id, unit, desc);
-        typeMesures.push_back(*a);
+        // Attribute *a = new Attribute(id, unit, desc);
+        typeMesures.push_back(Attribute(id, unit, desc));
     }
+    cout << "Chargement, taille de typeMesures : " << typeMesures.size() << endl;
 
     ////////////////////////////////////////////////// Chargement cleaners
-    ifstream clean("data/cleaners.csv");
+    ifstream clean("../data/cleaners.csv");
+    if (!clean.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de cleaners.csv" << endl;
+        return;
+    }
     getline(clean, line);
     while (getline(clean, line))
     {
@@ -103,7 +115,12 @@ void Traitement::chargerDonnees()
     }
 
     ////////////////////////////////////////////////// Chargement providers
-    ifstream provid("data/providers.csv");
+    ifstream provid("../data/providers.csv");
+    if (!provid.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de providers.csv" << endl;
+        return;
+    }
     getline(provid, line);
     while (getline(provid, line))
     {
@@ -112,7 +129,7 @@ void Traitement::chargerDonnees()
         getline(lineStream, id, ';');
         string idCleaner;
         getline(lineStream, idCleaner, ';');
-        Provider *p = new Provider(id, NULL, NULL);
+        Provider *p = new Provider(id);
         users.push_back(*p);
 
         Cleaner c;
@@ -126,8 +143,12 @@ void Traitement::chargerDonnees()
     }
 
     ////////////////////////////////////////////////// Chargement sensors
-    ifstream sens("data/sensors.csv");
-    getline(sens, line);
+    ifstream sens("../data/sensors.csv");
+    if (!sens.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de sensors.csv" << endl;
+        return;
+    }
     while (getline(sens, line))
     {
         stringstream lineStream(line);
@@ -140,12 +161,17 @@ void Traitement::chargerDonnees()
         getline(lineStream, ln, ';');
         float lng = stof(ln);
         CoordGPS *gps = new CoordGPS(lat, lng);
-        Sensor *s = new Sensor(id, *gps, NULL);
+        Sensor *s = new Sensor(id, *gps, nullptr);
         sensors.push_back(*s);
     } //----- Fin de Méthode
 
     ////////////////////////////////////////////////// Chargement users
-    ifstream user("data/users.csv");
+    ifstream user("../data/users.csv");
+    if (!user.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de users.csv" << endl;
+        return;
+    }
     getline(user, line);
     while (getline(user, line))
     {
@@ -154,7 +180,7 @@ void Traitement::chargerDonnees()
         getline(lineStream, id, ';');
         string sensorId;
         getline(lineStream, sensorId, ';');
-        PrivateIndividual *p = new PrivateIndividual(id, NULL, NULL);
+        PrivateIndividual *p = new PrivateIndividual(id);
         users.push_back(*p);
         for (int i = 0; i < sensors.size(); i++)
         {

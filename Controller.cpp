@@ -189,12 +189,12 @@ bool Controller::connexion(string login, string password)
         break;
 
     case casePrivate:
-        user = new PrivateIndividual(id, login, password);
+        user = new PrivateIndividual(id);
         Controller::chargerMenu();
         break;
 
     case caseProvider:
-        user = new Provider(id, login, password);
+        user = new Provider(id);
         Controller::chargerMenu();
         break;
 
@@ -442,7 +442,7 @@ void Controller::CheckSensorFunctional()
     string sensorID = View::entrerString("Enter the sensor ID");
 
     Sensor *sensor = Traitement::findSensorById(sensorID);
-    cout << "Log : " << sensor->GetSensorID() << endl;
+
     bool functional = Traitement::analyzeFunctionalState(*sensor);
     View::afficherBool(functional);
 }

@@ -55,7 +55,7 @@ public:
     // Contrat :
     //
 
-    Provider(string id, string login, string password);
+    Provider(string id);
     // Mode d'emploi :
     //
     // Contrat :
