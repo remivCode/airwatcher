@@ -164,6 +164,7 @@ void Traitement::chargerDonnees()
             }
         }
     } //----- Fin de Méthode
+    cout << "Chargement : " << sensors.size() << endl;
 }
 
 bool Traitement::analyzeFunctionalState(Sensor sensor)
@@ -199,6 +200,7 @@ Sensor *Traitement::findSensorById(string id)
 // Algorithme :
 //
 {
+    cout << "Log : " << sensors.size() << endl;
     for (int i = 0; i < sensors.size(); i++)
     {
         if (sensors[i].GetSensorID() == id)

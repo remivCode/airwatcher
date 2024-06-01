@@ -153,7 +153,8 @@ Date View::entrerDate(const string &prompt)
 int View::entrerNombre(const string &prompt)
 {
     int nombre;
-    cout << prompt;
+    cout << prompt << endl;
+    cout << "Enter a number: ";
     cin >> nombre;
     return nombre;
 }
@@ -187,8 +188,8 @@ void View::MenuConnexion()
     cin >> username;
     cout << "Password: ";
     cin >> password;
+    cout << endl;
 
-    cout << "Fake auth" << endl;
     Controller::connexion(username, password);
 }
 void View::MenuPrincipalGovernmentAgency()
@@ -204,6 +205,7 @@ void View::MenuPrincipalGovernmentAgency()
     int choice;
     cout << "Enter your choice: ";
     cin >> choice;
+    cout << endl;
     Controller::recupererSaisieMenu(choice);
 }
 void View::MenuPrincipalPrive()
@@ -217,6 +219,7 @@ void View::MenuPrincipalPrive()
     int choice;
     cout << "Enter your choice: ";
     cin >> choice;
+    cout << endl;
     Controller::recupererSaisieMenu(choice);
 }
 void View::MenuPrincipalProvider()
@@ -227,6 +230,7 @@ void View::MenuPrincipalProvider()
     int choice;
     cout << "Enter your choice: ";
     cin >> choice;
+    cout << endl;
     Controller::recupererSaisieMenu(choice);
 }
 
