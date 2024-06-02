@@ -40,12 +40,12 @@ float CoordGPS::GetLng(void) const
 
 void CoordGPS::SetLat(float lat)
 {
-    this->latitude=lat;
+    this->latitude = lat;
 }
 
 void CoordGPS::SetLng(float lng)
 {
-    this->latitude=lng;
+    this->latitude = lng;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -76,7 +76,6 @@ CoordGPS::CoordGPS(float lat, float lng)
     longitude = lng;
 } //----- Fin de CoordGPS
 
-
 CoordGPS::CoordGPS()
 // Algorithme :
 //
@@ -84,6 +83,8 @@ CoordGPS::CoordGPS()
 #ifdef MAP
     cout << "Appel au constructeur de <CoordGPS>" << endl;
 #endif
+    latitude = 0.0;
+    longitude = 0.0;
 } //----- Fin de CoordGPS
 
 CoordGPS::~CoordGPS()

@@ -285,18 +285,18 @@ void Controller::MesureAirQuality()
 // Algorithme :
 //
 {
-    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates");
-    if ((abs(coordGPS.GetLat() > 90.0)) or (abs(coordGPS.GetLng() > 180)))
+    CoordGPS *coordGPS = View::entrerCoord("Enter the GPS coordinates");
+    if ((abs(coordGPS->GetLat() > 90.0)) or (abs(coordGPS->GetLng() > 180)))
     {
         View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180");
         return;
     }
 
-    Date date = View::entrerDate("Enter the date");
-    int an = date.GetAnnee();
-    int mois = date.GetMois();
-    int jour = date.GetJour();
-    int heure = date.GetHeure();
+    Date *date = View::entrerDate("Enter the date");
+    int an = date->GetAnnee();
+    int mois = date->GetMois();
+    int jour = date->GetJour();
+    int heure = date->GetHeure();
 
     if ((mois < 0) or (mois > 12))
     {
@@ -350,8 +350,8 @@ void Controller::MesureMeanAirQuality()
 // Algorithme :
 //
 {
-    CoordGPS coordGPS = View::entrerCoord("Enter the GPS coordinates of the center of the area");
-    if ((abs(coordGPS.GetLat() > 90.0)) or (abs(coordGPS.GetLng() > 180)))
+    CoordGPS *coordGPS = View::entrerCoord("Enter the GPS coordinates of the center of the area");
+    if ((abs(coordGPS->GetLat() > 90.0)) or (abs(coordGPS->GetLng() > 180)))
     {
         View::afficherErreur("The latitude must be between -90 and 90 and the longitude must be between -180 and 180");
         return;
@@ -364,16 +364,16 @@ void Controller::MesureMeanAirQuality()
         return;
     }
 
-    Date dateBeginning = View::entrerDate("Enter the date 1 (beginning)");
-    int an1 = dateBeginning.GetAnnee();
-    int mois1 = dateBeginning.GetMois();
-    int jour1 = dateBeginning.GetJour();
-    int heure1 = dateBeginning.GetHeure();
-    Date dateEnd = View::entrerDate("Enter the date 2 (end)");
-    int an2 = dateEnd.GetAnnee();
-    int mois2 = dateEnd.GetMois();
-    int jour2 = dateEnd.GetJour();
-    int heure2 = dateEnd.GetHeure();
+    Date *dateBeginning = View::entrerDate("Enter the date 1 (beginning)");
+    int an1 = dateBeginning->GetAnnee();
+    int mois1 = dateBeginning->GetMois();
+    int jour1 = dateBeginning->GetJour();
+    int heure1 = dateBeginning->GetHeure();
+    Date *dateEnd = View::entrerDate("Enter the date 2 (end)");
+    int an2 = dateEnd->GetAnnee();
+    int mois2 = dateEnd->GetMois();
+    int jour2 = dateEnd->GetJour();
+    int heure2 = dateEnd->GetHeure();
 
     if ((mois1 < 0) or (mois1 > 12) or (mois2 < 0) or (mois2 > 12))
     {
@@ -441,9 +441,12 @@ void Controller::CheckSensorFunctional()
 {
     string sensorID = View::entrerString("Enter the sensor ID");
 
+    cout << "Log entrée dans find by id" << endl;
     Sensor *sensor = Traitement::findSensorById(sensorID);
+    cout << "Log sortie de find by id" << endl;
+    cout << "Log sensor found controller: " << sensor->GetSensorID() << endl;
 
-    bool functional = Traitement::analyzeFunctionalState(*sensor);
+    bool functional = Traitement::analyzeFunctionalState(sensor);
     View::afficherBool(functional);
 }
 

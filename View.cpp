@@ -97,8 +97,8 @@ void View::afficherListe(const std::vector<Sensor> &liste)
     for (const Sensor &sensor : liste)
     {
         cout << "Sensor ID: " << sensor.GetSensorID()
-             << "\tCoordinates: (" << sensor.GetCoord().GetLat()
-             << ", " << sensor.GetCoord().GetLng()
+             << "\tCoordinates: (" << sensor.GetCoord()->GetLat()
+             << ", " << sensor.GetCoord()->GetLng()
              << ")\tFiability: " << (sensor.GetFiability() ? "True" : "False")
              << endl;
     }
@@ -134,7 +134,7 @@ void View::afficherTpsExec(const string &temps)
     setColor(0); // Reset to default color
 }
 
-Date View::entrerDate(const string &prompt)
+Date *View::entrerDate(const string &prompt)
 {
     int annee, mois, jour, heure;
     cout << prompt << endl;
@@ -146,8 +146,8 @@ Date View::entrerDate(const string &prompt)
     cin >> jour;
     cout << "Enter hour: ";
     cin >> heure;
-
-    return Date(annee, mois, jour, heure);
+    Date *d = new Date(annee, mois, jour, heure);
+    return d;
 }
 
 int View::entrerNombre(const string &prompt)
@@ -159,7 +159,7 @@ int View::entrerNombre(const string &prompt)
     return nombre;
 }
 
-CoordGPS View::entrerCoord(const string &prompt)
+CoordGPS *View::entrerCoord(const string &prompt)
 {
     float lat, lng;
     cout << prompt << endl;
@@ -167,7 +167,8 @@ CoordGPS View::entrerCoord(const string &prompt)
     cin >> lat;
     cout << "Enter longitude: ";
     cin >> lng;
-    return CoordGPS(lat, lng);
+    CoordGPS *coord = new CoordGPS(lat, lng);
+    return coord;
 }
 
 string View::entrerString(const string &prompt)

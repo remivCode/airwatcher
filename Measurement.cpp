@@ -28,17 +28,17 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-Sensor Measurement::getSensor(void) const
+Sensor *Measurement::getSensor(void) const
 {
     return sensor;
 }
 
-Date Measurement::getTimestamp(void) const
+Date *Measurement::getTimestamp(void) const
 {
     return timestamp;
 }
 
-Attribute Measurement::getAttribute(void) const
+Attribute *Measurement::getAttribute(void) const
 {
     return attribut;
 }
@@ -74,7 +74,7 @@ Measurement::Measurement()
 #endif
 } //----- Fin de Measurement
 
-Measurement::Measurement(Date date, float val, Attribute attribute, Sensor sensor)
+Measurement::Measurement(Date *date, float val, Attribute *attribute, Sensor *sensor)
 // Algorithme :
 //
 {

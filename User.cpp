@@ -91,6 +91,13 @@ User::User()
 #endif
 } //----- Fin de User
 
+User::User(string id)
+// Algorithme :
+//
+{
+    this->userID = id;
+}
+
 User::User(string id, string login, string password)
 // Algorithme :
 //

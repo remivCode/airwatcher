@@ -54,7 +54,7 @@ Provider::Provider()
 #endif
 } //----- Fin de Provider
 
-Provider::Provider(string id) : User(id, login, password)
+Provider::Provider(string id) : User(id)
 // Algorithme :
 //
 {

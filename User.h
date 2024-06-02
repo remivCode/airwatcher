@@ -62,6 +62,12 @@ public:
     // Contrat :
     //
 
+    User(string id);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     User(string id, string login, string password);
     // Mode d'emploi :
     //

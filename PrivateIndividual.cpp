@@ -79,7 +79,7 @@ PrivateIndividual::PrivateIndividual()
 #endif
 } //----- Fin de PrivateIndividual
 
-PrivateIndividual::PrivateIndividual(string id) : User(id, login, password)
+PrivateIndividual::PrivateIndividual(string id) : User(id)
 // Algorithme :
 //
 {

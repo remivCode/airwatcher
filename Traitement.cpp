@@ -12,13 +12,13 @@
 
 //-------------------------------------------------------- Include système
 #include <iostream>
+using namespace std;
 #include <map>
 #include <cmath>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Traitement.h"
@@ -29,11 +29,11 @@ using namespace std;
 
 //----------------------------------------------------------------- PUBLIC
 
-vector<Sensor> Traitement::sensors;
-vector<Attribute> Traitement::typeMesures;
-vector<Measurement> Traitement::measurements;
-vector<Cleaner> Traitement::cleaners;
-vector<User> Traitement::users;
+vector<Sensor *> Traitement::sensors;
+vector<Attribute *> Traitement::typeMesures;
+vector<Measurement *> Traitement::measurements;
+vector<Cleaner *> Traitement::cleaners;
+vector<User *> Traitement::users;
 
 //----------------------------------------------------- Méthodes publiques
 void Traitement::chargerDonnees()
@@ -54,15 +54,13 @@ void Traitement::chargerDonnees()
         stringstream lineStream(line);
         string id;
         getline(lineStream, id, ';');
-        cout << "Chargement, id des éléments de typeMesures : " << id << endl;
         string unit;
         getline(lineStream, unit, ';');
         string desc;
         getline(lineStream, desc, ';');
-        // Attribute *a = new Attribute(id, unit, desc);
-        typeMesures.push_back(Attribute(id, unit, desc));
+        Attribute *a = new Attribute(id, unit, desc);
+        typeMesures.push_back(a);
     }
-    cout << "Chargement, taille de typeMesures : " << typeMesures.size() << endl;
 
     ////////////////////////////////////////////////// Chargement cleaners
     ifstream clean("../data/cleaners.csv");
@@ -110,8 +108,8 @@ void Traitement::chargerDonnees()
         getline(lineStream, h, ':');
         int heureFin = stoi(h);
         Date *fin = new Date(anneeFin, moisFin, jourFin, heureFin);
-        Cleaner *c = new Cleaner(id, *gps, *debut, *fin, NULL);
-        cleaners.push_back(*c);
+        Cleaner *c = new Cleaner(id, gps, debut, fin, nullptr);
+        cleaners.push_back(c);
     }
 
     ////////////////////////////////////////////////// Chargement providers
@@ -130,14 +128,14 @@ void Traitement::chargerDonnees()
         string idCleaner;
         getline(lineStream, idCleaner, ';');
         Provider *p = new Provider(id);
-        users.push_back(*p);
+        users.push_back(p);
 
         Cleaner c;
         for (int i = 0; i < cleaners.size(); i++)
         {
-            if (cleaners[i].getCleanerID() == idCleaner)
+            if (cleaners[i]->getCleanerID() == idCleaner)
             {
-                cleaners[i].setProvider(p);
+                cleaners[i]->setProvider(p);
             }
         }
     }
@@ -161,8 +159,8 @@ void Traitement::chargerDonnees()
         getline(lineStream, ln, ';');
         float lng = stof(ln);
         CoordGPS *gps = new CoordGPS(lat, lng);
-        Sensor *s = new Sensor(id, *gps, nullptr);
-        sensors.push_back(*s);
+        Sensor *s = new Sensor(id, gps, nullptr);
+        sensors.push_back(s);
     } //----- Fin de Méthode
 
     ////////////////////////////////////////////////// Chargement users
@@ -181,34 +179,85 @@ void Traitement::chargerDonnees()
         string sensorId;
         getline(lineStream, sensorId, ';');
         PrivateIndividual *p = new PrivateIndividual(id);
-        users.push_back(*p);
+        users.push_back(p);
         for (int i = 0; i < sensors.size(); i++)
         {
-            if (sensors[i].GetSensorID() == sensorId)
+            if (sensors[i]->GetSensorID() == sensorId)
             {
-                sensors[i].SetUser(p);
+                sensors[i]->SetUser(p);
             }
         }
-    } //----- Fin de Méthode
-    cout << "Chargement : " << sensors.size() << endl;
+    }
+
+    ////////////////////////////////////////////////// Chargement measurements
+    ifstream meas("../data/measurements.csv");
+    if (!meas.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de measurements.csv" << endl;
+        return;
+    }
+    while (getline(meas, line))
+    {
+        stringstream lineStream(line);
+        string a;
+        string m;
+        string j;
+        string h;
+        getline(lineStream, a, '-');
+        int annee = stoi(a);
+        getline(lineStream, m, '-');
+        int mois = stoi(a);
+        getline(lineStream, j, ' ');
+        int jour = stoi(j);
+        getline(lineStream, h, ':');
+        int heure = stoi(h);
+        Date *date = new Date(annee, mois, jour, heure);
+        string temp;
+        getline(lineStream, temp, ';');
+
+        string sensorId;
+        getline(lineStream, sensorId, ';');
+        string attId;
+        getline(lineStream, attId, ';');
+        string v;
+        getline(lineStream, v, ';');
+        float value = stof(v);
+        Sensor *s = Traitement::findSensorById(sensorId);
+        Attribute *att = Traitement::findAttributeById(attId);
+        Measurement *me = new Measurement(date, value, att, s);
+        measurements.push_back(me);
+    }
 }
 
-bool Traitement::analyzeFunctionalState(Sensor sensor)
+bool Traitement::analyzeFunctionalState(Sensor *sensor)
 // Algorithme :
 //
 {
-    map<int, Sensor> nearest = Traitement::findSensorByCoord(sensor.GetCoord());
+    if (!sensor)
+    {
+        cerr << "Erreur : le pointeur de capteur est nul." << endl;
+        return false;
+    }
+    map<int, Sensor *> nearest = Traitement::findSensorByCoord(sensor->GetCoord());
+    if (nearest.empty())
+    {
+        cerr << "Erreur : aucun capteur proche trouvé." << endl;
+        return false;
+    }
     float ozone = 0;
     float sulfur = 0;
     float nitrogen = 0;
     float particules = 0;
 
     int i = 0;
-    for (const pair<int, Sensor> el : nearest)
+    for (const pair<int, Sensor *> el : nearest)
     {
         if (i < 3)
         {
-            AirMeasurement am = Traitement::calculateAirQualite(el.second.GetCoord(), measurements.back().getTimestamp());
+            cout << "Traitement du capteur avec coord: " << el.second->GetCoord()->GetLat() << ", " << el.second->GetCoord()->GetLng() << endl;
+            cout << "measurments vide ? " << measurements.empty() << endl;
+            cout << "Traitement du capteur avec la mesure: " << measurements.back()->getAttribute()->getAttributeID() << endl;
+            AirMeasurement am = Traitement::calculateAirQualite(el.second->GetCoord(), measurements.back()->getTimestamp());
             ozone += am.GetO3();
             sulfur += am.GetSO2();
             nitrogen += am.GetNO2();
@@ -220,46 +269,63 @@ bool Traitement::analyzeFunctionalState(Sensor sensor)
     float sulfurMean = sulfur / 3;
     float nitrogenMean = nitrogen / 3;
     float particulesMean = particules / 3;
+
+    AirMeasurement am = Traitement::calculateAirQualite(sensor->GetCoord(), measurements.back()->getTimestamp());
 } //----- Fin de Méthode
 
 Sensor *Traitement::findSensorById(string id)
 // Algorithme :
 //
 {
-    cout << "Log : " << sensors.size() << endl;
     for (int i = 0; i < sensors.size(); i++)
     {
-        if (sensors[i].GetSensorID() == id)
+        if (sensors[i]->GetSensorID() == id)
         {
-            return &sensors[i];
+            return sensors[i];
         }
     }
 
-    return NULL;
+    return nullptr;
 } //----- Fin de Méthode
 
-map<int, Sensor> Traitement::findSensorByCoord(CoordGPS coordonnees)
+Attribute *Traitement::findAttributeById(string id)
+// Algorithme :
+//
 {
-    map<int, Sensor> *sensorDistMap = new map<int, Sensor>;
+    for (int i = 0; i < typeMesures.size(); i++)
+    {
+        if (typeMesures[i]->getAttributeID() == id)
+        {
+            return typeMesures[i];
+        }
+    }
+
+    return nullptr;
+} //----- Fin de Méthode
+
+map<int, Sensor *> Traitement::findSensorByCoord(CoordGPS *coordonnees)
+{
+    map<int, Sensor *> *sensorDistMap = new map<int, Sensor *>;
     int i;
     float lat;
     float lng;
     int d;
     for (i = 0; i < sensors.size(); i++)
     {
-        lat = sensors[i].GetCoord().GetLat();
-        lng = sensors[i].GetCoord().GetLng();
-        d = (int)sqrt(pow(lat - coordonnees.GetLat(), 2) + pow(lng - coordonnees.GetLng(), 2));
+        lat = sensors[i]->GetCoord()->GetLat();
+        lng = sensors[i]->GetCoord()->GetLng();
+        cout << "Log find by coord lat, long: " << lat << ", " << lng << endl;
+        d = (int)sqrt(pow(lat - coordonnees->GetLat(), 2) + pow(lng - coordonnees->GetLng(), 2));
         sensorDistMap->insert(make_pair(d, sensors[i]));
     }
     return *sensorDistMap;
 }
 
-AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
+AirMeasurement Traitement::calculateAirQualite(CoordGPS *coords, Date *date)
 // Algorithme :
 //
 {
-    Sensor sensor = findSensorByCoord(coords).begin()->second; // récupérer le sensor le plus proche
+    Sensor *sensor = findSensorByCoord(coords).begin()->second; // récupérer le sensor le plus proche
 
     int i;
     float measureO3 = -1;
@@ -268,33 +334,33 @@ AirMeasurement Traitement::calculateAirQualite(CoordGPS coords, Date date)
     float measurePM = -1;
     for (i = measurements.size() - 1; (i >= 0) && (measureO3 * measureNO2 * measureSO2 * measurePM < 0); i--)
     {
-        if ((measurements[i].getSensor().GetSensorID() == sensor.GetSensorID()) && (measurements[i].getTimestamp() == date))
+        if ((measurements[i]->getSensor()->GetSensorID() == sensor->GetSensorID()) && (measurements[i]->getTimestamp() == date))
         {
-            if ((measurements[i].getAttribute().getAttributeID() == "O3") && (measureO3 < 0))
+            if ((measurements[i]->getAttribute()->getAttributeID() == "O3") && (measureO3 < 0))
             {
-                measureO3 = measurements[i].getValue();
+                measureO3 = measurements[i]->getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "SO2") && (measureSO2 < 0))
+            if ((measurements[i]->getAttribute()->getAttributeID() == "SO2") && (measureSO2 < 0))
             {
-                measureSO2 = measurements[i].getValue();
+                measureSO2 = measurements[i]->getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "NO2") && (measureNO2 < 0))
+            if ((measurements[i]->getAttribute()->getAttributeID() == "NO2") && (measureNO2 < 0))
             {
-                measureNO2 = measurements[i].getValue();
+                measureNO2 = measurements[i]->getValue();
             }
-            if ((measurements[i].getAttribute().getAttributeID() == "PM") && (measurePM < 0))
+            if ((measurements[i]->getAttribute()->getAttributeID() == "PM") && (measurePM < 0))
             {
-                measurePM = measurements[i].getValue();
+                measurePM = measurements[i]->getValue();
             }
         }
     }
 
-    AirMeasurement mesurement = AirMeasurement(measureO3, measureSO2, measureNO2, measurePM);
+    AirMeasurement *mesurement = new AirMeasurement(measureO3, measureSO2, measureNO2, measurePM);
 
-    return mesurement;
+    return *mesurement;
 } //----- Fin de Méthode
 
-AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, Date dateDebut, Date dateFin)
+AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius, Date *dateDebut, Date *dateFin)
 // Algorithme :
 //
 {
@@ -302,27 +368,27 @@ AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS coords, int radius, 
     int day;
     int month;
     int year;
-    Date date = dateDebut;
+    Date *date = dateDebut;
     int counter = 0;
     AirMeasurement mean = *(new AirMeasurement());
     AirMeasurement sum;
 
-    map<int, Sensor> DistSensor = findSensorByCoord(coords);
+    map<int, Sensor *> DistSensor = findSensorByCoord(coords);
 
     for (auto it = DistSensor.begin(); it != DistSensor.end(); it++)
     {
         if (it->first < radius)
         {
-            for (year = dateDebut.GetAnnee(); year <= dateFin.GetAnnee(); year++)
+            for (year = dateDebut->GetAnnee(); year <= dateFin->GetAnnee(); year++)
             {
-                date.SetAnnee(year);
-                for (month = dateDebut.GetMois(); month <= dateFin.GetMois(); month++)
+                date->SetAnnee(year);
+                for (month = dateDebut->GetMois(); month <= dateFin->GetMois(); month++)
                 {
-                    date.SetMois(month);
-                    for (day = dateDebut.GetJour(); day <= dateFin.GetJour(); day++)
+                    date->SetMois(month);
+                    for (day = dateDebut->GetJour(); day <= dateFin->GetJour(); day++)
                     {
-                        date.SetJour(day);
-                        sum = sum + calculateAirQualite(it->second.GetCoord(), date);
+                        date->SetJour(day);
+                        sum = sum + calculateAirQualite(it->second->GetCoord(), date);
                         ++counter;
                     }
                 }
@@ -367,6 +433,26 @@ Traitement::~Traitement()
 #ifdef MAP
     cout << "Appel au destructeur de <Traitement>" << endl;
 #endif
+    for (Sensor *p : sensors)
+    {
+        delete p;
+    }
+    for (Attribute *p : typeMesures)
+    {
+        delete p;
+    }
+    for (Measurement *p : measurements)
+    {
+        delete p;
+    }
+    for (Cleaner *p : cleaners)
+    {
+        delete p;
+    }
+    for (User *p : users)
+    {
+        delete p;
+    }
 } //----- Fin de ~Traitement
 
 //------------------------------------------------------------------ PRIVE

@@ -50,7 +50,12 @@ public:
     // Contrat :
     //
 
-    bool operator==(const Date &unDate) const;
+    bool operator==(const Date &unDate);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     //-------------------------------------------- Constructeurs - destructeur
 
     Date(const Date &unDate);

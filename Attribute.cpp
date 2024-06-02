@@ -28,7 +28,8 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-string Attribute::getAttributeID(void) const {
+string Attribute::getAttributeID(void) const
+{
     return attributeID;
 }
 

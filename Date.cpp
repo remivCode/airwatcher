@@ -28,39 +28,47 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
- // Getters
-    int Date::GetAnnee() const {
-        return annee;
-    }
+// Getters
+int Date::GetAnnee() const
+{
+    return annee;
+}
 
-    int Date::GetMois() const {
-        return mois;
-    }
+int Date::GetMois() const
+{
+    return mois;
+}
 
-    int Date::GetJour() const {
-        return jour;
-    }
+int Date::GetJour() const
+{
+    return jour;
+}
 
-    int Date::GetHeure() const {
-        return heure;
-    }
+int Date::GetHeure() const
+{
+    return heure;
+}
 
-    // Setters
-    void Date::SetAnnee(int a) {
-        annee = a;
-    }
+// Setters
+void Date::SetAnnee(int a)
+{
+    annee = a;
+}
 
-    void Date::SetMois(int m) {
-        mois = m;
-    }
+void Date::SetMois(int m)
+{
+    mois = m;
+}
 
-    void Date::SetJour(int j) {
-        jour = j;
-    }
+void Date::SetJour(int j)
+{
+    jour = j;
+}
 
-    void Date::SetHeure(int h) {
-        heure = h;
-    }
+void Date::SetHeure(int h)
+{
+    heure = h;
+}
 
 //------------------------------------------------- Surcharge d'opérateurs
 Date &Date::operator=(const Date &unDate)
@@ -69,7 +77,8 @@ Date &Date::operator=(const Date &unDate)
 {
 } //----- Fin de operator =
 
-bool Date::operator==(const Date &unDate) const {
+bool Date::operator==(const Date &unDate)
+{
     return (this->annee == unDate.annee) &&
            (this->mois == unDate.mois) &&
            (this->jour == unDate.jour);
@@ -120,3 +129,5 @@ Date::~Date()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+
+//----------------------------------------------------

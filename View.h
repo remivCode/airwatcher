@@ -83,7 +83,7 @@ public:
     //
     // Contrat :
     //
-    static Date entrerDate(const string &prompt);
+    static Date *entrerDate(const string &prompt);
     // Mode d'emploi :
     //
     // Contrat :
@@ -93,7 +93,7 @@ public:
     //
     // Contrat :
     //
-    static CoordGPS entrerCoord(const string &prompt);
+    static CoordGPS *entrerCoord(const string &prompt);
     // Mode d'emploi :
     //
     // Contrat :
@@ -130,7 +130,7 @@ public:
     //
 
     //------------------------------------------------------------------ PRIVE
-    private:
+private:
     //----------------------------------------------------- Méthodes privées
     static void setColor(int color);
     // Mode d'emploi :

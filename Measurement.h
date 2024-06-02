@@ -37,10 +37,10 @@ public:
     // Contrat :
     //
 
-    Sensor getSensor(void) const;
-    Attribute getAttribute(void) const;
+    Sensor *getSensor(void) const;
+    Attribute *getAttribute(void) const;
     float getValue(void) const;
-    Date getTimestamp(void) const;
+    Date *getTimestamp(void) const;
 
     //------------------------------------------------- Surcharge d'opérateurs
     Measurement &operator=(const Measurement &unMeasurement);
@@ -62,7 +62,7 @@ public:
     // Contrat :
     //
 
-    Measurement(Date date, float val, Attribute attribut, Sensor sensor);
+    Measurement(Date *date, float val, Attribute *attribut, Sensor *sensor);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :
@@ -80,10 +80,10 @@ protected:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
-    Date timestamp;
+    Date *timestamp;
     float value;
-    Attribute attribut;
-    Sensor sensor;
+    Attribute *attribut;
+    Sensor *sensor;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Measurement>

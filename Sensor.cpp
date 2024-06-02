@@ -33,7 +33,7 @@ string Sensor::GetSensorID(void) const
     return this->sensorID;
 }
 
-CoordGPS Sensor::GetCoord(void) const
+CoordGPS *Sensor::GetCoord(void) const
 {
     return this->coord;
 }
@@ -53,7 +53,7 @@ void Sensor::SetSensorID(string id)
     this->sensorID = id;
 }
 
-void Sensor::SetCoord(CoordGPS coord)
+void Sensor::SetCoord(CoordGPS *coord)
 {
     this->coord = coord;
 }
@@ -94,7 +94,7 @@ Sensor::Sensor()
 #endif
 } //----- Fin de Sensor
 
-Sensor::Sensor(string id, CoordGPS coordonnee, User *u)
+Sensor::Sensor(string id, CoordGPS *coordonnee, User *u)
 // Algorithme :
 //
 {

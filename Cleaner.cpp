@@ -34,17 +34,17 @@ string Cleaner::getCleanerID() const
     return cleanerID;
 }
 
-CoordGPS Cleaner::getCoord() const
+CoordGPS *Cleaner::getCoord() const
 {
     return coord;
 }
 
-Date Cleaner::getTimestampStart() const
+Date *Cleaner::getTimestampStart() const
 {
     return timestamp_start;
 }
 
-Date Cleaner::getTimestampStop() const
+Date *Cleaner::getTimestampStop() const
 {
     return timestamp_stop;
 }
@@ -60,17 +60,17 @@ void Cleaner::setCleanerID(const std::string &id)
     cleanerID = id;
 }
 
-void Cleaner::setCoord(const CoordGPS &gps)
+void Cleaner::setCoord(CoordGPS *gps)
 {
     coord = gps;
 }
 
-void Cleaner::setTimestampStart(const Date &start)
+void Cleaner::setTimestampStart(Date *start)
 {
     timestamp_start = start;
 }
 
-void Cleaner::setTimestampStop(const Date &stop)
+void Cleaner::setTimestampStop(Date *stop)
 {
     timestamp_stop = stop;
 }
@@ -106,7 +106,7 @@ Cleaner::Cleaner()
 #endif
 } //----- Fin de Cleaner
 
-Cleaner::Cleaner(string id, CoordGPS coordonnee, Date debut, Date fin, Provider *provid)
+Cleaner::Cleaner(string id, CoordGPS *coordonnee, Date *debut, Date *fin, Provider *provid)
 // Algorithme :
 //
 {
