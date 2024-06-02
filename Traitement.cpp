@@ -31,7 +31,7 @@ using namespace std;
 
 vector<Sensor *> Traitement::sensors;
 vector<Attribute *> Traitement::typeMesures;
-vector<Measurement *> Traitement::measurements;
+// vector<Measurement *> Traitement::measurements;
 vector<Cleaner *> Traitement::cleaners;
 vector<User *> Traitement::users;
 
@@ -206,7 +206,7 @@ void Traitement::chargerDonnees()
         getline(lineStream, a, '-');
         int annee = stoi(a);
         getline(lineStream, m, '-');
-        int mois = stoi(a);
+        int mois = stoi(m);
         getline(lineStream, j, ' ');
         int jour = stoi(j);
         getline(lineStream, h, ':');
@@ -224,8 +224,8 @@ void Traitement::chargerDonnees()
         float value = stof(v);
         Sensor *s = Traitement::findSensorById(sensorId);
         Attribute *att = Traitement::findAttributeById(attId);
-        Measurement *me = new Measurement(date, value, att, s);
-        measurements.push_back(me);
+        Measurement *me = new Measurement(date, value, att);
+        s->addMeasurement(me);
     }
 }
 
@@ -238,7 +238,7 @@ bool Traitement::analyzeFunctionalState(Sensor *sensor)
         cerr << "Erreur : le pointeur de capteur est nul." << endl;
         return false;
     }
-    map<int, Sensor *> nearest = Traitement::findSensorByCoord(sensor->GetCoord());
+    map<float, Sensor *> nearest = Traitement::findSensorByCoord(sensor->GetCoord());
     if (nearest.empty())
     {
         cerr << "Erreur : aucun capteur proche trouvé." << endl;
@@ -252,16 +252,19 @@ bool Traitement::analyzeFunctionalState(Sensor *sensor)
     int i = 0;
     for (const pair<int, Sensor *> el : nearest)
     {
-        if (i < 3)
+        if (i == 0)
         {
-            cout << "Traitement du capteur avec coord: " << el.second->GetCoord()->GetLat() << ", " << el.second->GetCoord()->GetLng() << endl;
-            cout << "measurments vide ? " << measurements.empty() << endl;
-            cout << "Traitement du capteur avec la mesure: " << measurements.back()->getAttribute()->getAttributeID() << endl;
-            AirMeasurement am = Traitement::calculateAirQualite(el.second->GetCoord(), measurements.back()->getTimestamp());
-            ozone += am.GetO3();
-            sulfur += am.GetSO2();
-            nitrogen += am.GetNO2();
-            particules += am.GetPM10();
+            i++;
+            continue;
+        }
+        if (i < 4)
+        {
+            vector<Measurement *> m = el.second->getMeasurements();
+            AirMeasurement *am = Traitement::calculateAirQualite(el.second->GetCoord(), m.back()->getTimestamp());
+            ozone = ozone + am->GetO3();
+            sulfur = sulfur + am->GetSO2();
+            nitrogen = nitrogen + am->GetNO2();
+            particules = particules + am->GetPM10();
         }
         i++;
     }
@@ -270,7 +273,27 @@ bool Traitement::analyzeFunctionalState(Sensor *sensor)
     float nitrogenMean = nitrogen / 3;
     float particulesMean = particules / 3;
 
-    AirMeasurement am = Traitement::calculateAirQualite(sensor->GetCoord(), measurements.back()->getTimestamp());
+    vector<Measurement *> m = sensor->getMeasurements();
+    AirMeasurement *am = Traitement::calculateAirQualite(sensor->GetCoord(), m.back()->getTimestamp());
+    bool res = true;
+    if (abs((ozoneMean - am->GetO3()) / am->GetO3()) > 0.5)
+    {
+        res = false;
+    }
+    if (abs((sulfurMean - am->GetSO2()) / am->GetSO2()) > 0.5)
+    {
+        res = false;
+    }
+    if (abs((nitrogenMean - am->GetNO2()) / am->GetNO2()) > 0.5)
+    {
+        res = false;
+    }
+    if (abs((particulesMean - am->GetPM10()) / am->GetPM10()) > 0.5)
+    {
+        res = false;
+    }
+
+    return res;
 } //----- Fin de Méthode
 
 Sensor *Traitement::findSensorById(string id)
@@ -303,25 +326,28 @@ Attribute *Traitement::findAttributeById(string id)
     return nullptr;
 } //----- Fin de Méthode
 
-map<int, Sensor *> Traitement::findSensorByCoord(CoordGPS *coordonnees)
+map<float, Sensor *> Traitement::findSensorByCoord(CoordGPS *coordonnees)
 {
-    map<int, Sensor *> *sensorDistMap = new map<int, Sensor *>;
+    map<float, Sensor *> *sensorDistMap = new map<float, Sensor *>;
     int i;
     float lat;
     float lng;
-    int d;
+    float d;
     for (i = 0; i < sensors.size(); i++)
     {
         lat = sensors[i]->GetCoord()->GetLat();
         lng = sensors[i]->GetCoord()->GetLng();
-        cout << "Log find by coord lat, long: " << lat << ", " << lng << endl;
-        d = (int)sqrt(pow(lat - coordonnees->GetLat(), 2) + pow(lng - coordonnees->GetLng(), 2));
+        d = (float)sqrt(pow(lat - coordonnees->GetLat(), 2) + pow(lng - coordonnees->GetLng(), 2));
         sensorDistMap->insert(make_pair(d, sensors[i]));
     }
+    /* for (map<float, Sensor *>::iterator it = sensorDistMap->begin(); it != sensorDistMap->end(); ++it)
+    {
+        cout << "Distance : " << it->first << "Capteur: " << it->second->GetSensorID() << endl;
+    } */
     return *sensorDistMap;
 }
 
-AirMeasurement Traitement::calculateAirQualite(CoordGPS *coords, Date *date)
+AirMeasurement *Traitement::calculateAirQualite(CoordGPS *coords, Date *date)
 // Algorithme :
 //
 {
@@ -332,35 +358,42 @@ AirMeasurement Traitement::calculateAirQualite(CoordGPS *coords, Date *date)
     float measureNO2 = -1;
     float measureSO2 = -1;
     float measurePM = -1;
-    for (i = measurements.size() - 1; (i >= 0) && (measureO3 * measureNO2 * measureSO2 * measurePM < 0); i--)
-    {
-        if ((measurements[i]->getSensor()->GetSensorID() == sensor->GetSensorID()) && (measurements[i]->getTimestamp() == date))
+    vector<Measurement *> m = sensor->getMeasurements();
+    for (i = m.size() - 1; i >= 0; i--)
+    { // On boucle trop longtemps, une fois qu'on a passé les 4 valeurs avec la bonne date on retrouvera
+        // jamais la date donc ça sert à rien de continuer à boucler. Je pense pas qu'ils aient mis d'erreur
+        // il y aura toujours les 4 valeurs en vrai
+        if (*m[i]->getTimestamp() == *date)
         {
-            if ((measurements[i]->getAttribute()->getAttributeID() == "O3") && (measureO3 < 0))
+            // if ((m[i]->getAttribute()->getAttributeID() == "O3") && (measureO3 < 0))
+            if (m[i]->getAttribute()->getAttributeID() == "O3")
             {
-                measureO3 = measurements[i]->getValue();
+                measureO3 = m[i]->getValue();
             }
-            if ((measurements[i]->getAttribute()->getAttributeID() == "SO2") && (measureSO2 < 0))
+            // else if ((m[i]->getAttribute()->getAttributeID() == "SO2") && (measureSO2 < 0))
+            else if (m[i]->getAttribute()->getAttributeID() == "SO2")
             {
-                measureSO2 = measurements[i]->getValue();
+                measureSO2 = m[i]->getValue();
             }
-            if ((measurements[i]->getAttribute()->getAttributeID() == "NO2") && (measureNO2 < 0))
+            // else if ((m[i]->getAttribute()->getAttributeID() == "NO2") && (measureNO2 < 0))
+            else if (m[i]->getAttribute()->getAttributeID() == "NO2")
             {
-                measureNO2 = measurements[i]->getValue();
+                measureNO2 = m[i]->getValue();
             }
-            if ((measurements[i]->getAttribute()->getAttributeID() == "PM") && (measurePM < 0))
+            // else if ((m[i]->getAttribute()->getAttributeID() == "PM") && (measurePM < 0))
+            else if (m[i]->getAttribute()->getAttributeID() == "PM10")
             {
-                measurePM = measurements[i]->getValue();
+                measurePM = m[i]->getValue();
             }
         }
     }
 
     AirMeasurement *mesurement = new AirMeasurement(measureO3, measureSO2, measureNO2, measurePM);
 
-    return *mesurement;
+    return mesurement;
 } //----- Fin de Méthode
 
-AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius, Date *dateDebut, Date *dateFin)
+AirMeasurement *Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius, Date *dateDebut, Date *dateFin)
 // Algorithme :
 //
 {
@@ -370,10 +403,10 @@ AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius,
     int year;
     Date *date = dateDebut;
     int counter = 0;
-    AirMeasurement mean = *(new AirMeasurement());
+    AirMeasurement *mean = new AirMeasurement();
     AirMeasurement sum;
 
-    map<int, Sensor *> DistSensor = findSensorByCoord(coords);
+    map<float, Sensor *> DistSensor = findSensorByCoord(coords);
 
     for (auto it = DistSensor.begin(); it != DistSensor.end(); it++)
     {
@@ -388,7 +421,7 @@ AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius,
                     for (day = dateDebut->GetJour(); day <= dateFin->GetJour(); day++)
                     {
                         date->SetJour(day);
-                        sum = sum + calculateAirQualite(it->second->GetCoord(), date);
+                        sum = sum + *calculateAirQualite(it->second->GetCoord(), date);
                         ++counter;
                     }
                 }
@@ -396,7 +429,7 @@ AirMeasurement Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius,
         }
     }
 
-    mean = sum / counter;
+    *mean = sum / counter;
     return mean;
 } //----- Fin de Méthode
 
@@ -433,25 +466,25 @@ Traitement::~Traitement()
 #ifdef MAP
     cout << "Appel au destructeur de <Traitement>" << endl;
 #endif
-    for (Sensor *p : sensors)
+    for (Sensor *s : sensors)
     {
-        delete p;
+        for (Measurement *m : s->getMeasurements())
+        {
+            delete m;
+        }
+        delete s;
     }
-    for (Attribute *p : typeMesures)
+    for (Attribute *a : typeMesures)
     {
-        delete p;
+        delete a;
     }
-    for (Measurement *p : measurements)
+    for (Cleaner *c : cleaners)
     {
-        delete p;
+        delete c;
     }
-    for (Cleaner *p : cleaners)
+    for (User *u : users)
     {
-        delete p;
-    }
-    for (User *p : users)
-    {
-        delete p;
+        delete u;
     }
 } //----- Fin de ~Traitement
 

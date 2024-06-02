@@ -12,7 +12,6 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "Date.h"
-#include "Sensor.h"
 #include "Attribute.h"
 
 //------------------------------------------------------------- Constantes
@@ -37,7 +36,6 @@ public:
     // Contrat :
     //
 
-    Sensor *getSensor(void) const;
     Attribute *getAttribute(void) const;
     float getValue(void) const;
     Date *getTimestamp(void) const;
@@ -62,7 +60,7 @@ public:
     // Contrat :
     //
 
-    Measurement(Date *date, float val, Attribute *attribut, Sensor *sensor);
+    Measurement(Date *date, float val, Attribute *attribut);
     // Mode d'emploi (constructeur avec paramètres):
     //
     // Contrat :
@@ -83,7 +81,6 @@ protected:
     Date *timestamp;
     float value;
     Attribute *attribut;
-    Sensor *sensor;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Measurement>

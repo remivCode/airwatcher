@@ -44,13 +44,13 @@ public:
     // Contrat :
     //
 
-    static map<int, Sensor *> findSensorByCoord(CoordGPS *coordonnees);
+    static map<float, Sensor *> findSensorByCoord(CoordGPS *coordonnees);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    static AirMeasurement calculateAirQualite(CoordGPS *coords, Date *date);
+    static AirMeasurement *calculateAirQualite(CoordGPS *coords, Date *date);
     // Mode d'emploi :
     //
     // Contrat :
@@ -62,7 +62,7 @@ public:
     // Contrat :
     //
 
-    static AirMeasurement calculateMeanAirQualite(CoordGPS *coords, int radius, Date *dateDebut, Date *dateFin);
+    static AirMeasurement *calculateMeanAirQualite(CoordGPS *coords, int radius, Date *dateDebut, Date *dateFin);
     // Mode d'emploi :
     //
     // Contrat :
@@ -120,7 +120,7 @@ protected:
     //----------------------------------------------------- Attributs protégés
     static vector<Sensor *> sensors;
     static vector<Attribute *> typeMesures;
-    static vector<Measurement *> measurements;
+    // static vector<Measurement *> measurements;
     static vector<Cleaner *> cleaners;
     static vector<User *> users; // à rajouter dans le diagramme de classes
 };

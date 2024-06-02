@@ -341,9 +341,9 @@ void Controller::MesureAirQuality()
         return;
     }
 
-    AirMeasurement airMeasurement = Traitement::calculateAirQualite(coordGPS, date);
+    AirMeasurement *airMeasurement = Traitement::calculateAirQualite(coordGPS, date);
 
-    View::afficherMesureAirQuality(airMeasurement);
+    View::afficherMesureAirQuality(*airMeasurement);
 }
 
 void Controller::MesureMeanAirQuality()
@@ -430,9 +430,9 @@ void Controller::MesureMeanAirQuality()
         return;
     }
 
-    AirMeasurement airMeasurement = Traitement::calculateMeanAirQualite(coordGPS, radius, dateBeginning, dateEnd);
+    AirMeasurement *airMeasurement = Traitement::calculateMeanAirQualite(coordGPS, radius, dateBeginning, dateEnd);
 
-    View::afficherMesureAirQuality(airMeasurement);
+    View::afficherMesureAirQuality(*airMeasurement);
 }
 
 void Controller::CheckSensorFunctional()
@@ -441,10 +441,7 @@ void Controller::CheckSensorFunctional()
 {
     string sensorID = View::entrerString("Enter the sensor ID");
 
-    cout << "Log entrée dans find by id" << endl;
     Sensor *sensor = Traitement::findSensorById(sensorID);
-    cout << "Log sortie de find by id" << endl;
-    cout << "Log sensor found controller: " << sensor->GetSensorID() << endl;
 
     bool functional = Traitement::analyzeFunctionalState(sensor);
     View::afficherBool(functional);

@@ -79,9 +79,12 @@ Date &Date::operator=(const Date &unDate)
 
 bool Date::operator==(const Date &unDate)
 {
+    // cout << "Operateur == date, left: " << this->annee << "/" << this->mois << "/" << this->jour << "/" << this->heure << " right: " << unDate.annee << "/" << unDate.mois << "/" << unDate.jour << "/" << unDate.heure << endl;
+    //;
     return (this->annee == unDate.annee) &&
            (this->mois == unDate.mois) &&
-           (this->jour == unDate.jour);
+           (this->jour == unDate.jour) &&
+           (this->heure == unDate.heure);
 }
 
 //-------------------------------------------- Constructeurs - destructeur

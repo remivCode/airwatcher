@@ -12,7 +12,9 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include "CoordGPS.h"
+#include "Measurement.h"
 #include "User.h"
+#include <vector>
 
 //------------------------------------------------------------- Constantes
 
@@ -40,7 +42,9 @@ public:
     CoordGPS *GetCoord(void) const;
     bool GetFiability(void) const;
     User *GetUser(void) const;
+    vector<Measurement *> getMeasurements(void) const;
 
+    void addMeasurement(Measurement *m);
     void SetSensorID(string id);
     void SetCoord(CoordGPS *coordonnes);
     void SetFiability(bool fiab);
@@ -88,6 +92,7 @@ protected:
     CoordGPS *coord;
     bool fiability = true;
     User *user;
+    vector<Measurement *> measurements;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Sensor>

@@ -38,6 +38,11 @@ CoordGPS *Sensor::GetCoord(void) const
     return this->coord;
 }
 
+void Sensor::addMeasurement(Measurement *m)
+{
+    measurements.push_back(m);
+}
+
 bool Sensor::GetFiability(void) const
 {
     return this->fiability;
@@ -46,6 +51,11 @@ bool Sensor::GetFiability(void) const
 User *Sensor::GetUser(void) const
 {
     return this->user;
+}
+
+vector<Measurement *> Sensor::getMeasurements(void) const
+{
+    return this->measurements;
 }
 
 void Sensor::SetSensorID(string id)
