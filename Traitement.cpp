@@ -130,7 +130,6 @@ void Traitement::chargerDonnees()
         Provider *p = new Provider(id);
         users.push_back(p);
 
-        Cleaner c;
         for (int i = 0; i < cleaners.size(); i++)
         {
             if (cleaners[i]->getCleanerID() == idCleaner)
@@ -265,6 +264,7 @@ bool Traitement::analyzeFunctionalState(Sensor *sensor)
             sulfur = sulfur + am->GetSO2();
             nitrogen = nitrogen + am->GetNO2();
             particules = particules + am->GetPM10();
+            delete am;
         }
         i++;
     }
@@ -292,7 +292,7 @@ bool Traitement::analyzeFunctionalState(Sensor *sensor)
     {
         res = false;
     }
-
+    delete am;
     return res;
 } //----- Fin de Méthode
 
@@ -328,7 +328,7 @@ Attribute *Traitement::findAttributeById(string id)
 
 map<float, Sensor *> Traitement::findSensorByCoord(CoordGPS *coordonnees)
 {
-    map<float, Sensor *> *sensorDistMap = new map<float, Sensor *>;
+    map<float, Sensor *> sensorDistMap;
     int i;
     float lat;
     float lng;
@@ -338,13 +338,9 @@ map<float, Sensor *> Traitement::findSensorByCoord(CoordGPS *coordonnees)
         lat = sensors[i]->GetCoord()->GetLat();
         lng = sensors[i]->GetCoord()->GetLng();
         d = (float)sqrt(pow(lat - coordonnees->GetLat(), 2) + pow(lng - coordonnees->GetLng(), 2));
-        sensorDistMap->insert(make_pair(d, sensors[i]));
+        sensorDistMap.insert(make_pair(d, sensors[i]));
     }
-    /* for (map<float, Sensor *>::iterator it = sensorDistMap->begin(); it != sensorDistMap->end(); ++it)
-    {
-        cout << "Distance : " << it->first << "Capteur: " << it->second->GetSensorID() << endl;
-    } */
-    return *sensorDistMap;
+    return sensorDistMap;
 }
 
 AirMeasurement *Traitement::calculateAirQualite(CoordGPS *coords, Date *date)
@@ -410,7 +406,7 @@ AirMeasurement *Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius
 
     for (auto it = DistSensor.begin(); it != DistSensor.end(); it++)
     {
-        if (it->first < radius)
+        if (it->first <= radius)
         {
             for (year = dateDebut->GetAnnee(); year <= dateFin->GetAnnee(); year++)
             {
@@ -432,6 +428,54 @@ AirMeasurement *Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius
     *mean = sum / counter;
     return mean;
 } //----- Fin de Méthode
+
+map<AirMeasurement, Sensor *> Traitement::rankingBySimilarity(Sensor *sensor, Date *dateDebut, Date *dateFin)
+// Algorithme :
+//
+{ // Traitement.cpp:439)
+    map<AirMeasurement, Sensor *> classified;
+    AirMeasurement *sensorMean = Traitement::calculateMeanAirQualite(sensor->GetCoord(), 0, dateDebut, dateFin);
+
+    AirMeasurement *empty = new AirMeasurement();
+    classified.insert(make_pair(*empty, sensor));
+
+    for (int i = 0; i < sensors.size(); i++)
+    {
+        if (sensors[i]->GetSensorID() != sensor->GetSensorID())
+        {
+            AirMeasurement *mean = Traitement::calculateMeanAirQualite(sensors[i]->GetCoord(), 0, dateDebut, dateFin);
+            classified.insert(make_pair(abs(*sensorMean - *mean), sensors[i]));
+        }
+    }
+    classified.erase(classified.begin()); // Pour supprimer le capteur lui-même
+    return classified;
+} //----- Fin de Méthode
+
+void Traitement::clean()
+// Algorithme :
+//
+{
+    for (Sensor *s : sensors)
+    {
+        for (Measurement *m : s->getMeasurements())
+        {
+            delete m;
+        }
+        delete s;
+    }
+    for (Attribute *a : typeMesures)
+    {
+        delete a;
+    }
+    for (Cleaner *c : cleaners)
+    {
+        delete c;
+    }
+    for (User *u : users)
+    {
+        delete u;
+    }
+} //----- Fin de ~Traitement
 
 //------------------------------------------------- Surcharge d'opérateurs
 Traitement &Traitement::operator=(const Traitement &unTraitement)

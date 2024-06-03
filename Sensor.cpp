@@ -93,6 +93,32 @@ Sensor::Sensor(const Sensor &unSensor)
 #ifdef MAP
     cout << "Appel au constructeur de copie de <Sensor>" << endl;
 #endif
+    sensorID = unSensor.sensorID;
+    if (unSensor.coord != nullptr)
+    {
+        coord = new CoordGPS(*unSensor.coord);
+    }
+    else
+    {
+        coord = nullptr;
+    }
+    fiability = unSensor.fiability;
+    if (unSensor.user != nullptr)
+    {
+        user = new User(*unSensor.user);
+    }
+    else
+    {
+        user = nullptr;
+    }
+
+    for (const auto &measurement : unSensor.measurements)
+    {
+        if (measurement != nullptr)
+        {
+            measurements.push_back(measurement);
+        }
+    }
 } //----- Fin de Sensor (constructeur de copie)
 
 Sensor::Sensor()
@@ -123,6 +149,7 @@ Sensor::~Sensor()
 #ifdef MAP
     cout << "Appel au destructeur de <Sensor>" << endl;
 #endif
+    delete coord;
 } //----- Fin de ~Sensor
 
 //------------------------------------------------------------------ PRIVE

@@ -11,7 +11,7 @@
 #define AIRMEASUREMENT_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <cmath>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -33,6 +33,8 @@ public:
     //
     // Contrat :
     //
+
+    friend AirMeasurement abs(const AirMeasurement &measurement);
 
     int GetAtmoIndex(void) const;
     float GetO3(void) const;
@@ -59,6 +61,18 @@ public:
     //
 
     AirMeasurement(float o3, float so2, float no2, float pm10);
+    // Mode d'emploi (constructeur avec paramètres) :
+    //
+    // Contrat :
+    //
+
+    bool operator<(const AirMeasurement &other) const;
+    // Mode d'emploi (constructeur avec paramètres) :
+    //
+    // Contrat :
+    //
+
+    AirMeasurement operator-(const AirMeasurement &unAirMeasurement) const;
     // Mode d'emploi (constructeur avec paramètres) :
     //
     // Contrat :

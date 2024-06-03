@@ -88,6 +88,7 @@ Measurement::~Measurement()
 #ifdef MAP
     cout << "Appel au destructeur de <Measurement>" << endl;
 #endif
+    delete timestamp;
 } //----- Fin de ~Measurement
 
 //------------------------------------------------------------------ PRIVE

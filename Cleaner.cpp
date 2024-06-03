@@ -127,6 +127,9 @@ Cleaner::~Cleaner()
 #ifdef MAP
     cout << "Appel au destructeur de <Cleaner>" << endl;
 #endif
+    delete timestamp_start;
+    delete timestamp_stop;
+    delete coord;
 } //----- Fin de ~Cleaner
 
 //------------------------------------------------------------------ PRIVE

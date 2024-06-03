@@ -40,7 +40,7 @@ User *Controller::user;
 //{
 //} //----- Fin de Méthode
 
-bool Controller::recupererSaisieMenu(int saisie)
+void Controller::recupererSaisieMenu(int saisie)
 // Algorithme :
 //
 {
@@ -86,7 +86,8 @@ bool Controller::recupererSaisieMenu(int saisie)
 
         case 0:
         {
-            user = NULL;
+            delete user;
+            user = nullptr;
             break;
         }
 
@@ -128,7 +129,8 @@ bool Controller::recupererSaisieMenu(int saisie)
 
         case 0:
         {
-            user = NULL;
+            delete user;
+            user = nullptr;
             break;
         }
 
@@ -152,7 +154,8 @@ bool Controller::recupererSaisieMenu(int saisie)
 
         case 0:
         {
-            user = NULL;
+            delete user;
+            user = nullptr;
             break;
         }
 
@@ -164,10 +167,11 @@ bool Controller::recupererSaisieMenu(int saisie)
         }
     }
     chargerMenu();
+    return;
 
 } //----- Fin de Méthode
 
-bool Controller::connexion(string login, string password)
+void Controller::connexion(string login, string password)
 // Algorithme :
 //
 {
@@ -202,6 +206,7 @@ bool Controller::connexion(string login, string password)
         View::afficherErreur("Veuillez entrer un nombre valide.");
         View::MenuConnexion();
     }
+    return;
 
     // If there are logins and passwords
     /*
@@ -239,8 +244,16 @@ void Controller::chargerMenu()
             View::MenuPrincipalProvider();
         }
     }
+    return;
 
 } //----- Fin de Méthode
+
+void Controller::clean()
+// Algorithme :
+//
+{
+    delete user;
+} //----- Fin de ~Controller
 
 //------------------------------------------------- Surcharge d'opérateurs
 Controller &Controller::operator=(const Controller &unController)
@@ -266,7 +279,7 @@ Controller::Controller()
 #ifdef MAP
     cout << "Appel au constructeur de <Controller>" << endl;
 #endif
-    user = NULL;
+    user = nullptr;
 } //----- Fin de Controller
 
 Controller::~Controller()
@@ -276,6 +289,7 @@ Controller::~Controller()
 #ifdef MAP
     cout << "Appel au destructeur de <Controller>" << endl;
 #endif
+    delete user;
 } //----- Fin de ~Controller
 
 //------------------------------------------------------------------ PRIVE
@@ -451,16 +465,27 @@ void Controller::RankBySimilarity()
 // Algorithme :
 //
 {
-    /*
-        string sensorID = View::entrerNombre("Enter the sensor ID : \r\n") ;
-        Date dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n") ;
-        Date dateEnd = View::entrerDate("Enter the date 2 (end) : \r\n") ;
+    string sensorID = View::entrerString("Enter the sensor ID : \r\n");
+    Date *dateBeginning = View::entrerDate("Enter the date 1 (beginning) : \r\n");
+    Date *dateEnd = View::entrerDate("Enter the date 2 (end) : \r\n");
 
-        Sensor sensor = Traitement::findSensorById(sensorID) ;
-        vector<Sensor> vectSensor = Traitement::rankingBySimilarity(sensor, dateBeginning, dateEnd) ;
+    Sensor *sensor = Traitement::findSensorById(sensorID);
+    map<AirMeasurement, Sensor *> mapSensor = Traitement::rankingBySimilarity(sensor, dateBeginning, dateEnd);
+    vector<Sensor> vectSensor;
 
-        View::afficherListe(vectSensor) ;
-        */
+    // Utilisation de std::for_each pour copier les valeurs de la map dans le vecteur
+    for_each(mapSensor.begin(), mapSensor.end(),
+             [&vectSensor](const pair<AirMeasurement, Sensor *> &pair)
+             {
+                 vectSensor.push_back(*pair.second);
+             });
+
+    for (const Sensor &s : vectSensor)
+    {
+        cout << "Log sensor list : " << s.GetSensorID() << endl;
+    }
+
+    View::afficherListe(vectSensor);
 }
 
 void Controller::ConsultPoints()

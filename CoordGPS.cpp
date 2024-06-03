@@ -63,6 +63,8 @@ CoordGPS::CoordGPS(const CoordGPS &unCoordGPS)
 #ifdef MAP
     cout << "Appel au constructeur de copie de <CoordGPS>" << endl;
 #endif
+    latitude = unCoordGPS.latitude;
+    longitude = unCoordGPS.longitude;
 } //----- Fin de CoordGPS (constructeur de copie)
 
 CoordGPS::CoordGPS(float lat, float lng)

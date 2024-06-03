@@ -96,6 +96,8 @@ User::User(string id)
 //
 {
     this->userID = id;
+    login = "";
+    password = "";
 }
 
 User::User(string id, string login, string password)

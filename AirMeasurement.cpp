@@ -76,10 +76,15 @@ AirMeasurement AirMeasurement::operator+(const AirMeasurement &unAirMeasurement)
     return AirMeasurement(sumO3, sumSO2, sumNO2, sumPM10);
 }
 
+bool AirMeasurement::operator<(const AirMeasurement &other) const
+{
+    float sum = atmoIndex + o3 + no2 + so2 + pm10;
+    float otherSum = other.atmoIndex + other.o3 + other.so2 + other.no2 + other.pm10;
+    return sum < otherSum;
+}
+
 AirMeasurement AirMeasurement::operator/(int diviseur) const
 {
-    // Vérification pour éviter une division par zéro
-
     float divO3;
     float divSO2;
     float divNO2;
@@ -125,6 +130,17 @@ AirMeasurement AirMeasurement::operator/(int diviseur) const
     return AirMeasurement(divO3, divSO2, divNO2, divPM10);
 }
 
+AirMeasurement AirMeasurement::operator-(const AirMeasurement &unAirMeasurement) const
+{
+    float sO3 = this->o3 - unAirMeasurement.o3;
+    float sSO2 = this->so2 - unAirMeasurement.so2;
+    float sNO2 = this->no2 - unAirMeasurement.no2;
+    float sPM10 = this->pm10 - unAirMeasurement.pm10;
+    AirMeasurement *res = new AirMeasurement(sO3, sSO2, sNO2, sPM10);
+
+    return *res;
+}
+
 //-------------------------------------------- Constructeurs - destructeur
 AirMeasurement::AirMeasurement(const AirMeasurement &unAirMeasurement)
 // Algorithme :
@@ -133,6 +149,11 @@ AirMeasurement::AirMeasurement(const AirMeasurement &unAirMeasurement)
 #ifdef MAP
     cout << "Appel au constructeur de copie de <AirMeasurement>" << endl;
 #endif
+    this->atmoIndex = unAirMeasurement.atmoIndex;
+    this->o3 = unAirMeasurement.o3;
+    this->so2 = unAirMeasurement.so2;
+    this->no2 = unAirMeasurement.no2;
+    this->pm10 = unAirMeasurement.pm10;
 } //----- Fin de AirMeasurement (constructeur de copie)
 
 AirMeasurement::AirMeasurement(float o3, float so2, float no2, float pm10)
@@ -147,10 +168,10 @@ AirMeasurement::AirMeasurement(float o3, float so2, float no2, float pm10)
     this->no2 = no2;
     this->pm10 = pm10;
 
-    int indexo3;
-    int indexso2;
-    int indexno2;
-    int indexpm;
+    int indexo3 = 0;
+    int indexso2 = 0;
+    int indexno2 = 0;
+    int indexpm = 0;
     if ((o3 <= 29) && (o3 >= 0))
     {
         indexo3 = 1;
@@ -344,3 +365,14 @@ AirMeasurement::~AirMeasurement()
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
+
+//------------------------------------------------------------------friend
+AirMeasurement abs(const AirMeasurement &measurement)
+{
+    AirMeasurement *res = new AirMeasurement(
+        fabs(measurement.o3),
+        fabs(measurement.so2),
+        fabs(measurement.no2),
+        fabs(measurement.pm10));
+    return *res;
+}

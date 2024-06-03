@@ -12,6 +12,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <iostream>
+#include <algorithm>
 using namespace std;
 #include "User.h"
 
@@ -37,19 +38,25 @@ public:
     // Contrat :
     //
 
-    static bool recupererSaisieMenu(int saisie);
+    static void recupererSaisieMenu(int saisie);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    static bool connexion(string login, string password);
+    static void connexion(string login, string password);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
     static void chargerMenu();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void clean();
     // Mode d'emploi :
     //
     // Contrat :

@@ -68,6 +68,12 @@ public:
     // Contrat :
     //
 
+    static map<AirMeasurement, Sensor *> rankingBySimilarity(Sensor *sensor, Date *dateDebut, Date *dateFin);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     static Sensor *findSensorById(string id);
     // Mode d'emploi :
     //
@@ -81,6 +87,12 @@ public:
     //
 
     static bool analyzeFunctionalState(Sensor *sensor);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    static void clean();
     // Mode d'emploi :
     //
     // Contrat :
@@ -120,7 +132,6 @@ protected:
     //----------------------------------------------------- Attributs protégés
     static vector<Sensor *> sensors;
     static vector<Attribute *> typeMesures;
-    // static vector<Measurement *> measurements;
     static vector<Cleaner *> cleaners;
     static vector<User *> users; // à rajouter dans le diagramme de classes
 };

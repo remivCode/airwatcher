@@ -143,6 +143,7 @@ private:
     //----------------------------------------------------- Méthodes protégées
 
     //----------------------------------------------------- Attributs protégés
+    static bool end;
 };
 
 //-------------------------------- Autres définitions dépendantes de <View>

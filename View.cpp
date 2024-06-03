@@ -25,7 +25,7 @@ using namespace std;
 #include "View.h"
 
 //------------------------------------------------------------- Constantes
-
+bool View::end = false;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
@@ -94,13 +94,14 @@ void View::afficherListe(const std::vector<Sensor> &liste)
     setColor(32); // Green color
     cout << "----- List of Sensors -----" << endl;
     setColor(36); // Cyan color
+    int i = 1;
     for (const Sensor &sensor : liste)
     {
         cout << "Sensor ID: " << sensor.GetSensorID()
              << "\tCoordinates: (" << sensor.GetCoord()->GetLat()
              << ", " << sensor.GetCoord()->GetLng()
-             << ")\tFiability: " << (sensor.GetFiability() ? "True" : "False")
-             << endl;
+             << ")\tRank: " << i << endl;
+        i++;
     }
     setColor(0); // Reset to default color
 }
@@ -183,15 +184,35 @@ string View::entrerString(const string &prompt)
 void View::MenuConnexion()
 {
     string username, password;
-    cout << "----- AUTHENTIFICATION PHASE -----\n\n"
-         << "If you already have an account, please enter your username and your password:\n"
-         << "Username: ";
-    cin >> username;
-    cout << "Password: ";
-    cin >> password;
-    cout << endl;
+    int choice;
+    while (!end)
+    {
+        cout << "----- AUTHENTIFICATION PHASE -----\n\n"
+             << "0. End" << endl
+             << "1. Authentification" << endl;
+        cin >> choice;
+        switch (choice)
+        {
+        case 0:
+            end = true;
+            return;
+        case 1:
+            cout << "If you already have an account, please enter your username and your password:\n"
+                 << "Username: ";
+            cin >> username;
+            cout << "Password: ";
+            cin >> password;
+            cout << endl;
 
-    Controller::connexion(username, password);
+            Controller::connexion(username, password);
+            break;
+        default:
+            setColor(31);
+            cout << "Veuillez entrer un nombre valide" << endl;
+            setColor(0);
+            break;
+        }
+    }
 }
 void View::MenuPrincipalGovernmentAgency()
 {
@@ -208,6 +229,7 @@ void View::MenuPrincipalGovernmentAgency()
     cin >> choice;
     cout << endl;
     Controller::recupererSaisieMenu(choice);
+    return;
 }
 void View::MenuPrincipalPrive()
 {
@@ -222,6 +244,7 @@ void View::MenuPrincipalPrive()
     cin >> choice;
     cout << endl;
     Controller::recupererSaisieMenu(choice);
+    return;
 }
 void View::MenuPrincipalProvider()
 {
@@ -233,6 +256,7 @@ void View::MenuPrincipalProvider()
     cin >> choice;
     cout << endl;
     Controller::recupererSaisieMenu(choice);
+    return;
 }
 
 View::~View()
