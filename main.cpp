@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     {
         int argument = atoi(argv[1]); // Convertir l'argument en entier
 
-        cout << "Execution with argument: " << argument << endl;
+        cout << "TEST EXECUTION" << endl;
 
         switch (argument)
         {

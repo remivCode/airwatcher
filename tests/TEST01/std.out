@@ -1,3 +1,105 @@
-1;
-2;
+TEST EXECUTION
+----- AUTHENTIFICATION PHASE -----
+
+0. End
+1. Authentification
+1
+If you already have an account, please enter your username and your password:
+Username: user
+Password: pass
+
+Enter the user (1: Government, 2: Private, 3: Provider)
+Enter a number: 1
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 4
+
+Enter the GPS coordinates of the center of the area
+Enter latitude: 5
+Enter longitude: 5
+Enter the radius (in km)
+Enter a number: 25
+Enter the date 1 (beginning)
+Enter year: 2024
+Enter month: 5
+Enter day: 4
+Enter hour: 11
+Enter the date 2 (end)
+Enter year: 2024
+Enter month: 5
+Enter day: 5
+Enter hour: 13
+----- Air Quality Measurement -----
+ATMO Index: 2
+O3: 19.0625
+SO2: 17.8125
+NO2: 14.3125
+PM10: 7.3125
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 4
+
+Enter the GPS coordinates of the center of the area
+Enter latitude: 5
+Enter longitude: 5
+Enter the radius (in km)
+Enter a number: 25
+Enter the date 1 (beginning)
+Enter year: 2024
+Enter month: 5
+Enter day: 5
+Enter hour: 13
+Enter the date 2 (end)
+Enter year: 2024
+Enter month: 5
+Enter day: 5
+Enter hour: 13
+----- Air Quality Measurement -----
+ATMO Index: 2
+O3: 23.75
+SO2: 22.5
+NO2: 17.875
+PM10: 11.5
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 4
+
+Enter the GPS coordinates of the center of the area
+Enter latitude: 5
+Enter longitude: 5
+Enter the radius (in km)
+Enter a number: -5
 Error: The radius must be strictly positive and must not exceed 200
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 0
+
+----- AUTHENTIFICATION PHASE -----
+
+0. End
+1. Authentification
+0

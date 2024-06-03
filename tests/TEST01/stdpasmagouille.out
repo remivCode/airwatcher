@@ -18,46 +18,29 @@ Enter a number: 1
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 5
+Enter your choice: 4
 
-Enter the GPS coordinates
-Enter latitude: 10
-Enter longitude: 1.0
-Enter the date
+Enter the GPS coordinates of the center of the area
+Enter latitude: 5
+Enter longitude: 5
+Enter the radius (in km)
+Enter a number: 25
+Enter the date 1 (beginning)
 Enter year: 2024
 Enter month: 5
 Enter day: 4
-Enter hour: 12
------ Air Quality Measurement -----
-ATMO Index: 1
-O3: 13
-SO2: 18
-NO2: 12
-PM10: 1
------ Government Agency Menu -----
-1: Analyze Sensors data
-2: Private Sensors data
-3: Sensors similarity
-4: Sensors statistics
-5: Air quality
-6: Air Cleaners impact
-0: End
-Enter your choice: 5
-
-Enter the GPS coordinates
-Enter latitude: 10
-Enter longitude: 0.9
-Enter the date
+Enter hour: 11
+Enter the date 2 (end)
 Enter year: 2024
 Enter month: 5
 Enter day: 5
-Enter hour: 12
+Enter hour: 13
 ----- Air Quality Measurement -----
-ATMO Index: 2
-O3: 32
-SO2: 30
-NO2: 24.5
-PM10: 13.5
+ATMO Index: 1
+O3: 21.583
+SO2: 21.580
+NO2: 16.416
+PM10: 5.916
 ----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
@@ -66,22 +49,45 @@ PM10: 13.5
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 5
+Enter your choice: 4
 
-Enter the GPS coordinates
-Enter latitude: 10.1
-Enter longitude: 0.8
-Enter the date
+Enter the GPS coordinates of the center of the area
+Enter latitude: 5
+Enter longitude: 5
+Enter the radius (in km)
+Enter a number: 25
+Enter the date 1 (beginning)
 Enter year: 2024
 Enter month: 5
-Enter day: 4
-Enter hour: 12
+Enter day: 5
+Enter hour: 13
+Enter the date 2 (end)
+Enter year: 2024
+Enter month: 5
+Enter day: 5
+Enter hour: 13
 ----- Air Quality Measurement -----
-ATMO Index: 1
-O3: 10
-SO2: 15.5
-NO2: 8.5
-PM10: 1.5
+ATMO Index: 2
+O3: 30.666
+SO2: 26.500
+NO2: 21.000
+PM10: 10.500
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 4
+
+Enter the GPS coordinates of the center of the area
+Enter latitude: 5
+Enter longitude: 5
+Enter the radius (in km)
+Enter a number: -5
+Error: The radius must be strictly positive and must not exceed 200
 ----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data

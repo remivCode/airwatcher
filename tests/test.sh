@@ -1,7 +1,6 @@
 echo "-----------------------------------------------------------"
 
 execDir=$(pwd)
-echo "Execution Directory: $execDir"
 
 if [ "$1" = "" ]
 then
@@ -19,12 +18,10 @@ else
 fi
 
 cd $Directory || { echo "Failed to change directory to $Directory. Exiting."; exit 2; }
-echo "Changed to directory: $(pwd)"
 
 if [ -r "description" ]
 then 
   echo "-----------------------------------------------------------"
-  echo "Description :"
   fold description -w 60 -s
   echo
   echo "-----------------------------------------------------------"
@@ -45,7 +42,6 @@ fi
 # stdin has been specified
 if [ -r "std.in" ]
 then
-  echo "std.in found"
   sRun="$sRun < ../tests/$1/std.in"
 else
   echo "std.in not found in $(pwd)"
@@ -53,15 +49,13 @@ fi
 
 
 # stdout has been specified
-if [ -r "std.out" ]
-then 
-  echo "std.out found"
+if [ -r "stdpasmagouille.out" ]
+then
   sRun="$sRun > ../tests/$1/temp.txt"
 else
   echo "std.out not found in $(pwd)"
 fi
 
-echo "Command to execute: $sRun"
 # execute the command line
 eval "$sRun"
 returnCode=$?

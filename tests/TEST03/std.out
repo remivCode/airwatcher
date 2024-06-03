@@ -1,3 +1,66 @@
-The sensor is functional;
-The sensor is not functional;
-The sensor is functional;
+TEST EXECUTION
+----- AUTHENTIFICATION PHASE -----
+
+0. End
+1. Authentification
+1
+If you already have an account, please enter your username and your password:
+Username: user
+Password: pass
+
+Enter the user (1: Government, 2: Private, 3: Provider)
+Enter a number: 1
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 1
+
+Enter the sensor ID
+Enter une chaine de caractère: Sensor1
+The sensor is perfectly working.
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 1
+
+Enter the sensor ID
+Enter une chaine de caractère: Sensor2
+The sensor is perfectly working.
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 1
+
+Enter the sensor ID
+Enter une chaine de caractère: Sensor3
+The sensor is not functional
+----- Government Agency Menu -----
+1: Analyze Sensors data
+2: Private Sensors data
+3: Sensors similarity
+4: Sensors statistics
+5: Air quality
+6: Air Cleaners impact
+0: End
+Enter your choice: 0
+
+----- AUTHENTIFICATION PHASE -----
+
+0. End
+1. Authentification
+0
