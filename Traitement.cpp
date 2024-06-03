@@ -412,12 +412,12 @@ AirMeasurement *Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius
             for (year = dateDebut->GetAnnee(); year <= dateFin->GetAnnee(); year++)
             {
                 date->SetAnnee(year);
-                for (month = dateDebut->GetMois(); month <= dateFin->GetMois(); month++)
+                for (month = 0; month <= abs(dateDebut->GetMois() - dateFin->GetMois()); month++)
                 {
-                    date->SetMois(month);
-                    for (day = dateDebut->GetJour(); day <= dateFin->GetJour(); day++)
+                    date->SetMois(dateDebut->GetMois() + month);
+                    for (day = 0; day <= abs(dateDebut->GetJour() - dateFin->GetJour()); day++)
                     {
-                        date->SetJour(day);
+                        date->SetJour(dateDebut->GetJour() + day);
                         AirMeasurement *am = calculateAirQualite(it->second->GetCoord(), date);
                         if (!(am->GetO3() == -1 || am->GetNO2() == -1 || am->GetSO2() == -1 || am->GetPM10() == -1))
                         {
