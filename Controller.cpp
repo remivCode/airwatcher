@@ -468,9 +468,15 @@ void Controller::CheckSensorFunctional()
     string sensorID = View::entrerString("Enter the sensor ID");
 
     Sensor *sensor = Traitement::findSensorById(sensorID);
-
-    bool functional = Traitement::analyzeFunctionalState(sensor);
-    View::afficherBool(functional);
+    if (!sensor)
+    {
+        View::afficherErreur("The specified sensor doesn't exist.");
+    }
+    else
+    {
+        bool functional = Traitement::analyzeFunctionalState(sensor);
+        View::afficherBool(functional);
+    }
 }
 
 void Controller::RankBySimilarity()

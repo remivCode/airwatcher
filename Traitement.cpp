@@ -232,15 +232,9 @@ bool Traitement::analyzeFunctionalState(Sensor *sensor)
 // Algorithme :
 //
 {
-    if (!sensor)
-    {
-        cerr << "Erreur : le pointeur de capteur est nul." << endl;
-        return false;
-    }
     map<float, Sensor *> nearest = Traitement::findSensorByCoord(sensor->GetCoord());
     if (nearest.empty())
     {
-        cerr << "Erreur : aucun capteur proche trouvé." << endl;
         return false;
     }
     float ozone = 0;
