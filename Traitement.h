@@ -44,6 +44,12 @@ public:
     // Contrat :
     //
 
+    static void chargerDonneesTest();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     static map<float, Sensor *> findSensorByCoord(CoordGPS *coordonnees);
     // Mode d'emploi :
     //

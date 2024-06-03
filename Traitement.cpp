@@ -290,6 +290,198 @@ bool Traitement::analyzeFunctionalState(Sensor *sensor)
     return res;
 } //----- Fin de Méthode
 
+void Traitement::chargerDonneesTest()
+// Algorithme :
+//
+{
+    ////////////////////////////////////////////////// Chargement attribut
+    ifstream attributes("../data/attributes.csv");
+    if (!attributes.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de attributes.csv" << endl;
+        return;
+    }
+    string line;
+    getline(attributes, line);
+    while (getline(attributes, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string unit;
+        getline(lineStream, unit, ';');
+        string desc;
+        getline(lineStream, desc, ';');
+        Attribute *a = new Attribute(id, unit, desc);
+        typeMesures.push_back(a);
+    }
+
+    ////////////////////////////////////////////////// Chargement cleaners
+    ifstream clean("../data/cleaners.csv");
+    if (!clean.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de cleaners.csv" << endl;
+        return;
+    }
+    getline(clean, line);
+    while (getline(clean, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string la;
+        getline(lineStream, la, ';');
+        float lat = stof(la);
+        string ln;
+        getline(lineStream, ln, ';');
+        float lng = stof(ln);
+        CoordGPS *gps = new CoordGPS(lat, lng);
+
+        string a;
+        getline(lineStream, a, '-');
+        int anneeDebut = stoi(a);
+        string m;
+        getline(lineStream, m, '-');
+        int moisDebut = stoi(a);
+        string j;
+        getline(lineStream, j, ' ');
+        int jourDebut = stoi(j);
+        string h;
+        getline(lineStream, h, ':');
+        int heureDebut = stoi(h);
+        Date *debut = new Date(anneeDebut, moisDebut, jourDebut, heureDebut);
+        string temp;
+        getline(lineStream, temp, ';');
+
+        getline(lineStream, a, '-');
+        int anneeFin = stoi(a);
+        getline(lineStream, m, '-');
+        int moisFin = stoi(a);
+        getline(lineStream, j, ' ');
+        int jourFin = stoi(j);
+        getline(lineStream, h, ':');
+        int heureFin = stoi(h);
+        Date *fin = new Date(anneeFin, moisFin, jourFin, heureFin);
+        Cleaner *c = new Cleaner(id, gps, debut, fin, nullptr);
+        cleaners.push_back(c);
+    }
+
+    ////////////////////////////////////////////////// Chargement providers
+    ifstream provid("../data/providers.csv");
+    if (!provid.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de providers.csv" << endl;
+        return;
+    }
+    getline(provid, line);
+    while (getline(provid, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string idCleaner;
+        getline(lineStream, idCleaner, ';');
+        Provider *p = new Provider(id);
+        users.push_back(p);
+
+        for (int i = 0; i < cleaners.size(); i++)
+        {
+            if (cleaners[i]->getCleanerID() == idCleaner)
+            {
+                cleaners[i]->setProvider(p);
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////// Chargement sensors
+    ifstream sens("../tests/sensors.csv");
+    if (!sens.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de sensors.csv" << endl;
+        return;
+    }
+    while (getline(sens, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string la;
+        getline(lineStream, la, ';');
+        float lat = stof(la);
+        string ln;
+        getline(lineStream, ln, ';');
+        float lng = stof(ln);
+        CoordGPS *gps = new CoordGPS(lat, lng);
+        Sensor *s = new Sensor(id, gps, nullptr);
+        sensors.push_back(s);
+    } //----- Fin de Méthode
+
+    ////////////////////////////////////////////////// Chargement users
+    ifstream user("../data/users.csv");
+    if (!user.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de users.csv" << endl;
+        return;
+    }
+    getline(user, line);
+    while (getline(user, line))
+    {
+        stringstream lineStream(line);
+        string id;
+        getline(lineStream, id, ';');
+        string sensorId;
+        getline(lineStream, sensorId, ';');
+        PrivateIndividual *p = new PrivateIndividual(id);
+        users.push_back(p);
+        for (int i = 0; i < sensors.size(); i++)
+        {
+            if (sensors[i]->GetSensorID() == sensorId)
+            {
+                sensors[i]->SetUser(p);
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////// Chargement measurements
+    ifstream meas("../tests/measurements.csv");
+    if (!meas.is_open())
+    {
+        cerr << "Erreur lors de l'ouverture de measurements.csv" << endl;
+        return;
+    }
+    while (getline(meas, line))
+    {
+        stringstream lineStream(line);
+        string a;
+        string m;
+        string j;
+        string h;
+        getline(lineStream, a, '-');
+        int annee = stoi(a);
+        getline(lineStream, m, '-');
+        int mois = stoi(m);
+        getline(lineStream, j, ' ');
+        int jour = stoi(j);
+        getline(lineStream, h, ':');
+        int heure = stoi(h);
+        Date *date = new Date(annee, mois, jour, heure);
+        string temp;
+        getline(lineStream, temp, ';');
+
+        string sensorId;
+        getline(lineStream, sensorId, ';');
+        string attId;
+        getline(lineStream, attId, ';');
+        string v;
+        getline(lineStream, v, ';');
+        float value = stof(v);
+        Sensor *s = Traitement::findSensorById(sensorId);
+        Attribute *att = Traitement::findAttributeById(attId);
+        Measurement *me = new Measurement(date, value, att);
+        s->addMeasurement(me);
+    }
+}
+
 Sensor *Traitement::findSensorById(string id)
 // Algorithme :
 //

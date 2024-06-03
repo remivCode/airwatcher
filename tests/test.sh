@@ -46,7 +46,7 @@ fi
 if [ -r "std.in" ]
 then
   echo "std.in found"
-  sRun="$sRun < std.in"
+  sRun="$sRun < ../tests/$1/std.in"
 else
   echo "std.in not found in $(pwd)"
 fi
@@ -56,7 +56,7 @@ fi
 if [ -r "std.out" ]
 then 
   echo "std.out found"
-  sRun="$sRun > temp.txt"
+  sRun="$sRun > ../tests/$1/temp.txt"
 else
   echo "std.out not found in $(pwd)"
 fi
