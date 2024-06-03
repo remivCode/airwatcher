@@ -445,8 +445,14 @@ void Controller::MesureMeanAirQuality()
     }
 
     AirMeasurement *airMeasurement = Traitement::calculateMeanAirQualite(coordGPS, radius, dateBeginning, dateEnd);
-
-    View::afficherMesureAirQuality(*airMeasurement);
+    if (airMeasurement->GetO3() == 0 && airMeasurement->GetNO2() == 0 && airMeasurement->GetPM10() == 0 && airMeasurement->GetSO2() == 0)
+    {
+        View::afficherErreur("No sensor in the specified area or no data for the specified dates.");
+    }
+    else
+    {
+        View::afficherMesureAirQuality(*airMeasurement);
+    }
 }
 
 void Controller::CheckSensorFunctional()

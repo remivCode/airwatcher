@@ -397,7 +397,8 @@ AirMeasurement *Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius
     int day;
     int month;
     int year;
-    Date *date = dateDebut;
+    Date *date = new Date();
+    date->SetHeure(12);
     int counter = 0;
     AirMeasurement *mean = new AirMeasurement();
     AirMeasurement sum;
@@ -417,8 +418,12 @@ AirMeasurement *Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius
                     for (day = dateDebut->GetJour(); day <= dateFin->GetJour(); day++)
                     {
                         date->SetJour(day);
-                        sum = sum + *calculateAirQualite(it->second->GetCoord(), date);
-                        ++counter;
+                        AirMeasurement *am = calculateAirQualite(it->second->GetCoord(), date);
+                        if (!(am->GetO3() == -1 || am->GetNO2() == -1 || am->GetSO2() == -1 || am->GetPM10() == -1))
+                        {
+                            sum = sum + *am;
+                            ++counter;
+                        }
                     }
                 }
             }
@@ -432,7 +437,7 @@ AirMeasurement *Traitement::calculateMeanAirQualite(CoordGPS *coords, int radius
 map<AirMeasurement, Sensor *> Traitement::rankingBySimilarity(Sensor *sensor, Date *dateDebut, Date *dateFin)
 // Algorithme :
 //
-{ // Traitement.cpp:439)
+{
     map<AirMeasurement, Sensor *> classified;
     AirMeasurement *sensorMean = Traitement::calculateMeanAirQualite(sensor->GetCoord(), 0, dateDebut, dateFin);
 
