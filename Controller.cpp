@@ -356,8 +356,14 @@ void Controller::MesureAirQuality()
     }
 
     AirMeasurement *airMeasurement = Traitement::calculateAirQualite(coordGPS, date);
-
-    View::afficherMesureAirQuality(*airMeasurement);
+    if (airMeasurement->GetO3() == -1 && airMeasurement->GetNO2() == -1 && airMeasurement->GetSO2() == -1 && airMeasurement->GetPM10() == -1)
+    {
+        View::afficherErreur("No data for the specified date.");
+    }
+    else
+    {
+        View::afficherMesureAirQuality(*airMeasurement);
+    }
 }
 
 void Controller::MesureMeanAirQuality()
