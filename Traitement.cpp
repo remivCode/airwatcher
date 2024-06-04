@@ -523,10 +523,23 @@ map<float, Sensor *> Traitement::findSensorByCoord(CoordGPS *coordonnees)
     {
         lat = sensors[i]->GetCoord()->GetLat();
         lng = sensors[i]->GetCoord()->GetLng();
-        d = (float)sqrt(pow(lat - coordonnees->GetLat(), 2) + pow(lng - coordonnees->GetLng(), 2));
+        d = dist(lat, lng, coordonnees->GetLat(), coordonnees->GetLng());
         sensorDistMap.insert(make_pair(d, sensors[i]));
     }
     return sensorDistMap;
+}
+
+float Traitement::dist(float lat1, float lon1, float lat2, float lon2)
+{
+    float R = 6378.137; // Radius of earth in KM
+    float dLat = lat2 * M_PI / 180 - lat1 * M_PI / 180;
+    float dLon = lon2 * M_PI / 180 - lon1 * M_PI / 180;
+    float a = sin(dLat / 2) * sin(dLat / 2) +
+              cos(lat1 * M_PI / 180) * cos(lat2 * M_PI / 180) *
+                  sin(dLon / 2) * sin(dLon / 2);
+    float c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    float d = R * c;
+    return d; // kilometers
 }
 
 AirMeasurement *Traitement::calculateAirQualite(CoordGPS *coords, Date *date)

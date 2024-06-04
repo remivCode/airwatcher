@@ -16,8 +16,8 @@ Enter a number: ----- Government Agency Menu -----
 0: End
 Enter your choice: 
 Enter the sensor ID
-Enter une chaine de caractère: [1;32mThe sensor is perfectly working.
-[0m----- Government Agency Menu -----
+Enter une chaine de caractère: The sensor is perfectly working.
+----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity
@@ -27,8 +27,8 @@ Enter une chaine de caractère: [1;32mThe sensor is perfectly working.
 0: End
 Enter your choice: 
 Enter the sensor ID
-Enter une chaine de caractère: [1;32mThe sensor is perfectly working.
-[0m----- Government Agency Menu -----
+Enter une chaine de caractère: The sensor is perfectly working.
+----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity
@@ -38,8 +38,8 @@ Enter une chaine de caractère: [1;32mThe sensor is perfectly working.
 0: End
 Enter your choice: 
 Enter the sensor ID
-Enter une chaine de caractère: [1;31mThe sensor is not functional
-[0m----- Government Agency Menu -----
+Enter une chaine de caractère: The sensor is not functional
+----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity

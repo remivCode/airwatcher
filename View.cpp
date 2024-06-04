@@ -67,10 +67,10 @@ void View::setColor(int color)
 #ifdef _WIN32
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 #else
-    if (color == 0)
+    /* if (color == 0)
         cout << "\033[0m"; // Reset to default color
     else
-        cout << "\033[1;" << color << "m";
+        cout << "\033[1;" << color << "m"; */
 #endif
 }
 
@@ -109,7 +109,7 @@ void View::afficherListe(const std::vector<Sensor> &liste)
 void View::afficherErreur(const string &message)
 {
     setColor(31); // Red color
-    cerr << "Error: " << message << endl;
+    cout << "Error: " << message << endl;
     setColor(0); // Reset to default color
 }
 

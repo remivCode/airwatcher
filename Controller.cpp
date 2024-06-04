@@ -498,11 +498,6 @@ void Controller::RankBySimilarity()
                  vectSensor.push_back(*pair.second);
              });
 
-    for (const Sensor &s : vectSensor)
-    {
-        cout << "Log sensor list : " << s.GetSensorID() << endl;
-    }
-
     View::afficherListe(vectSensor);
 }
 

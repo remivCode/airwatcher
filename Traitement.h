@@ -21,6 +21,8 @@
 #include "Date.h"
 #include "AirMeasurement.h"
 #include "User.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 //------------------------------------------------------------- Constantes
 
@@ -134,6 +136,11 @@ public:
 
 protected:
     //----------------------------------------------------- Méthodes protégées
+    static float dist(float lat1, float lon1, float lat2, float lon2);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     //----------------------------------------------------- Attributs protégés
     static vector<Sensor *> sensors;

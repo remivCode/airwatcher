@@ -3,13 +3,13 @@ TEST EXECUTION
 
 0. End
 1. Authentification
-1
+
 If you already have an account, please enter your username and your password:
-Username: user
-Password: pass
+Username: 
+Password: 
 
 Enter the user (1: Government, 2: Private, 3: Provider)
-Enter a number: 1
+Enter a number: 
 ----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
@@ -18,16 +18,16 @@ Enter a number: 1
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 5
+Enter your choice: 
 
 Enter the GPS coordinates
-Enter latitude: 10
-Enter longitude: 1.0
+Enter latitude: 
+Enter longitude: 
 Enter the date
-Enter year: 2024
-Enter month: 5
-Enter day: 4
-Enter hour: 12
+Enter year: 
+Enter month:
+Enter day:
+Enter hour:
 ----- Air Quality Measurement -----
 ATMO Index: 1
 O3: 13
@@ -42,16 +42,16 @@ PM10: 1
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 5
+Enter your choice: 
 
 Enter the GPS coordinates
-Enter latitude: 10
-Enter longitude: 0.9
+Enter latitude: 
+Enter longitude: 
 Enter the date
-Enter year: 2024
-Enter month: 5
-Enter day: 5
-Enter hour: 12
+Enter year: 
+Enter month:
+Enter day:
+Enter hour:
 ----- Air Quality Measurement -----
 ATMO Index: 2
 O3: 32
@@ -66,16 +66,16 @@ PM10: 13.5
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 5
+Enter your choice:
 
 Enter the GPS coordinates
-Enter latitude: 10.1
-Enter longitude: 0.8
+Enter latitude: 
+Enter longitude: 
 Enter the date
-Enter year: 2024
-Enter month: 5
-Enter day: 4
-Enter hour: 12
+Enter year: 
+Enter month:
+Enter day:
+Enter hour:
 ----- Air Quality Measurement -----
 ATMO Index: 1
 O3: 10
@@ -90,10 +90,9 @@ PM10: 1.5
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 0
+Enter your choice: 
 
 ----- AUTHENTIFICATION PHASE -----
 
 0. End
 1. Authentification
-0
