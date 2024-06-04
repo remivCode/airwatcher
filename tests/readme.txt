@@ -1,5 +1,12 @@
 Programme de tests automatiques - mode d'emploi
 
+Tout d'abord, afin d'effectuer tous les tests, il faut se donner les droits.
+Il faut executer les deux commandes suivantes dans le fichier Tests:
+chmod +x test.sh
+chmod +x mktest.sh
+
+Afin d'exécuter l'ensemble des tests, il faut exécuter la commande suivante:
+./mktest.sh
 
 -------------------------------------------------------------------------------
 test.sh [ repertoire [ fichier.csv ] ]
@@ -12,25 +19,10 @@ ajoutés
 En l'absence d'arguments, le script traitera le répertoire courant
 
 Fichiers de configuration :
-- run : fichier texte indiquant la ligne de commande à éxécuter (obligatoire)
-- std.in : fichier texte indiquant une entrée clavier à simuler (facultatif)
+- run : fichier texte indiquant la ligne de commande à éxécuter
+- std.in : fichier texte indiquant une entrée clavier à simuler
 - std.out : fichier texte indiquant la sortie devant être produite 
-(facultatif/validation*)
-- stderr.out : fichier texte indiquant la sortie d'erreur devant être produite 
-(facultatif/validation*)
-- description : fichier texte donnant la description du test (facultatif)
-- returncode : fichier texte contenant l'entier code retour attendu 
-(facultatif/validation*)
-- *.outfile : un ou plusieurs fichiers devant être produits par le programme 
-(facultatif/validation*)
-  si le fichier s'appelle exemple.txt.outfile, il sera comparé à exemple.txt
-
-*validation indique que le script va tester la conformité, si cette conformité 
-n'est pas 
-satisfaite, il l'indiquera
+- description : fichier texte donnant la description du test
 
 -------------------------------------------------------------------------------
 mktest.sh
-
-Fichier à personnaliser. Dans l'état, il cherche à valider tous les tests 
-contenus dans les répertoires dont le nom commence par Test.
