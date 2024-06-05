@@ -49,11 +49,11 @@ fi
 
 
 # stdout has been specified
-if [ -r "stdpasmagouille.out" ]
+if [ -r "std.out" ]
 then
   sRun="$sRun > ../tests/$1/temp.txt"
 else
-  echo "stdpasmagouille.out not found in $(pwd)"
+  echo "std.out not found in $(pwd)"
 fi
 
 # execute the command line
@@ -64,9 +64,9 @@ resultGlobal=1
 
 # compare stdout if concerned
 resultOut=2
-if [ -r "stdpasmagouille.out" ]
+if [ -r "std.out" ]
 then 
-  diff -wB ../tests/$1/temp.txt ../tests/$1/stdpasmagouille.out >/dev/null
+  diff -wB ../tests/$1/temp.txt ../tests/$1/std.out >/dev/null
   if [ $? -eq 0 ]
   then
     echo "                                       Stdout      : PASSED"
@@ -75,7 +75,7 @@ then
     echo "                                       Stdout      : FAILED"
     resultOut=0
     resultGlobal=0
-    diff -wB -y --side-by-side  ../tests/$1/temp.txt ../tests/$1/stdpasmagouille.out 
+    diff -wB -y --side-by-side  ../tests/$1/temp.txt ../tests/$1/std.out 
   fi
   # clean temporary out file
   rm ../tests/$1/temp.txt

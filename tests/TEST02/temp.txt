@@ -21,11 +21,11 @@ Enter une chaine de caractère: Enter the date 1 (beginning) :
 
 Enter year: Enter month: Enter day: Enter hour: Enter the date 2 (end) : 
 
-Enter year: Enter month: Enter day: Enter hour: ----- List of Sensors -----
-Sensor ID: Sensor2	Coordinates: (4.5, 4)	Rank: 1
+Enter year: Enter month: Enter day: Enter hour: [1;32m----- List of Sensors -----
+[1;36mSensor ID: Sensor2	Coordinates: (4.5, 4)	Rank: 1
 Sensor ID: Sensor3	Coordinates: (4, 4.5)	Rank: 2
 Sensor ID: Sensor4	Coordinates: (3, 3)	Rank: 3
------ Government Agency Menu -----
+[0m----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity
@@ -40,11 +40,11 @@ Enter une chaine de caractère: Enter the date 1 (beginning) :
 
 Enter year: Enter month: Enter day: Enter hour: Enter the date 2 (end) : 
 
-Enter year: Enter month: Enter day: Enter hour: ----- List of Sensors -----
-Sensor ID: Sensor1	Coordinates: (4, 4)	Rank: 1
+Enter year: Enter month: Enter day: Enter hour: [1;32m----- List of Sensors -----
+[1;36mSensor ID: Sensor1	Coordinates: (4, 4)	Rank: 1
 Sensor ID: Sensor3	Coordinates: (4, 4.5)	Rank: 2
 Sensor ID: Sensor4	Coordinates: (3, 3)	Rank: 3
------ Government Agency Menu -----
+[0m----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity
@@ -59,11 +59,11 @@ Enter une chaine de caractère: Enter the date 1 (beginning) :
 
 Enter year: Enter month: Enter day: Enter hour: Enter the date 2 (end) : 
 
-Enter year: Enter month: Enter day: Enter hour: ----- List of Sensors -----
-Sensor ID: Sensor1	Coordinates: (4, 4)	Rank: 1
+Enter year: Enter month: Enter day: Enter hour: [1;32m----- List of Sensors -----
+[1;36mSensor ID: Sensor1	Coordinates: (4, 4)	Rank: 1
 Sensor ID: Sensor2	Coordinates: (4.5, 4)	Rank: 2
 Sensor ID: Sensor4	Coordinates: (3, 3)	Rank: 3
------ Government Agency Menu -----
+[0m----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity

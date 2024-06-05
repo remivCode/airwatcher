@@ -17,13 +17,13 @@ Enter a number: ----- Government Agency Menu -----
 Enter your choice: 
 Enter the GPS coordinates
 Enter latitude: Enter longitude: Enter the date
-Enter year: Enter month: Enter day: Enter hour: ----- Air Quality Measurement -----
-ATMO Index: 1
+Enter year: Enter month: Enter day: Enter hour: [1;32m----- Air Quality Measurement -----
+[1;36mATMO Index: 1
 O3: 13
 SO2: 18
 NO2: 12
 PM10: 1
------ Government Agency Menu -----
+[0m----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity
@@ -34,13 +34,13 @@ PM10: 1
 Enter your choice: 
 Enter the GPS coordinates
 Enter latitude: Enter longitude: Enter the date
-Enter year: Enter month: Enter day: Enter hour: ----- Air Quality Measurement -----
-ATMO Index: 2
+Enter year: Enter month: Enter day: Enter hour: [1;32m----- Air Quality Measurement -----
+[1;36mATMO Index: 2
 O3: 32
 SO2: 30
 NO2: 24.5
 PM10: 13.5
------ Government Agency Menu -----
+[0m----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity
@@ -51,13 +51,13 @@ PM10: 13.5
 Enter your choice: 
 Enter the GPS coordinates
 Enter latitude: Enter longitude: Enter the date
-Enter year: Enter month: Enter day: Enter hour: ----- Air Quality Measurement -----
-ATMO Index: 1
+Enter year: Enter month: Enter day: Enter hour: [1;32m----- Air Quality Measurement -----
+[1;36mATMO Index: 1
 O3: 10
 SO2: 15.5
 NO2: 8.5
 PM10: 1.5
------ Government Agency Menu -----
+[0m----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
 3: Sensors similarity

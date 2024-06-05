@@ -3,13 +3,13 @@ TEST EXECUTION
 
 0. End
 1. Authentification
-1
+
 If you already have an account, please enter your username and your password:
-Username: user
-Password: pass
+Username: 
+Password:
 
 Enter the user (1: Government, 2: Private, 3: Provider)
-Enter a number: 1
+Enter a number:
 ----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
@@ -18,30 +18,27 @@ Enter a number: 1
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 3
+Enter your choice:
 
 Enter the sensor ID : 
 
-Enter une chaine de caractère: Sensor1
+Enter une chaine de caractère:
 Enter the date 1 (beginning) : 
 
-Enter year: 2024
-Enter month: 5
-Enter day: 4
-Enter hour: 12
+Enter year:
+Enter month:
+Enter day:
+Enter hour:
 Enter the date 2 (end) : 
 
-Enter year: 2024
-Enter month: 5
-Enter day: 4
-Enter hour: 12
-Log sensor list : Sensor2
-Log sensor list : Sensor3
-Log sensor list : Sensor4
+Enter year:
+Enter month: 
+Enter day:
+Enter hour: 
 ----- List of Sensors -----
-Sensor ID: Sensor2      Coordinates: (10, 0.9)  Rank: 1
-Sensor ID: Sensor3      Coordinates: (10.1, 0.8)        Rank: 2
-Sensor ID: Sensor4      Coordinates: (10.2, 0.8)        Rank: 3
+Sensor ID: Sensor2      Coordinates: (4.5, 4)  Rank: 1
+Sensor ID: Sensor3      Coordinates: (4, 4.5)        Rank: 2
+Sensor ID: Sensor4      Coordinates: (3, 3)        Rank: 3
 ----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
@@ -50,30 +47,27 @@ Sensor ID: Sensor4      Coordinates: (10.2, 0.8)        Rank: 3
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 3
+Enter your choice:
 
 Enter the sensor ID : 
 
-Enter une chaine de caractère: Sensor2
+Enter une chaine de caractère: 
 Enter the date 1 (beginning) : 
 
-Enter year: 2024
-Enter month: 5
-Enter day: 5
-Enter hour: 12
+Enter year:
+Enter month:
+Enter day:
+Enter hour:
 Enter the date 2 (end) : 
 
-Enter year: 2024
-Enter month: 5
-Enter day: 5
-Enter hour: 12
-Log sensor list : Sensor1
-Log sensor list : Sensor3
-Log sensor list : Sensor4
+Enter year:
+Enter month:
+Enter day:
+Enter hour: 
 ----- List of Sensors -----
-Sensor ID: Sensor1      Coordinates: (10, 1)    Rank: 1
-Sensor ID: Sensor3      Coordinates: (10.1, 0.8)        Rank: 2
-Sensor ID: Sensor4      Coordinates: (10.2, 0.8)        Rank: 3
+Sensor ID: Sensor1      Coordinates: (4, 4)    Rank: 1
+Sensor ID: Sensor3      Coordinates: (4, 4.5)        Rank: 2
+Sensor ID: Sensor4      Coordinates: (3, 3)        Rank: 3
 ----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
@@ -82,30 +76,27 @@ Sensor ID: Sensor4      Coordinates: (10.2, 0.8)        Rank: 3
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 3
+Enter your choice:
 
 Enter the sensor ID : 
 
-Enter une chaine de caractère: Sensor3
+Enter une chaine de caractère:
 Enter the date 1 (beginning) : 
 
-Enter year: 2024
-Enter month: 5
-Enter day: 4
-Enter hour: 12
+Enter year: 
+Enter month:
+Enter day:
+Enter hour:
 Enter the date 2 (end) : 
 
-Enter year: 2024
-Enter month: 5
-Enter day: 4
-Enter hour: 12
-Log sensor list : Sensor1
-Log sensor list : Sensor2
-Log sensor list : Sensor4
+Enter year: 
+Enter month: 
+Enter day:
+Enter hour:
 ----- List of Sensors -----
-Sensor ID: Sensor1      Coordinates: (10, 1)    Rank: 1
-Sensor ID: Sensor2      Coordinates: (10, 0.9)  Rank: 2
-Sensor ID: Sensor4      Coordinates: (10.2, 0.8)        Rank: 3
+Sensor ID: Sensor1      Coordinates: (4, 4)    Rank: 1
+Sensor ID: Sensor2      Coordinates: (4.5, 4)  Rank: 2
+Sensor ID: Sensor4      Coordinates: (3, 3)        Rank: 3
 ----- Government Agency Menu -----
 1: Analyze Sensors data
 2: Private Sensors data
@@ -114,10 +105,9 @@ Sensor ID: Sensor4      Coordinates: (10.2, 0.8)        Rank: 3
 5: Air quality
 6: Air Cleaners impact
 0: End
-Enter your choice: 0
+Enter your choice:
 
 ----- AUTHENTIFICATION PHASE -----
 
 0. End
 1. Authentification
-0

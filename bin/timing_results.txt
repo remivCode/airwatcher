@@ -1,0 +1,2 @@
+analyzeFunctionalState | Execution time: 178 microseconds
+calculateMeanAirQualite | Execution time: 78 microseconds
