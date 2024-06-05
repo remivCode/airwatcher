@@ -207,17 +207,6 @@ void Controller::connexion(string login, string password)
         View::MenuConnexion();
     }
     return;
-
-    // If there are logins and passwords
-    /*
-    this.user = Traitement::connexion(login, password) ;
-    if (this.user){
-        return true ;
-    }
-    else{
-        return false ;
-    }
-    */
 } //----- Fin de Méthode
 
 void Controller::chargerMenu()
@@ -252,6 +241,7 @@ void Controller::clean()
 // Algorithme :
 //
 {
+    std::ofstream outFile("timing_results.txt", std::ios::trunc);
     delete user;
 } //----- Fin de ~Controller
 
@@ -354,8 +344,11 @@ void Controller::MesureAirQuality()
         View::afficherErreur("Days of some months must not exceed 30");
         return;
     }
-
+    std::chrono::_V2::system_clock::time_point start = std::chrono::high_resolution_clock::now();
     AirMeasurement *airMeasurement = Traitement::calculateAirQualite(coordGPS, date);
+    std::chrono::_V2::system_clock::time_point end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    View::afficherTpsExec("calculateAirQualite", duration);
     if (airMeasurement->GetO3() == -1 && airMeasurement->GetNO2() == -1 && airMeasurement->GetSO2() == -1 && airMeasurement->GetPM10() == -1)
     {
         View::afficherErreur("No data for the specified date.");
@@ -450,7 +443,11 @@ void Controller::MesureMeanAirQuality()
         return;
     }
 
+    std::chrono::_V2::system_clock::time_point start = std::chrono::high_resolution_clock::now();
     AirMeasurement *airMeasurement = Traitement::calculateMeanAirQualite(coordGPS, radius, dateBeginning, dateEnd);
+    std::chrono::_V2::system_clock::time_point end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    View::afficherTpsExec("calculateMeanAirQualite", duration);
     if (airMeasurement->GetO3() == 0 && airMeasurement->GetNO2() == 0 && airMeasurement->GetPM10() == 0 && airMeasurement->GetSO2() == 0)
     {
         View::afficherErreur("No sensor in the specified area or no data for the specified dates.");
@@ -466,6 +463,8 @@ void Controller::CheckSensorFunctional()
 //
 {
     string sensorID = View::entrerString("Enter the sensor ID");
+    std::chrono::_V2::system_clock::time_point start;
+    std::chrono::_V2::system_clock::time_point end;
 
     Sensor *sensor = Traitement::findSensorById(sensorID);
     if (!sensor)
@@ -474,8 +473,12 @@ void Controller::CheckSensorFunctional()
     }
     else
     {
+        start = std::chrono::high_resolution_clock::now();
         bool functional = Traitement::analyzeFunctionalState(sensor);
+        end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
         View::afficherBool(functional);
+        View::afficherTpsExec("analyzeFunctionalState", duration);
     }
 }
 
@@ -488,7 +491,13 @@ void Controller::RankBySimilarity()
     Date *dateEnd = View::entrerDate("Enter the date 2 (end) : \r\n");
 
     Sensor *sensor = Traitement::findSensorById(sensorID);
+
+    std::chrono::_V2::system_clock::time_point start = std::chrono::high_resolution_clock::now();
     map<AirMeasurement, Sensor *> mapSensor = Traitement::rankingBySimilarity(sensor, dateBeginning, dateEnd);
+    std::chrono::_V2::system_clock::time_point end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    View::afficherTpsExec("analyzeFunctionalState", duration);
+
     vector<Sensor> vectSensor;
 
     // Utilisation de std::for_each pour copier les valeurs de la map dans le vecteur

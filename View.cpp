@@ -67,10 +67,10 @@ void View::setColor(int color)
 #ifdef _WIN32
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 #else
-    /* if (color == 0)
+    if (color == 0)
         cout << "\033[0m"; // Reset to default color
     else
-        cout << "\033[1;" << color << "m"; */
+        cout << "\033[1;" << color << "m";
 #endif
 }
 
@@ -128,11 +128,19 @@ void View::afficherBool(const bool &state)
     setColor(0); // Reset to default color
 }
 
-void View::afficherTpsExec(const string &temps)
+void View::afficherTpsExec(const string &prompt, const std::chrono::microseconds &temps)
 {
-    setColor(32); // Green color
-    cout << "Execution time: " << temps << endl;
-    setColor(0); // Reset to default color
+
+    ofstream outFile("timing_results.txt", std::ios::app);
+    if (outFile.is_open())
+    {
+        outFile << prompt << " | Execution time: " << temps.count() << " microseconds" << std::endl;
+        outFile.close();
+    }
+    else
+    {
+        std::cerr << "Unable to open file for writing" << std::endl;
+    }
 }
 
 Date *View::entrerDate(const string &prompt)

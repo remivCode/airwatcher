@@ -17,6 +17,7 @@
 #include "Controller.h"
 #include "Date.h"
 #include <vector>
+#include <fstream>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -78,7 +79,7 @@ public:
     //
     // Contrat :
     //
-    static void afficherTpsExec(const string &temps);
+    static void afficherTpsExec(const string &prompt, const std::chrono::microseconds &temps);
     // Mode d'emploi :
     //
     // Contrat :
